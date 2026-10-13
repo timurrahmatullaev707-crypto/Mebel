@@ -800,6 +800,8 @@
       const iconSvg = type === 'success' 
         ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>'
         : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
+      const t = document.createElement('div');
+      t.className = `toast toast-${type} show`;
       t.innerHTML = `<span style="display:inline-flex; align-items:center;">${iconSvg}</span> <span>${msg}</span>`;
       c.appendChild(t);
       setTimeout(() => {

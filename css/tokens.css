@@ -1,0 +1,350 @@
+/**
+ * MebelPro - Mukammal Dizayn Tokenlari (tokens.css)
+ * 100% Barqaror va Bug-free Multi-palitra Tizimi
+ * Default: Sutli Qahva, Mocha va Bej (Warm Cashmere & Mocha Bronze)
+ */
+
+:root {
+  /* ========================================================================
+     1. DEFAULT PALITRA: SUTLI QAHVA & MOCHA BRONZA (LIGHT MODE)
+     ======================================================================== */
+  --color-primary: #4A3326;
+  --color-primary-hover: #382419;
+  --color-primary-active: #29180E;
+  --color-primary-subtle: #F5EFE8;
+  --color-primary-glow: rgba(74, 51, 38, 0.24);
+
+  --color-secondary: #915A36;
+  --color-secondary-hover: #7A4928;
+  --color-secondary-subtle: #FAF3ED;
+
+  --color-accent: #C89557;
+  --color-gold: #C89557;
+  --color-gold-hover: #B58245;
+  --color-gold-light: #F8EFE4;
+  --color-gold-glow: rgba(200, 149, 87, 0.32);
+
+  --bg-page: #FAF7F2;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-surface-muted: #F2ECE3;
+  --bg-surface-alt: #F2ECE3;
+  --bg-input: #FFFFFF;
+
+  --text-main: #241A15;
+  --text-muted: #6C5B52;
+  --text-subtle: #9E8C82;
+  --text-inverse: #FFFFFF;
+  --btn-primary-text: #FFFFFF;
+
+  --border-light: #E7DFD4;
+  --border-focus: var(--color-primary);
+
+  --blueprint-bg: #F5EFE8;
+  --blueprint-grid: rgba(74, 51, 38, 0.10);
+  --blueprint-border: #DCD2C4;
+  --blueprint-wood-stroke: #4A3326;
+
+  /* Status ranglari */
+  --color-success: #15803D;
+  --color-success-bg: #DCFCE7;
+  --color-warning: #B45309;
+  --color-warning-bg: #FEF3C7;
+  --color-error: #B91C1C;
+  --color-error-bg: #FEE2E2;
+
+  /* Shriftlar */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* O'lchamlar */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px 0 rgba(36, 26, 21, 0.05);
+  --shadow-md: 0 4px 14px -1px rgba(36, 26, 21, 0.07), 0 2px 5px -2px rgba(36, 26, 21, 0.04);
+  --shadow-lg: 0 12px 28px -4px rgba(36, 26, 21, 0.10), 0 4px 12px -3px rgba(36, 26, 21, 0.05);
+  --shadow-xl: 0 22px 42px -6px rgba(36, 26, 21, 0.14), 0 8px 18px -6px rgba(36, 26, 21, 0.06);
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================================================
+   2. QORONG'I REJIM (DARK MODE - DEFAULT MOCHA)
+   ======================================================================== */
+[data-theme="dark"] {
+  --bg-page: #130E0C;
+  --bg-surface: #1E1613;
+  --bg-surface-elevated: #281E19;
+  --bg-surface-muted: #241A16;
+  --bg-surface-alt: #241A16;
+  --bg-input: #18120F;
+
+  --color-primary: #D8A369;
+  --color-primary-hover: #E3B37C;
+  --color-primary-active: #C89557;
+  --color-primary-subtle: rgba(200, 149, 87, 0.16);
+  --color-primary-glow: rgba(216, 163, 105, 0.32);
+  --btn-primary-text: #18110B;
+
+  --color-secondary: #B6784D;
+  --color-secondary-hover: #C5885D;
+  --color-secondary-subtle: rgba(182, 120, 77, 0.20);
+
+  --color-accent: #C89557;
+  --color-gold: #C89557;
+
+  --text-main: #FAF5F0;
+  --text-muted: #C2B3A7;
+  --text-subtle: #8E7D73;
+  --text-inverse: #18110B;
+
+  --border-light: rgba(231, 223, 212, 0.12);
+  --border-focus: #C89557;
+
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.55);
+  --shadow-md: 0 4px 16px -1px rgba(0, 0, 0, 0.65);
+  --shadow-lg: 0 14px 32px -3px rgba(0, 0, 0, 0.75);
+  --shadow-xl: 0 26px 48px -5px rgba(0, 0, 0, 0.85);
+
+  --blueprint-bg: #1A120E;
+  --blueprint-grid: rgba(216, 163, 105, 0.12);
+  --blueprint-border: #2E2019;
+  --blueprint-wood-stroke: #D8A369;
+}
+
+/* ========================================================================
+   3. ZÜMRAD VA OLTIN (EMERALD PALETTE) - LIGHT & DARK 100% BUG-FREE
+   ======================================================================== */
+[data-palette="emerald"] {
+  --color-primary: #124E3F;
+  --color-primary-hover: #0C3B2F;
+  --color-primary-active: #082921;
+  --color-primary-subtle: #E8F5F1;
+  --color-primary-glow: rgba(18, 78, 63, 0.24);
+
+  --color-secondary: #0D6E58;
+  --color-secondary-hover: #095443;
+  --color-secondary-subtle: #EDF7F4;
+
+  --color-accent: #C5A059;
+  --color-gold: #C5A059;
+
+  --bg-page: #F6FAF8;
+  --bg-surface: #FFFFFF;
+  --bg-surface-muted: #EBF4F0;
+  --bg-surface-alt: #EBF4F0;
+  --border-light: #D5E7DF;
+
+  --text-main: #11221D;
+  --text-muted: #4B635B;
+  --text-subtle: #809B92;
+
+  --blueprint-bg: #EBF4F0;
+  --blueprint-grid: rgba(18, 78, 63, 0.10);
+  --blueprint-border: #C8DED5;
+  --blueprint-wood-stroke: #124E3F;
+}
+
+[data-palette="emerald"][data-theme="dark"] {
+  --bg-page: #0A1411;
+  --bg-surface: #10211C;
+  --bg-surface-elevated: #162C25;
+  --bg-surface-muted: #132721;
+  --bg-surface-alt: #132721;
+  --bg-input: #0B1713;
+
+  --color-primary: #34D399;
+  --color-primary-hover: #6EE7B7;
+  --color-primary-active: #10B981;
+  --color-primary-subtle: rgba(52, 211, 153, 0.18);
+  --color-primary-glow: rgba(52, 211, 153, 0.30);
+  --btn-primary-text: #05261D;
+
+  --color-secondary: #10B981;
+  --color-secondary-subtle: rgba(16, 185, 129, 0.18);
+
+  --color-accent: #FBBF24;
+  --color-gold: #FBBF24;
+
+  --text-main: #F2FBF7;
+  --text-muted: #A3C9BC;
+  --text-subtle: #679284;
+  --text-inverse: #05261D;
+
+  --border-light: rgba(213, 231, 223, 0.12);
+  --border-focus: #34D399;
+
+  --blueprint-bg: #0D1A16;
+  --blueprint-grid: rgba(52, 211, 153, 0.12);
+  --blueprint-border: #162C25;
+  --blueprint-wood-stroke: #34D399;
+}
+
+/* ========================================================================
+   4. JAPANDI ISSIQ YOG'OCH VA QUM (JAPANDI PALETTE) - LIGHT & DARK
+   ======================================================================== */
+[data-palette="japandi"] {
+  --color-primary: #784522;
+  --color-primary-hover: #603417;
+  --color-primary-active: #482610;
+  --color-primary-subtle: #F7EFE7;
+  --color-primary-glow: rgba(120, 69, 34, 0.24);
+  --btn-primary-text: #FFFFFF;
+
+  --color-secondary: #B45309;
+  --color-secondary-hover: #92400E;
+  --color-secondary-subtle: #FDF5ED;
+
+  --color-accent: #D97706;
+  --color-gold: #D97706;
+
+  --bg-page: #FAF8F5;
+  --bg-surface: #FFFFFF;
+  --bg-surface-muted: #F2ECE3;
+  --bg-surface-alt: #F2ECE3;
+  --border-light: #E5DDD0;
+
+  --text-main: #271C15;
+  --text-muted: #6B5B50;
+  --text-subtle: #9B897D;
+
+  --blueprint-bg: #F4EDE3;
+  --blueprint-grid: rgba(120, 69, 34, 0.10);
+  --blueprint-border: #DBCFBF;
+  --blueprint-wood-stroke: #784522;
+}
+
+[data-palette="japandi"][data-theme="dark"] {
+  --bg-page: #14100C;
+  --bg-surface: #1E1813;
+  --bg-surface-elevated: #28201A;
+  --bg-surface-muted: #241D17;
+  --bg-surface-alt: #241D17;
+  --bg-input: #17120E;
+
+  --color-primary: #F59E0B;
+  --color-primary-hover: #FBBF24;
+  --color-primary-active: #D97706;
+  --color-primary-subtle: rgba(245, 158, 11, 0.18);
+  --color-primary-glow: rgba(245, 158, 11, 0.30);
+  --btn-primary-text: #1C1204;
+
+  --color-secondary: #D97706;
+  --color-secondary-subtle: rgba(217, 119, 6, 0.18);
+
+  --color-accent: #F59E0B;
+  --color-gold: #F59E0B;
+
+  --text-main: #FDF9F5;
+  --text-muted: #C8BAAF;
+  --text-subtle: #8F7F74;
+  --text-inverse: #1C1204;
+
+  --border-light: rgba(229, 221, 208, 0.12);
+  --border-focus: #F59E0B;
+
+  --blueprint-bg: #18130E;
+  --blueprint-grid: rgba(245, 158, 11, 0.12);
+  --blueprint-border: #28201A;
+  --blueprint-wood-stroke: #F59E0B;
+}
+
+/* ========================================================================
+   5. OBSIDIAN VA GRAFIT (OBSIDIAN PALETTE) - LIGHT & DARK
+   ======================================================================== */
+[data-palette="obsidian"] {
+  --color-primary: #1E232A;
+  --color-primary-hover: #14171C;
+  --color-primary-active: #0A0C0E;
+  --color-primary-subtle: #EFF1F5;
+  --color-primary-glow: rgba(30, 35, 42, 0.24);
+  --btn-primary-text: #FFFFFF;
+
+  --color-secondary: #3B4252;
+  --color-secondary-hover: #2E3440;
+  --color-secondary-subtle: #ECEFF4;
+
+  --color-accent: #38BDF8;
+  --color-gold: #EBCB8B;
+
+  --bg-page: #F7F8FA;
+  --bg-surface: #FFFFFF;
+  --bg-surface-muted: #ECEFF4;
+  --bg-surface-alt: #ECEFF4;
+  --border-light: #D8DEE9;
+
+  --text-main: #181B20;
+  --text-muted: #4C566A;
+  --text-subtle: #7B88A1;
+
+  --blueprint-bg: #ECEFF4;
+  --blueprint-grid: rgba(30, 35, 42, 0.10);
+  --blueprint-border: #D8DEE9;
+  --blueprint-wood-stroke: #1E232A;
+}
+
+[data-palette="obsidian"][data-theme="dark"] {
+  --bg-page: #0C0E12;
+  --bg-surface: #14181F;
+  --bg-surface-elevated: #1C222C;
+  --bg-surface-muted: #181D26;
+  --bg-surface-alt: #181D26;
+  --bg-input: #101318;
+
+  --color-primary: #38BDF8;
+  --color-primary-hover: #7DD3FC;
+  --color-primary-active: #0284C7;
+  --color-primary-subtle: rgba(56, 189, 248, 0.18);
+  --color-primary-glow: rgba(56, 189, 248, 0.32);
+  --btn-primary-text: #082F49;
+
+  --color-secondary: #81A1C1;
+  --color-secondary-subtle: rgba(129, 161, 193, 0.18);
+
+  --color-accent: #38BDF8;
+  --color-gold: #EBCB8B;
+
+  --text-main: #ECEFF4;
+  --text-muted: #9AA7BD;
+  --text-subtle: #67748B;
+  --text-inverse: #082F49;
+
+  --border-light: rgba(216, 222, 233, 0.12);
+  --border-focus: #38BDF8;
+
+  --blueprint-bg: #0F1217;
+  --blueprint-grid: rgba(56, 189, 248, 0.12);
+  --blueprint-border: #1C222C;
+  --blueprint-wood-stroke: #38BDF8;
+}

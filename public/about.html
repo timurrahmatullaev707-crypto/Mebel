@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MebelPro - Biz Haqimizda | Mebel Biznesi va Texnologiya</title>
+  <meta name="description" content="MebelPro - IT Live Academy ekotizimida yaratilgan mebel ishlab chiqarish va onlayn sotuv platformasi.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <style>
+    .about-hero {
+      background: linear-gradient(135deg, var(--color-primary-subtle), var(--bg-surface));
+      padding: var(--space-12) 0;
+      border-bottom: 1px solid var(--border-light);
+      text-align: center;
+    }
+    .value-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-6);
+      margin: var(--space-8) 0;
+    }
+    .value-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+    .value-num {
+      font-size: 36px;
+      font-weight: 900;
+      font-family: var(--font-mono);
+      color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+    .investor-banner {
+      background: linear-gradient(135deg, #1C1917, #2E2824);
+      color: #FFFFFF;
+      border-radius: var(--radius-xl);
+      padding: var(--space-10) var(--space-8);
+      margin: var(--space-12) 0;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme') || 'light';
+        var p = localStorage.getItem('mebelpro_palette') || 'mocha';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.setAttribute('data-palette', p);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </div>
+          <span>Mebel<span class="logo-accent">Pro</span></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Asosiy menyu">
+          <a href="index.html#kalkulyator" class="nav-link">3D Kalkulyator</a>
+          <a href="catalog.html" class="nav-link">Tayyor Mebellar</a>
+          <a href="index.html#olchov-chaqirish" class="nav-link">Bepul O'lchov</a>
+          <a href="index.html#buyurtma-holati" class="nav-link">Holatni Kuzatish</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Mavzu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          <a href="index.html#olchov-chaqirish" class="btn btn-primary nav-cta-btn" style="padding:8px 16px; font-size:13px;">Usta Chaqirish</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="about-hero">
+      <div class="container">
+        <span class="section-tag">Biz Haqimizda & Missiyamiz</span>
+        <h1 style="font-size:clamp(2rem, 4vw, 3.2rem); font-weight:900; margin-bottom:12px;">
+          An'anaviy Mebel Ishlab Chiqarishining <span class="hero-highlight">Raqamli Kelajagi</span>
+        </h1>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:16px; line-height:1.6;">
+          MebelPro — bu mijozlarga 1 daqiqada narx va chizmani ko'rish, mebel fabrikalariga esa buyurtmalarni 3 barobar tezroq va xatosiz ishlab chiqarishga yo'naltirish imkonini beruvchi kompleks raqamli tizim.
+        </p>
+      </div>
+    </div>
+
+    <div class="container" style="padding-top: var(--space-10); padding-bottom: var(--space-16);">
+      <!-- 3 TA ASOSIY AFZALLIK -->
+      <div class="value-cards-grid">
+        <div class="value-card">
+          <div class="value-num">01</div>
+          <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">Avtomatlashtirilgan Hisob</h3>
+          <p style="font-size:14px; color:var(--text-muted); line-height:1.5;">
+            Mijoz o'lchamlarni kiritishi bilan xomashyo (DSP, MDF, kromka, furnitura) va ish haqi aniq formula bo'yicha hisoblanadi. O'lchovchi xato qilishining oldi olinadi.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-num">02</div>
+          <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">Real-Time SVG Chizma</h3>
+          <p style="font-size:14px; color:var(--text-muted); line-height:1.5;">
+            Xaridor o'z mebelini buyurtma qilishdan oldin 2D/3D proporsional chizmada ko'radi. Eshiklar ochilishi, tortmalar soni va rang uyg'unligini oldindan baholaydi.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-num">03</div>
+          <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">CRM va Ishlab Chiqarish Nazorati</h3>
+          <p style="font-size:14px; color:var(--text-muted); line-height:1.5;">
+            Barcha buyurtmalar yagona Admin CRM tizimiga tushadi. Har bir buyurtmaning holati o'lchovdan to o'rnatishgacha bosqichma-bosqich nazorat qilinadi.
+          </p>
+        </div>
+      </div>
+
+      <!-- INVESTORLAR UCHUN TAKLIF BANNERI -->
+      <div class="investor-banner">
+        <div style="max-width: 750px;">
+          <span style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:var(--color-primary);">Investorlar va Hamkorlar Uchun</span>
+          <h2 style="font-size:clamp(1.75rem, 3.5vw, 2.5rem); font-weight:900; margin: 12px 0;">
+            Mebel Biznesini Masshtablashtirish Taklifi
+          </h2>
+          <p style="font-size:15px; color:#D6D3D1; line-height:1.6; margin-bottom:24px;">
+            MebelPro tizimi O'zbekistondagi mebel sexlari va fabrikalarini raqamlashtirib, oylik savdo aylanmasini 40-60% ga oshirish va operatsion xarajatlarni 25% ga qisqartirish imkonini beradi. Tizim to'liq tayyor, sinovdan o'tgan va integratsiyaga tayyor.
+          </p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="admin.html" class="btn btn-primary" style="padding:12px 24px;">Admin CRM Panelni Sinab Ko'rish</a>
+            <a href="https://t.me/mebelpro_admin" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="background:transparent; color:#FFF; border-color:#57534E;">Hamkorlik Uchun Bog'lanish</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- IT LIVE ACADEMY REKVIZITLARI -->
+      <div style="text-align:center; padding:var(--space-8) 0;">
+        <h3 style="font-size:20px; font-weight:800; margin-bottom:6px;">Loyiha Muallifi</h3>
+        <p style="font-size:14px; color:var(--text-muted);">
+          IT Live Academy Dasturlash Akademiyasi talabasi tomonidan ishlab chiqilgan va investorlar taqdimotiga tayyorlangan.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:none; padding:0;">
+        <span>© 2026 MebelPro (IT Live Academy). Barcha huquqlar himoyalangan.</span>
+        <span>+998 (90) 123-45-67</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

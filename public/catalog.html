@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MebelPro - Eksklyuziv Tayyor Mebellar Do'koni va Shourumi</title>
+  <meta name="description" content="MebelPro tayyor mebellar shourumi: premium oshxona garniturlari, shkaf-kupelar, ortopedik krovatlar, stollar va ofis mebellari fabrika kafolati bilan.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme') || 'light';
+        var p = localStorage.getItem('mebelpro_palette') || 'mocha';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.setAttribute('data-palette', p);
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    /* ==========================================================================
+       PREMIUM KATALOG VA SHOURUM STILLARI
+       ========================================================================== */
+    .catalog-header-banner {
+      background: radial-gradient(circle at 50% 0%, rgba(217, 119, 6, 0.12) 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-surface-muted) 100%);
+      border-bottom: 1px solid var(--border-light);
+      padding: var(--space-12) 0 var(--space-8);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .catalog-main-title {
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .catalog-sub-desc {
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 24px;
+      font-size: var(--text-base);
+      line-height: 1.6;
+    }
+    .catalog-usp-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .usp-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Mebel Toifalari Showcase */
+    .cat-showcase-section {
+      padding: var(--space-8) 0;
+      border-bottom: 1px solid var(--border-light);
+      background: var(--bg-surface);
+    }
+    .cat-showcase-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .cat-showcase-title {
+      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+      font-weight: 900;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .cat-showcase-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .premium-cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .premium-cat-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      background: var(--bg-surface-muted);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      text-align: left;
+      transition: all var(--duration-fast) var(--ease-spring);
+      position: relative;
+      overflow: hidden;
+    }
+    .premium-cat-card:hover {
+      background: var(--bg-surface);
+      border-color: #f59e0b;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(217, 119, 6, 0.15);
+    }
+    .premium-cat-card.active {
+      background: linear-gradient(135deg, rgba(217, 119, 6, 0.08), rgba(245, 158, 11, 0.03));
+      border-color: #d97706;
+      box-shadow: 0 0 0 1px #d97706, 0 8px 24px rgba(217, 119, 6, 0.18);
+    }
+    .premium-cat-card.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #d97706;
+    }
+    .pcat-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .premium-cat-card.active .pcat-icon-box {
+      background: #d97706;
+      border-color: #d97706;
+    }
+    .pcat-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .pcat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+    .pcat-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pcat-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      background: rgba(217, 119, 6, 0.12);
+      color: #d97706;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .pcat-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.3;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Asosiy Katalog Layout */
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      padding: var(--space-8) 0 var(--space-16);
+    }
+    @media (min-width: 1024px) {
+      .catalog-layout {
+        grid-template-columns: 290px 1fr;
+      }
+    }
+
+    /* Yon Filter Paneli */
+    .filter-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      height: fit-content;
+      position: sticky;
+      top: 96px;
+      box-shadow: var(--shadow-sm);
+    }
+    .filter-title {
+      font-size: var(--text-base);
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .filter-group {
+      margin-bottom: var(--space-5);
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: var(--space-4);
+    }
+    .filter-group:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .filter-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: var(--space-3);
+      display: block;
+    }
+
+    /* Qidiruv & Top Bar */
+    .products-top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: var(--space-6);
+      background: var(--bg-surface);
+      padding: 16px 20px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+    .catalog-search-input {
+      flex: 1;
+      min-width: 220px;
+      max-width: 360px;
+      padding: 9px 14px 9px 36px;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      background: var(--bg-surface-muted);
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+      transition: border var(--duration-fast) ease;
+    }
+    .catalog-search-input:focus {
+      border-color: #d97706;
+      background: var(--bg-surface);
+    }
+
+    /* Mahsulotlar Kartasi */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+      gap: var(--space-6);
+    }
+    .product-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--duration-fast) var(--ease-spring);
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg), 0 12px 32px rgba(0, 0, 0, 0.08);
+      border-color: #f59e0b;
+    }
+    .product-img-box {
+      width: 100%;
+      height: 230px;
+      background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.04) 0%, transparent 70%),
+                  linear-gradient(180deg, #18202c 0%, #0f141d 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 12px;
+    }
+    .product-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      z-index: 2;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .badge-hit { background: #10b981; color: #ffffff; }
+    .badge-sale { background: #ef4444; color: #ffffff; }
+    .badge-new { background: #f59e0b; color: #111827; }
+    .badge-lux { background: linear-gradient(135deg, #fbbf24, #d97706); color: #000000; }
+
+    .product-rating-pill {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 700;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      z-index: 2;
+    }
+
+    .product-info {
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .product-cat-tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: #d97706;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .product-warranty-tag {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .product-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .product-specs {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: var(--space-4);
+      line-height: 1.5;
+    }
+    .product-price-row {
+      margin-top: auto;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: var(--space-4);
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-light);
+    }
+    .current-price {
+      font-size: 19px;
+      font-weight: 900;
+      font-family: var(--font-mono);
+      color: #10b981;
+    }
+    .old-price {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+      margin-left: 6px;
+    }
+    .product-card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- YASHIRIN SVG MATERIALLAR VA GRADIENTLAR -->
+  <svg style="display:none;" width="0" height="0">
+    <defs>
+      <linearGradient id="body-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.16" />
+        <stop offset="100%" stop-color="#000000" stop-opacity="0.28" />
+      </linearGradient>
+      <linearGradient id="mirror-shine" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#93c5fd" stop-opacity="0.35" />
+        <stop offset="50%" stop-color="#ffffff" stop-opacity="0.75" />
+        <stop offset="100%" stop-color="#60a5fa" stop-opacity="0.25" />
+      </linearGradient>
+      <linearGradient id="floor-shadow" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#000000" stop-opacity="0.45" />
+        <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+      </linearGradient>
+      <pattern id="wood-pattern-cat" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 0,5 Q 10,8 20,5 M 0,15 Q 10,12 20,15" stroke="rgba(0,0,0,0.12)" stroke-width="1" fill="none" />
+      </pattern>
+    </defs>
+  </svg>
+
+  <!-- YOPISHQOQ NAVIGATSIYA -->
+  <header class="site-header" id="site-header">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </div>
+          <span>Mebel<span class="logo-accent">Pro</span></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Asosiy menyu">
+          <a href="index.html#kalkulyator" class="nav-link">3D Kalkulyator</a>
+          <a href="catalog.html" class="nav-link active" style="color:var(--color-primary); font-weight:800;">Tayyor Mebellar</a>
+          <a href="index.html#olchov-chaqirish" class="nav-link">Bepul O'lchov</a>
+          <a href="index.html#buyurtma-holati" class="nav-link">Holatni Kuzatish</a>
+        </nav>
+
+        <div class="nav-actions">
+          <!-- Rang Palitrasi Tanlagichi -->
+          <div class="palette-switcher-wrapper">
+            <button type="button" class="palette-btn" id="palette-toggle-btn" aria-label="Rang uslubi" title="Rang uslubini tanlash">
+              <span class="palette-dot"></span>
+              <span id="palette-label-text">Mocha</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="palette-dropdown" id="palette-dropdown">
+              <button type="button" class="palette-option active" data-set-palette="mocha">
+                <span class="palette-option-color" style="background:#4A3326;"></span>
+                <span>☕ Mocha & Kashmer</span>
+              </button>
+              <button type="button" class="palette-option" data-set-palette="emerald">
+                <span class="palette-option-color" style="background:#124E3F;"></span>
+                <span>🌿 Zümrad & Oltin</span>
+              </button>
+              <button type="button" class="palette-option" data-set-palette="japandi">
+                <span class="palette-option-color" style="background:#784522;"></span>
+                <span>🪵 Japandi & Qum</span>
+              </button>
+              <button type="button" class="palette-option" data-set-palette="obsidian">
+                <span class="palette-option-color" style="background:#1E232A;"></span>
+                <span>🖤 Obsidian & Grafit</span>
+              </button>
+            </div>
+          </div>
+
+          <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Mavzu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          
+          <!-- Savat tugmasi -->
+          <a href="cart.html" class="btn btn-secondary" style="position:relative; padding:8px 14px;" aria-label="Savat">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            <span id="cart-counter-badge" style="position:absolute; top:-6px; right:-6px; background:var(--color-primary); color:var(--btn-primary-text, #fff); font-size:11px; font-weight:900; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center;">0</span>
+          </a>
+
+          <a href="index.html#olchov-chaqirish" class="btn btn-primary nav-cta-btn">
+            <span>Usta Chaqirish</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO BANNER -->
+    <div class="catalog-header-banner">
+      <div class="container">
+        <div class="studio-mega-badge">
+          <span class="badge-dot"></span>
+          <span>★ RASMIY FABRIKA SHOURUMI VA OMBORDAGI TAYYOR MODELLAR</span>
+        </div>
+        <h1 class="catalog-main-title">Eksklyuziv Tayyor Mebellar</h1>
+        <p class="catalog-sub-desc">
+          Omborda tayyor bo'lgan zamonaviy mebellarni maxsus fabrika narxlarida xarid qiling yoki istalgan birini 3D Studiyamizda o'z xonangiz o'lchamlariga moslab sozlang.
+        </p>
+
+        <div class="catalog-usp-pills">
+          <div class="usp-pill">
+            <span>⚡️</span>
+            <span>Bugun buyurtma — 24 soatda yetkazish</span>
+          </div>
+          <div class="usp-pill">
+            <span>🛡️</span>
+            <span>2 Yil rasmiy fabrika kafolati</span>
+          </div>
+          <div class="usp-pill">
+            <span>🛠️</span>
+            <span>Professional bepul o'rnatish</span>
+          </div>
+          <div class="usp-pill">
+            <span>💎</span>
+            <span>100% original materiallar (Egger / Blum)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEBEL TOIFALARI SHOWCASE (PREMIUM KARTALAR) -->
+    <section class="cat-showcase-section">
+      <div class="container">
+        <div class="cat-showcase-head">
+          <div>
+            <h2 class="cat-showcase-title">Mebel Toifalari Bo'yicha Tanlang</h2>
+            <p class="cat-showcase-desc">O'zingizga kerakli bo'limni tanlang — filtr bir zumda moslashadi</p>
+          </div>
+          <div style="font-size:13px; font-weight:700; color:var(--text-muted); background:var(--bg-surface-muted); padding:6px 14px; border-radius:var(--radius-full); border:1px solid var(--border-light);">
+            Katalogda jami: <strong id="cat-total-count" style="color:#d97706;">12 ta model</strong>
+          </div>
+        </div>
+
+        <div class="premium-cat-grid" id="premium-cat-grid">
+          <!-- 1. Barcha mebellar -->
+          <button type="button" class="premium-cat-card active" data-cat="all">
+            <div class="pcat-icon-box">🌟</div>
+            <div class="pcat-content">
+              <div class="pcat-top">
+                <span class="pcat-name">Barcha Mebellar</span>
+                <span class="pcat-badge">12 Model</span>
+              </div>
+              <p class="pcat-desc">To'liq kolleksiya va yangi mahsulotlar</p>
+            </div>
+          </button>
+
+          <!-- 2. Oshxona garniturlari -->
+          <button type="button" class="premium-cat-card" data-cat="oshxona">
+            <div class="pcat-icon-box">🍽️</div>
+            <div class="pcat-content">
+              <div class="pcat-top">
+                <span class="pcat-name">Oshxona Garnituri</span>
+                <span class="pcat-badge">High-Gloss</span>
+              </div>
+              <p class="pcat-desc">Akril, emal, tosh stoleshnitsa & Blum</p>
+            </div>
+          </button>
+
+          <!-- 3. Shkaf-kupelar -->
+          <button type="button" class="premium-cat-card" data-cat="shkaf">
+            <div class="pcat-icon-box">🚪</div>
+            <div class="pcat-content">
+              <div class="pcat-top">
+                <span class="pcat-name">Shkaf-Kupelar</span>
+                <span class="pcat-badge">Garderob</span>
+              </div>
+              <p class="pcat-desc">Ko'zguli kupe tizim, grafit profillar</p>
+            </div>
+          </button>
+
+          <!-- 4. Yotoqxona & Krovatlar -->
+          <button type="button" class="premium-cat-card" data-cat="krovat">
+            <div class="pcat-icon-box">🛏️</div>
+            <div class="pcat-content">
+              <div class="pcat-top">
+                <span class="pcat-name">Yotoqxona & Krovat</span>
+                <span class="pcat-badge">Ortopedik</span>
+              </div>
+              <p class="pcat-desc">Yumshoq baxmal bosh qism, gazlift quti</p>
+            </div>
+          </button>
+
+          <!-- 5. Zamonaviy Stollar -->
+          <button type="button" class="premium-cat-card" data-cat="stol">
+            <div class="pcat-icon-box">☕</div>
+            <div class="pcat-content">
+              <div class="pcat-top">
+                <span class="pcat-name">Zamonaviy Stollar</span>
+                <span class="pcat-badge">Loft & Smart</span>
+              </div>
+              <p class="pcat-desc">Tabiiy eman, metall karkas, ergonomik</p>
+            </div>
+          </button>
+
+          <!-- 6. TV Tumba & Komodlar -->
+          <button type="button" class="premium-cat-card" data-cat="tumba">
+            <div class="pcat-icon-box">📺</div>
+            <div class="pcat-content">
+              <div class="pcat-top">
+                <span class="pcat-name">TV Tumba & Komod</span>
+                <span class="pcat-badge">LED Konsol</span>
+              </div>
+              <p class="pcat-desc">Suzuvchi LED nur, faset oyna & tortmalar</p>
+            </div>
+          </button>
+
+          <!-- 7. Ofis & Rahbar Mebeli -->
+          <button type="button" class="premium-cat-card" data-cat="ofis">
+            <div class="pcat-icon-box">💼</div>
+            <div class="pcat-content">
+              <div class="pcat-top">
+                <span class="pcat-name">Ofis & Rahbar</span>
+                <span class="pcat-badge">Biznes Lux</span>
+              </div>
+              <p class="pcat-desc">Keng ishchi stol, hujjatlar shkafi</p>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ASOSIY KATALOG QISMI -->
+    <div class="container">
+      <div class="catalog-layout">
+        <!-- CHAP: FILTRLAR -->
+        <aside class="filter-panel">
+          <div class="filter-title">
+            <span>Filtrlar</span>
+            <button type="button" id="btn-reset-filters" style="font-size:12px; color:#d97706; font-weight:800; cursor:pointer; background:none; border:none;">Tozalash 🔄</button>
+          </div>
+
+          <!-- Kategoriya Radio Ro'yxat -->
+          <div class="filter-group">
+            <span class="filter-label">Kategoriyalar</span>
+            <div class="category-radio-list">
+              <div class="cat-item active" data-cat="all">
+                <span>🌟 Barcha mebellar</span>
+                <span class="cat-count">12</span>
+              </div>
+              <div class="cat-item" data-cat="oshxona">
+                <span>🍽️ Oshxona garniturlari</span>
+                <span class="cat-count">3</span>
+              </div>
+              <div class="cat-item" data-cat="shkaf">
+                <span>🚪 Shkaf-kupelar</span>
+                <span class="cat-count">3</span>
+              </div>
+              <div class="cat-item" data-cat="krovat">
+                <span>🛏️ Yotoqxona & Krovatlar</span>
+                <span class="cat-count">2</span>
+              </div>
+              <div class="cat-item" data-cat="stol">
+                <span>☕ Zamonaviy Stollar</span>
+                <span class="cat-count">2</span>
+              </div>
+              <div class="cat-item" data-cat="tumba">
+                <span>📺 TV Tumba & Komodlar</span>
+                <span class="cat-count">1</span>
+              </div>
+              <div class="cat-item" data-cat="ofis">
+                <span>💼 Ofis Mebellari</span>
+                <span class="cat-count">1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Material -->
+          <div class="filter-group">
+            <span class="filter-label">Material turi</span>
+            <div style="display:flex; flex-direction:column; gap:8px; font-size:13px;">
+              <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                <input type="checkbox" checked class="mat-checkbox" value="all"> Barchasi
+              </label>
+              <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                <input type="checkbox" class="mat-checkbox" value="mdf"> MDF Akril / Emal
+              </label>
+              <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                <input type="checkbox" class="mat-checkbox" value="dsp"> Sifatli DSP (Laminat)
+              </label>
+            </div>
+          </div>
+
+          <!-- Narx oralig'i -->
+          <div class="filter-group">
+            <span class="filter-label">Maksimal narx</span>
+            <input type="range" id="price-filter-range" min="800000" max="9000000" step="200000" value="9000000" style="width:100%; accent-color:#d97706;">
+            <div style="display:flex; justify-content:space-between; font-size:12px; font-family:var(--font-mono); margin-top:6px; color:var(--text-muted);">
+              <span>800 ming</span>
+              <span id="price-filter-val" style="color:#d97706; font-weight:800;">9.0 mln so'm</span>
+            </div>
+          </div>
+
+          <!-- Tezkor 3D Studiyaga O'tish Vidjeti -->
+          <div style="background:var(--bg-surface-muted); padding:16px; border-radius:var(--radius-lg); border:1px solid var(--border-light); text-align:center;">
+            <div style="font-size:22px; margin-bottom:6px;">✨</div>
+            <strong style="font-size:13px; display:block; margin-bottom:4px; color:var(--text-main);">Maxsus O'lcham Kerakmi?</strong>
+            <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px; line-height:1.4;">O'z xonangizga mos o'lcham va dizaynni 3D studiyamizda quring!</p>
+            <a href="index.html#kalkulyator" class="btn btn-primary" style="padding:8px 12px; font-size:12px; width:100%;">
+              3D Studiyani Ochish →
+            </a>
+          </div>
+        </aside>
+
+        <!-- O'NG: MAHSULOTLAR GRID -->
+        <div>
+          <div class="products-top-bar">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="font-size:14px; color:var(--text-muted);">
+                Ko'rsatilmoqda: <strong id="product-count-display" style="color:var(--text-main);">12 ta mahsulot</strong>
+              </span>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+              <!-- Qidiruv maydoni -->
+              <input type="text" id="catalog-search" class="catalog-search-input" placeholder="🔍 Mebel nomini qidiring...">
+
+              <!-- Saralash -->
+              <div style="display:flex; align-items:center; gap:8px;">
+                <label style="font-size:13px; color:var(--text-muted); font-weight:600;">Saralash:</label>
+                <select id="sort-select" style="padding:8px 12px; border-radius:var(--radius-md); border:1px solid var(--border-light); background:var(--bg-surface); color:var(--text-main); font-size:13px; font-weight:600; outline:none;">
+                  <option value="popular">⭐️ Ommabopligi bo'yicha</option>
+                  <option value="cheap">Avval arzonlari</option>
+                  <option value="expensive">Avval qimmatlari</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- MAHSULOTLAR KARTALARI CONTAINER -->
+          <div class="product-grid" id="product-cards-container">
+            <!-- JS orqali dinamik chiziladi -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:none; padding:24px 0;">
+        <span>© 2026 MebelPro Platformasi. Barcha huquqlar himoyalangan.</span>
+        <span>Telefon: +998 (90) 123-45-67 | Telegram: @mebelpro_admin</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JAVASCRIPT LOGIKA -->
+  <script>
+    // TOAST BILDIRISHNOMA
+    function showToast(msg, type = 'success') {
+      let c = document.getElementById('toast-container');
+      if (!c) {
+        c = document.createElement('div');
+        c.id = 'toast-container';
+        c.className = 'toast-container';
+        document.body.appendChild(c);
+      }
+      const t = document.createElement('div');
+      t.className = `toast toast-${type} show`;
+      t.innerHTML = `<span>${type === 'success' ? '✓' : 'ℹ'}</span> <span>${msg}</span>`;
+      c.appendChild(t);
+      setTimeout(() => {
+        t.classList.remove('show');
+        setTimeout(() => t.remove(), 300);
+      }, 3200);
+    }
+
+    // TAYYOR MAHSULOTLAR BAZASI (12 TA PREMIAL MODEL)
+    const PRODUCTS = [
+      {
+        id: 'p1',
+        title: 'Verona Shkaf-Kupe 3 Eshikli',
+        category: 'shkaf',
+        catName: 'Shkaf-kupe',
+        badge: 'Xit savdo',
+        badgeClass: 'badge-hit',
+        rating: '4.9',
+        reviews: '34',
+        specs: '220 × 240 × 60 sm • Tabiiy Eman & Oyna • Blum dovodchik',
+        price: 4650000,
+        oldPrice: 5200000,
+        material: 'mdf',
+        colorHex: '#B88654'
+      },
+      {
+        id: 'p2',
+        title: 'Milano High-Gloss Oshxona',
+        category: 'oshxona',
+        catName: 'Oshxona garnituri',
+        badge: 'Yangi',
+        badgeClass: 'badge-new',
+        rating: '5.0',
+        reviews: '28',
+        specs: '280 × 230 × 60 sm • Akril Oq Fasad • Tosh stoleshnitsa',
+        price: 5800000,
+        oldPrice: 6500000,
+        material: 'mdf',
+        colorHex: '#FFFFFF'
+      },
+      {
+        id: 'p3',
+        title: 'Loft Minimalist Ish Stoli',
+        category: 'stol',
+        catName: 'Stol',
+        badge: 'Chegirma',
+        badgeClass: 'badge-sale',
+        rating: '4.8',
+        reviews: '41',
+        specs: '140 × 75 × 70 sm • Qora metall karkas • Eman usti',
+        price: 890000,
+        oldPrice: 1100000,
+        material: 'dsp',
+        colorHex: '#7A4B29'
+      },
+      {
+        id: 'p4',
+        title: 'Royal Soft Boshli Krovat',
+        category: 'krovat',
+        catName: 'Krovat',
+        badge: 'Premium',
+        badgeClass: 'badge-lux',
+        rating: '4.9',
+        reviews: '19',
+        specs: '160 × 200 sm • Velur yumshoq orqa • Gazlift saqlash qutisi',
+        price: 2950000,
+        oldPrice: 3400000,
+        material: 'mdf',
+        colorHex: '#373A3C'
+      },
+      {
+        id: 'p5',
+        title: 'Scandi 3 Tortmali TV Tumba',
+        category: 'tumba',
+        catName: 'TV Tumba',
+        badge: 'Top Model',
+        badgeClass: 'badge-hit',
+        rating: '4.7',
+        reviews: '15',
+        specs: '160 × 52 × 42 sm • Suzuvchi LED chiroq • Yog\'och oyoq',
+        price: 1180000,
+        oldPrice: 1350000,
+        material: 'dsp',
+        colorHex: '#F5F0E6'
+      },
+      {
+        id: 'p6',
+        title: 'Nordic Shkaf-Kupe 2 Eshikli',
+        category: 'shkaf',
+        catName: 'Shkaf-kupe',
+        badge: 'Klassika',
+        badgeClass: 'badge-hit',
+        rating: '4.8',
+        reviews: '22',
+        specs: '180 × 230 × 60 sm • Mat Oq & Grafit profillar',
+        price: 3950000,
+        oldPrice: 4400000,
+        material: 'mdf',
+        colorHex: '#FFFFFF'
+      },
+      {
+        id: 'p7',
+        title: 'Monaco Ofis Rahbar To\'plami',
+        category: 'ofis',
+        catName: 'Ofis mebeli',
+        badge: 'Biznes Lux',
+        badgeClass: 'badge-lux',
+        rating: '5.0',
+        reviews: '12',
+        specs: '180 × 75 × 85 sm • Keng stol + Pedestal tumba',
+        price: 2450000,
+        oldPrice: 2800000,
+        material: 'dsp',
+        colorHex: '#34261E'
+      },
+      {
+        id: 'p8',
+        title: 'Provence Klassik Frezali Oshxona',
+        category: 'oshxona',
+        catName: 'Oshxona garnituri',
+        badge: 'Eksklyuziv',
+        badgeClass: 'badge-lux',
+        rating: '4.9',
+        reviews: '31',
+        specs: '300 × 240 × 60 sm • MDF Emal frezerovka • Gola profil',
+        price: 6900000,
+        oldPrice: 7800000,
+        material: 'mdf',
+        colorHex: '#F5F0E6'
+      },
+      {
+        id: 'p9',
+        title: 'Prestige Yotoqxona Krovati',
+        category: 'krovat',
+        catName: 'Krovat',
+        badge: 'Yangi',
+        badgeClass: 'badge-new',
+        rating: '4.8',
+        reviews: '17',
+        specs: '180 × 200 sm • Tabiiy Eman karkas • Ortopedik reykalar',
+        price: 3200000,
+        oldPrice: 3600000,
+        material: 'mdf',
+        colorHex: '#B88654'
+      },
+      {
+        id: 'p10',
+        title: 'Modern Katta Ovqat Stoli',
+        category: 'stol',
+        catName: 'Stol',
+        badge: 'Chegirma',
+        badgeClass: 'badge-sale',
+        rating: '4.7',
+        reviews: '26',
+        specs: '180 × 75 × 90 sm • 38mm qalin ustki qism • 8 kishilik',
+        price: 1450000,
+        oldPrice: 1750000,
+        material: 'dsp',
+        colorHex: '#1C1C1E'
+      },
+      {
+        id: 'p11',
+        title: 'Neo-Graphite Katta Garderob',
+        category: 'shkaf',
+        catName: 'Shkaf-kupe',
+        badge: 'Premium',
+        badgeClass: 'badge-lux',
+        rating: '5.0',
+        reviews: '16',
+        specs: '240 × 250 × 65 sm • Qora shisha faset • Ichki LED sensor',
+        price: 5400000,
+        oldPrice: 6100000,
+        material: 'mdf',
+        colorHex: '#373A3C'
+      },
+      {
+        id: 'p12',
+        title: 'Smart Antratsit L-Oshxona',
+        category: 'oshxona',
+        catName: 'Oshxona garnituri',
+        badge: 'Trend 2026',
+        badgeClass: 'badge-hit',
+        rating: '4.9',
+        reviews: '23',
+        specs: '320 × 240 × 60 sm • Mat Antratsit • Yashirin Gola profil',
+        price: 7400000,
+        oldPrice: 8300000,
+        material: 'mdf',
+        colorHex: '#252932'
+      }
+    ];
+
+    let currentCat = 'all';
+    let maxPriceLimit = 9000000;
+    let sortBy = 'popular';
+    let searchQuery = '';
+
+    // REALISTIK SVG MEBEL TASVIRINI YARATISH (PREMIUM GRAFIKA)
+    function renderProductGraphic(p) {
+      const c = p.colorHex || '#B88654';
+
+      if (p.category === 'shkaf') {
+        return `
+          <svg viewBox="0 0 240 180" width="200" height="150" style="filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));">
+            <!-- Pol soyasi -->
+            <ellipse cx="120" cy="172" rx="90" ry="6" fill="url(#floor-shadow)" />
+            <!-- Korpus asos -->
+            <rect x="35" y="15" width="170" height="150" rx="3" fill="#181c24" stroke="#374151" stroke-width="2" />
+            <!-- Chap eshik (Yog'och) -->
+            <rect x="38" y="18" width="54" height="144" rx="1" fill="${c}" stroke="#1f2937" stroke-width="1.5" />
+            <rect x="38" y="18" width="54" height="144" fill="url(#wood-pattern-cat)" opacity="0.3" />
+            <rect x="88" y="75" width="2" height="30" rx="1" fill="#111827" />
+            <!-- O'rta eshik (Ko'zgu) -->
+            <rect x="94" y="18" width="52" height="144" rx="1" fill="#cbd5e1" stroke="#334155" stroke-width="1.5" />
+            <rect x="94" y="18" width="52" height="144" fill="url(#mirror-shine)" />
+            <line x1="102" y1="24" x2="138" y2="156" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" />
+            <!-- O'ng eshik -->
+            <rect x="148" y="18" width="54" height="144" rx="1" fill="${c}" stroke="#1f2937" stroke-width="1.5" />
+            <rect x="148" y="18" width="54" height="144" fill="url(#wood-pattern-cat)" opacity="0.3" />
+            <rect x="150" y="75" width="2" height="30" rx="1" fill="#111827" />
+            <!-- Yuqori korniz LED chiroqlar -->
+            <circle cx="65" cy="15" r="2" fill="#fbbf24" />
+            <circle cx="120" cy="15" r="2" fill="#fbbf24" />
+            <circle cx="175" cy="15" r="2" fill="#fbbf24" />
+          </svg>
+        `;
+      } else if (p.category === 'oshxona') {
+        return `
+          <svg viewBox="0 0 240 180" width="200" height="150" style="filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));">
+            <ellipse cx="120" cy="172" rx="95" ry="6" fill="url(#floor-shadow)" />
+            <!-- Yuqori shkaflar -->
+            <rect x="30" y="15" width="180" height="48" rx="2" fill="${c}" stroke="#1f2937" stroke-width="1.8" />
+            <rect x="30" y="15" width="180" height="48" fill="url(#body-grad)" opacity="0.3" />
+            <line x1="90" y1="15" x2="90" y2="63" stroke="#1f2937" stroke-width="1.5" />
+            <line x1="150" y1="15" x2="150" y2="63" stroke="#1f2937" stroke-width="1.5" />
+            <!-- Fartuk ostidagi LED chiziq -->
+            <line x1="32" y1="63" x2="208" y2="63" stroke="#fbbf24" stroke-width="2.5" />
+            <!-- Marmar fartuk -->
+            <rect x="30" y="64" width="180" height="38" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1" />
+            <line x1="30" y1="83" x2="210" y2="83" stroke="#cbd5e1" stroke-dasharray="6 4" />
+            <!-- Tosh stoleshnitsa (Qalin) -->
+            <rect x="26" y="102" width="188" height="10" rx="1.5" fill="#0f172a" stroke="#000" stroke-width="1.5" />
+            <!-- Pastki shkaflar & tortmalar -->
+            <rect x="30" y="112" width="180" height="54" rx="2" fill="${c}" stroke="#1f2937" stroke-width="1.8" />
+            <line x1="90" y1="112" x2="90" y2="166" stroke="#1f2937" stroke-width="1.5" />
+            <line x1="150" y1="112" x2="150" y2="166" stroke="#1f2937" stroke-width="1.5" />
+            <!-- Qora tutqichlar -->
+            <rect x="42" y="116" width="36" height="2.5" rx="1" fill="#0f172a" />
+            <rect x="102" y="116" width="36" height="2.5" rx="1" fill="#0f172a" />
+            <rect x="162" y="116" width="36" height="2.5" rx="1" fill="#0f172a" />
+          </svg>
+        `;
+      } else if (p.category === 'krovat') {
+        return `
+          <svg viewBox="0 0 240 180" width="200" height="150" style="filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));">
+            <ellipse cx="120" cy="168" rx="85" ry="6" fill="url(#floor-shadow)" />
+            <!-- Yumshoq baxmal orqa (Headboard) -->
+            <rect x="45" y="30" width="150" height="65" rx="6" fill="${c}" stroke="#1f2937" stroke-width="2" />
+            <rect x="45" y="30" width="150" height="65" rx="6" fill="url(#body-grad)" opacity="0.3" />
+            <!-- Orqa vertikal choklar -->
+            <line x1="82" y1="30" x2="82" y2="95" stroke="rgba(0,0,0,0.25)" stroke-width="2" />
+            <line x1="120" y1="30" x2="120" y2="95" stroke="rgba(0,0,0,0.25)" stroke-width="2" />
+            <line x1="158" y1="30" x2="158" y2="95" stroke="rgba(0,0,0,0.25)" stroke-width="2" />
+            <!-- Yostiqlar -->
+            <rect x="60" y="80" width="50" height="20" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+            <rect x="130" y="80" width="50" height="20" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+            <!-- Ortopedik matras -->
+            <rect x="40" y="98" width="160" height="35" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1.8" />
+            <!-- Ko'rpa / Pled -->
+            <rect x="40" y="115" width="160" height="26" rx="3" fill="${c}" opacity="0.85" stroke="#1f2937" stroke-width="1.5" />
+            <!-- Yog'och karkas va oyoqlar -->
+            <rect x="36" y="132" width="168" height="16" rx="2" fill="#1e293b" />
+            <rect x="44" y="148" width="8" height="14" rx="2" fill="#0f172a" />
+            <rect x="188" y="148" width="8" height="14" rx="2" fill="#0f172a" />
+          </svg>
+        `;
+      } else if (p.category === 'stol') {
+        return `
+          <svg viewBox="0 0 240 180" width="200" height="150" style="filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));">
+            <ellipse cx="120" cy="168" rx="80" ry="5" fill="url(#floor-shadow)" />
+            <!-- Metall trapezoid oyoqlar -->
+            <polygon points="50,158 58,158 72,78 64,78" fill="#0f172a" />
+            <polygon points="190,158 182,158 168,78 176,78" fill="#0f172a" />
+            <!-- Stol usti (Qalin tabiiy yog'och) -->
+            <polygon points="35,76 205,76 195,64 45,64" fill="${c}" stroke="#1f2937" stroke-width="2" />
+            <polygon points="35,76 205,76 205,82 35,82" fill="#181c24" stroke="#1f2937" stroke-width="1.5" />
+            <!-- Usti teksturasi -->
+            <polygon points="45,64 195,64 205,76 35,76" fill="url(#wood-pattern-cat)" opacity="0.25" />
+            <!-- Noutbuk / Aksessuar silueti -->
+            <rect x="105" y="54" width="30" height="10" rx="1.5" fill="#64748b" />
+            <polygon points="102,64 138,64 135,67 105,67" fill="#94a3b8" />
+          </svg>
+        `;
+      } else if (p.category === 'tumba') {
+        return `
+          <svg viewBox="0 0 240 180" width="200" height="150" style="filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));">
+            <ellipse cx="120" cy="168" rx="80" ry="5" fill="url(#floor-shadow)" />
+            <!-- OLED TV silueti -->
+            <rect x="60" y="24" width="120" height="64" rx="2" fill="#020617" stroke="#1e293b" stroke-width="2" />
+            <rect x="64" y="28" width="112" height="56" fill="#0f172a" />
+            <line x1="64" y1="28" x2="176" y2="84" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+            <rect x="114" y="88" width="12" height="10" fill="#334155" />
+            <rect x="100" y="98" width="40" height="2.5" rx="1" fill="#1e293b" />
+            <!-- Tumba korpusi -->
+            <rect x="36" y="104" width="168" height="44" rx="3" fill="${c}" stroke="#1f2937" stroke-width="2" />
+            <rect x="36" y="104" width="168" height="44" fill="url(#body-grad)" opacity="0.3" />
+            <line x1="92" y1="104" x2="92" y2="148" stroke="#1f2937" stroke-width="1.5" />
+            <line x1="148" y1="104" x2="148" y2="148" stroke="#1f2937" stroke-width="1.5" />
+            <!-- Oltin/Metall oyoqlar -->
+            <line x1="50" y1="148" x2="44" y2="164" stroke="#d97706" stroke-width="3" stroke-linecap="round" />
+            <line x1="190" y1="148" x2="196" y2="164" stroke="#d97706" stroke-width="3" stroke-linecap="round" />
+            <!-- Pastdagi ambient LED nur -->
+            <line x1="52" y1="149" x2="188" y2="149" stroke="#fbbf24" stroke-width="2.5" />
+          </svg>
+        `;
+      } else { // 'ofis'
+        return `
+          <svg viewBox="0 0 240 180" width="200" height="150" style="filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));">
+            <ellipse cx="120" cy="168" rx="85" ry="5" fill="url(#floor-shadow)" />
+            <!-- Rahbar stoli usti -->
+            <rect x="30" y="60" width="180" height="12" rx="2" fill="${c}" stroke="#1f2937" stroke-width="2" />
+            <!-- Chap panel -->
+            <rect x="34" y="72" width="8" height="85" rx="1" fill="#1e293b" />
+            <!-- O'ng 3-tortmali tumba -->
+            <rect x="150" y="72" width="56" height="85" rx="2" fill="#1e293b" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="150" y1="100" x2="206" y2="100" stroke="#334155" stroke-width="1.5" />
+            <line x1="150" y1="128" x2="206" y2="128" stroke="#334155" stroke-width="1.5" />
+            <!-- Metall tutqichlar -->
+            <rect x="168" y="84" width="20" height="2" fill="#f8fafc" />
+            <rect x="168" y="112" width="20" height="2" fill="#f8fafc" />
+            <rect x="168" y="140" width="20" height="2" fill="#f8fafc" />
+            <!-- Monitor silueti -->
+            <rect x="75" y="32" width="60" height="24" rx="2" fill="#0f172a" stroke="#475569" stroke-width="1" />
+            <rect x="100" y="56" width="10" height="4" fill="#334155" />
+          </svg>
+        `;
+      }
+    }
+
+    function getCart() {
+      try {
+        return JSON.parse(localStorage.getItem('mebelpro_cart') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function updateCartCounter() {
+      const cart = getCart();
+      const count = cart.reduce((acc, item) => acc + (item.qty || 1), 0);
+      const badge = document.getElementById('cart-counter-badge');
+      if (badge) badge.textContent = count;
+    }
+
+    function addToCart(productId) {
+      const p = PRODUCTS.find(x => x.id === productId);
+      if (!p) return;
+
+      const cart = getCart();
+      const existing = cart.find(x => x.id === productId);
+      if (existing) {
+        existing.qty = (existing.qty || 1) + 1;
+      } else {
+        cart.push({
+          id: p.id,
+          title: p.title,
+          category: p.catName,
+          specs: p.specs,
+          price: p.price,
+          qty: 1
+        });
+      }
+      localStorage.setItem('mebelpro_cart', JSON.stringify(cart));
+      updateCartCounter();
+      showToast(`🛒 "${p.title}" savatga qo'shildi!`);
+    }
+
+    // 3D STUDIYADA SOZLASH VA OCHISH
+    function openInStudio(category) {
+      localStorage.setItem('mebelpro_open_type', category);
+      window.location.href = 'index.html#kalkulyator';
+    }
+
+    function renderProducts() {
+      const container = document.getElementById('product-cards-container');
+      if (!container) return;
+
+      let list = PRODUCTS.filter(p => {
+        if (currentCat !== 'all' && p.category !== currentCat) return false;
+        if (p.price > maxPriceLimit) return false;
+        if (searchQuery.trim()) {
+          const q = searchQuery.toLowerCase().trim();
+          const matchTitle = p.title.toLowerCase().includes(q);
+          const matchCat = p.catName.toLowerCase().includes(q);
+          const matchSpecs = p.specs.toLowerCase().includes(q);
+          if (!matchTitle && !matchCat && !matchSpecs) return false;
+        }
+        return true;
+      });
+
+      if (sortBy === 'cheap') {
+        list.sort((a, b) => a.price - b.price);
+      } else if (sortBy === 'expensive') {
+        list.sort((a, b) => b.price - a.price);
+      }
+
+      document.getElementById('product-count-display').textContent = `${list.length} ta mahsulot`;
+
+      if (!list.length) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align:center; padding: 60px 20px; background:var(--bg-surface); border-radius:var(--radius-xl); border:1px solid var(--border-light);">
+            <div style="font-size:42px; margin-bottom:12px;">🔍</div>
+            <p style="font-size:18px; font-weight:800; color:var(--text-main);">Bu parametrlar bo'yicha mebellar topilmadi</p>
+            <p style="font-size:14px; color:var(--text-muted); margin-top:6px; max-width:400px; margin-left:auto; margin-right:auto;">
+              Qidiruv so'zini o'zgartiring, narx oralig'ini oshiring yoki "Barcha mebellar" toifasini tanlang.
+            </p>
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('btn-reset-filters').click()" style="margin-top:16px;">
+              Barcha Filtrlarni Bekor Qilish
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map(p => `
+        <div class="product-card">
+          <div class="product-img-box">
+            ${p.badge ? `<span class="product-badge ${p.badgeClass}">${p.badge}</span>` : ''}
+            <div class="product-rating-pill">
+              <span>★</span>
+              <span>${p.rating || '4.9'}</span>
+            </div>
+            ${renderProductGraphic(p)}
+          </div>
+
+          <div class="product-info">
+            <div class="product-cat-tag">
+              <span>${p.catName}</span>
+              <span class="product-warranty-tag">🛡️ 2 yil kafolat</span>
+            </div>
+            <h3 class="product-title">${p.title}</h3>
+            <p class="product-specs">${p.specs}</p>
+
+            <div class="product-price-row">
+              <div>
+                <span class="current-price">${p.price.toLocaleString('uz-UZ')} so'm</span>
+                ${p.oldPrice ? `<span class="old-price">${p.oldPrice.toLocaleString('uz-UZ')}</span>` : ''}
+              </div>
+              <span style="font-size:11px; font-weight:800; color:#10b981; background:rgba(16,185,129,0.12); padding:3px 8px; border-radius:var(--radius-full);">
+                Omborda bor ✓
+              </span>
+            </div>
+
+            <div class="product-card-actions">
+              <button type="button" class="btn btn-primary" onclick="addToCart('${p.id}')" style="padding:10px 12px; font-size:13px; font-weight:700;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span>Savatga</span>
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="openInStudio('${p.category}')" title="3D Konstruktorda ochish" style="padding:10px 10px; font-size:12px; font-weight:700;">
+                <span>🧊 3D Studiya</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // TOIFA TANLASH HODISALARI (Yuqori kartalar va yon ro'yxatni sinxronlash)
+    function selectCategory(cat) {
+      currentCat = cat;
+
+      // 1. Yuqori premium kartalarni sinxronlash
+      document.querySelectorAll('.premium-cat-card').forEach(c => {
+        c.classList.toggle('active', c.dataset.cat === cat);
+      });
+
+      // 2. Yon panel elementlarini sinxronlash
+      document.querySelectorAll('.cat-item').forEach(i => {
+        i.classList.toggle('active', i.dataset.cat === cat);
+      });
+
+      renderProducts();
+    }
+
+    document.querySelectorAll('.premium-cat-card').forEach(card => {
+      card.addEventListener('click', () => {
+        selectCategory(card.dataset.cat);
+      });
+    });
+
+    document.querySelectorAll('.cat-item').forEach(item => {
+      item.addEventListener('click', () => {
+        selectCategory(item.dataset.cat);
+      });
+    });
+
+    // Qidiruv
+    const searchInput = document.getElementById('catalog-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderProducts();
+      });
+    }
+
+    // Narx slaydri
+    const priceRange = document.getElementById('price-filter-range');
+    const priceVal = document.getElementById('price-filter-val');
+    priceRange.addEventListener('input', (e) => {
+      maxPriceLimit = Number(e.target.value);
+      priceVal.textContent = (maxPriceLimit / 1000000).toFixed(1) + " mln so'm";
+      renderProducts();
+    });
+
+    // Saralash
+    document.getElementById('sort-select').addEventListener('change', (e) => {
+      sortBy = e.target.value;
+      renderProducts();
+    });
+
+    // Tozalash
+    document.getElementById('btn-reset-filters').addEventListener('click', () => {
+      currentCat = 'all';
+      maxPriceLimit = 9000000;
+      sortBy = 'popular';
+      searchQuery = '';
+      if (searchInput) searchInput.value = '';
+      priceRange.value = 9000000;
+      priceVal.textContent = "9.0 mln so'm";
+      selectCategory('all');
+      showToast('Barcha filtrlar tozalandi', 'info');
+    });
+
+    // Dark/Light rejim
+    const storedTheme = localStorage.getItem('mebelpro_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme');
+        const next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('mebelpro_theme', next);
+      });
+    }
+
+    // Rang palitrasi tanlagichi
+    const paletteToggleBtn = document.getElementById('palette-toggle-btn');
+    const paletteDropdown = document.getElementById('palette-dropdown');
+    const paletteLabel = document.getElementById('palette-label-text');
+    if (paletteToggleBtn && paletteDropdown) {
+      paletteToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        paletteDropdown.classList.toggle('open');
+      });
+      document.addEventListener('click', () => {
+        paletteDropdown.classList.remove('open');
+      });
+      const paletteNames = { mocha: 'Mocha', emerald: 'Zümrad', japandi: 'Japandi', obsidian: 'Obsidian' };
+      document.querySelectorAll('[data-set-palette]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const p = btn.dataset.setPalette;
+          document.documentElement.setAttribute('data-palette', p);
+          localStorage.setItem('mebelpro_palette', p);
+          if (paletteLabel) paletteLabel.textContent = paletteNames[p] || p;
+          document.querySelectorAll('[data-set-palette]').forEach(b => b.classList.toggle('active', b === btn));
+          paletteDropdown.classList.remove('open');
+          showToast(`🎨 "${paletteNames[p]}" rang uslubi tanlandi!`, 'success');
+        });
+      });
+      const savedPal = localStorage.getItem('mebelpro_palette') || 'mocha';
+      document.documentElement.setAttribute('data-palette', savedPal);
+      if (paletteLabel) paletteLabel.textContent = paletteNames[savedPal] || 'Mocha';
+      document.querySelectorAll(`[data-set-palette="${savedPal}"]`).forEach(b => b.classList.add('active'));
+    }
+
+    updateCartCounter();
+    renderProducts();
+  </script>
+</body>
+</html>

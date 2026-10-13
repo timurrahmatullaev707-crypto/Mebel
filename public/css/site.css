@@ -1,0 +1,2577 @@
+/**
+ * MebelHisob - Mijoz Sayti Stillari (site.css)
+ */
+
+/* ==========================================================================
+   1. NAVIGATSIYA (Yopishqoq / Sticky Header)
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(250, 247, 242, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-light);
+  transition: background-color var(--duration-normal) ease, border-color var(--duration-normal) ease;
+}
+
+[data-theme="dark"] .site-header {
+  background-color: rgba(19, 14, 12, 0.92);
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 72px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  transition: transform var(--duration-fast) ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px var(--color-primary-glow);
+}
+
+.logo-accent {
+  color: var(--color-primary);
+}
+
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: nowrap;
+}
+
+@media (min-width: 900px) {
+  .nav-links {
+    display: flex;
+  }
+}
+
+.nav-link {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color var(--duration-fast) ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.nav-link:hover, .nav-link:focus-visible {
+  color: var(--color-primary);
+}
+
+.nav-cta-btn {
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  border-radius: var(--radius-full);
+}
+
+@media (max-width: 900px) {
+  .nav-cta-btn {
+    display: none;
+  }
+}
+
+/* Nav Studiya 3-in-1 Dropdown */
+.nav-studio-dropdown, .nav-item-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link-studio {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-primary) !important;
+  font-weight: 800 !important;
+  padding: 5px 12px;
+  background: var(--color-primary-subtle, rgba(27, 44, 77, 0.08));
+  border: 1px solid var(--color-primary-glow, rgba(27, 44, 77, 0.22));
+  border-radius: var(--radius-full, 999px);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.nav-link-studio:hover {
+  background: var(--color-primary);
+  color: var(--btn-primary-text, #ffffff) !important;
+  box-shadow: 0 4px 14px var(--color-primary-glow);
+  transform: translateY(-1px);
+}
+
+.studio-sparkle-icon, .studio-sparkle {
+  font-size: 13px;
+  animation: pulseBadge 2s infinite ease-in-out;
+}
+
+.nav-studio-pill, .nav-studio-badge {
+  font-size: 10px;
+  font-weight: 900;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  color: #fff;
+  letter-spacing: 0.03em;
+}
+
+.studio-dropdown-menu, .nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 290px;
+  background: var(--bg-surface, #ffffff);
+  border: 1px solid var(--border-light, #e4e4e7);
+  border-radius: var(--radius-lg, 14px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1000;
+}
+
+[data-theme="dark"] .studio-dropdown-menu,
+[data-theme="dark"] .nav-dropdown-menu {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-light);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+}
+
+.nav-studio-dropdown:hover .studio-dropdown-menu,
+.nav-studio-dropdown:focus-within .studio-dropdown-menu,
+.nav-item-dropdown:hover .nav-dropdown-menu,
+.nav-item-dropdown:focus-within .nav-dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(4px);
+}
+
+.studio-drop-item, .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-md, 8px);
+  text-decoration: none;
+  transition: background 0.18s ease;
+  color: var(--text-main);
+}
+
+.studio-drop-item:hover, .dropdown-item:hover {
+  background: var(--bg-surface-muted, #f4f4f5);
+}
+
+[data-theme="dark"] .studio-drop-item:hover,
+[data-theme="dark"] .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.drop-icon {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--bg-surface-muted);
+}
+
+.drop-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.drop-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+.drop-desc {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* Mobil studiya guruhi */
+.mobile-studio-group {
+  background: var(--bg-surface-muted, #f4f4f5);
+  padding: 12px;
+  border-radius: var(--radius-md, 10px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid var(--border-light);
+}
+
+[data-theme="dark"] .mobile-studio-group {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.mobile-studio-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 10px;
+  border-left: 2.5px solid var(--color-primary);
+}
+
+.mobile-studio-sub a {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 2px 0;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Mavzu almashtirish tugmasi */
+.theme-toggle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  background-color: var(--bg-surface-muted);
+  border: 1px solid var(--border-light);
+  transition: background-color var(--duration-fast) ease, transform var(--duration-fast) ease;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--border-light);
+  transform: rotate(15deg);
+}
+
+.theme-toggle-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Burger menyu tugmasi */
+.burger-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-muted);
+}
+
+@media (min-width: 900px) {
+  .burger-btn {
+    display: none;
+  }
+}
+
+.burger-line {
+  width: 22px;
+  height: 2px;
+  background-color: var(--text-main);
+  transition: transform var(--duration-normal) ease, opacity var(--duration-normal) ease;
+}
+
+.burger-btn.active .burger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.burger-btn.active .burger-line:nth-child(2) {
+  opacity: 0;
+}
+.burger-btn.active .burger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobil menyu darchasi */
+.mobile-menu {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-surface);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6);
+  gap: var(--space-4);
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform var(--duration-normal) var(--ease-spring), opacity var(--duration-normal) ease;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu .nav-link {
+  font-size: var(--text-lg);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* ==========================================================================
+   2. HERO BO'LIMI
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  padding: var(--space-16) 0 var(--space-12);
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 20%, var(--color-primary-subtle), transparent 70%);
+}
+
+.hero-bg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+  margin-bottom: var(--space-5);
+}
+
+.hero-highlight {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: var(--space-8);
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+/* Umumiy tugmalar */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) var(--ease-spring);
+  text-align: center;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: var(--btn-primary-text, #ffffff) !important;
+  box-shadow: 0 4px 14px var(--color-primary-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  color: var(--btn-primary-text, #ffffff) !important;
+  box-shadow: 0 8px 20px var(--color-primary-glow);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: var(--bg-surface);
+  color: var(--text-main);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-surface-muted);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   3. RAQAMLAR BANDI (Stats strip count-up)
+   ========================================================================== */
+.stats-section {
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  background-color: var(--bg-surface);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-card {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 900;
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+}
+
+/* ==========================================================================
+   4. KALKULYATOR BO'LIMI (Asosiy qism)
+   ========================================================================== */
+.calculator-section {
+  padding: var(--space-16) 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto var(--space-12);
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 800;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-2);
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-3);
+}
+
+.section-desc {
+  font-size: var(--text-base);
+  color: var(--text-muted);
+}
+
+/* Studiya Mega Badge */
+.studio-mega-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-light);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: var(--space-3);
+}
+
+[data-theme="dark"] .studio-mega-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.studio-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  animation: pulseDot 1.8s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+.studio-badge-accent {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-primary), #f59e0b);
+  color: #fff;
+}
+
+/* 1-Klikda Tayyor Dizayn Shablonlari (Presets Banner) */
+.presets-banner {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg, 14px);
+  padding: 14px 18px;
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .presets-banner {
+  background: var(--bg-surface);
+  border-color: var(--border-light);
+}
+
+.presets-banner-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.presets-banner-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.presets-banner-title svg {
+  color: var(--color-primary);
+}
+
+.presets-hint {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.presets-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .presets-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.preset-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md, 10px);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .preset-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.preset-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--color-primary-glow);
+}
+
+.preset-card.active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  box-shadow: 0 6px 18px var(--color-primary-glow), 0 0 0 1px var(--color-primary);
+}
+
+.preset-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.preset-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.preset-name {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.preset-desc {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  line-height: 1.25;
+}
+
+/* Kalkulyator 2 ustunli tuzilmasi */
+.calc-layout {
+  display: flex;
+  flex-direction: column-reverse; /* Mobilda tepada vizualizatsiya */
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .calc-layout {
+    display: grid;
+    grid-template-columns: 1fr 440px;
+    align-items: start;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1200px) {
+  .calc-layout {
+    grid-template-columns: 1fr 480px;
+    gap: var(--space-10);
+  }
+}
+
+/* Chap ustun: Boshqaruv panellari */
+.calc-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.control-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-fast) ease;
+}
+
+.control-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.control-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-lg);
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: var(--space-4);
+}
+
+/* 6 ta Mebel turlari kartochkalari - Premium Dizayn */
+.control-header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.type-active-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  background: var(--color-primary-subtle, rgba(217, 119, 6, 0.12));
+  color: var(--color-primary, #d97706);
+  border: 1px solid var(--color-primary-glow, rgba(217, 119, 6, 0.25));
+  border-radius: var(--radius-full, 999px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.1);
+  transition: all 0.25s ease;
+}
+
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+@media (min-width: 640px) {
+  .type-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.type-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 14px 14px 12px;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-light, #e4e4e7);
+  border-radius: var(--radius-lg, 14px);
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+[data-theme="dark"] .type-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.type-btn:hover {
+  border-color: var(--color-primary-light, #f59e0b);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(217, 119, 6, 0.14);
+  background: var(--bg-surface-elevated, #ffffff);
+}
+
+[data-theme="dark"] .type-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.type-btn.active {
+  border-color: var(--color-primary, #d97706);
+  background: linear-gradient(150deg, var(--bg-surface), var(--color-primary-subtle, rgba(217, 119, 6, 0.09)));
+  box-shadow: 0 8px 24px var(--color-primary-glow, rgba(217, 119, 6, 0.25)), 0 0 0 1px var(--color-primary, #d97706);
+  transform: translateY(-2px);
+}
+
+.type-btn-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.type-badge-pill {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(217, 119, 6, 0.14);
+  color: #d97706;
+}
+
+.badge-kitchen { background: rgba(239, 68, 68, 0.14); color: #ef4444; }
+.badge-tv { background: rgba(16, 185, 129, 0.14); color: #10b981; }
+.badge-table { background: rgba(59, 130, 246, 0.14); color: #3b82f6; }
+.badge-bed { background: rgba(168, 85, 247, 0.14); color: #a855f7; }
+.badge-office { background: rgba(236, 72, 153, 0.14); color: #ec4899; }
+
+.type-check-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-primary, #d97706);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.type-btn.active .type-check-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.type-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: var(--bg-surface-muted, #f4f4f5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary, #d97706);
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .type-icon {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.type-btn:hover .type-icon {
+  transform: scale(1.08);
+  background: var(--color-primary-subtle, rgba(217, 119, 6, 0.15));
+}
+
+.type-btn.active .type-icon {
+  background: var(--color-primary, #d97706);
+  color: #ffffff;
+}
+
+.type-name {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-main, #18181b);
+  line-height: 1.25;
+  margin-bottom: 3px;
+}
+
+.type-sub {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted, #71717a);
+  line-height: 1.3;
+}
+
+/* O'lchamlar slider + input */
+.dimension-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.dimension-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.dimension-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dimension-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.dimension-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.number-input {
+  width: 90px;
+  height: 38px;
+  padding: 0 var(--space-2);
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-align: right;
+  color: var(--text-main);
+  transition: border-color var(--duration-fast) ease;
+}
+
+.number-input:focus {
+  border-color: var(--color-primary);
+}
+
+.unit-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.range-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--border-light);
+  outline: none;
+  cursor: pointer;
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 3px solid var(--bg-surface);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform var(--duration-fast) ease;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.range-limit {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.input-error-msg {
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  font-weight: 600;
+  display: none;
+}
+
+.input-error-msg.visible {
+  display: block;
+}
+
+/* [-] son [+] hisoblagichlar */
+.steppers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-4);
+}
+
+.stepper-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: var(--bg-surface-muted);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+}
+
+.stepper-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.stepper-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+}
+
+.stepper-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-lg);
+  font-weight: 800;
+  color: var(--text-main);
+  border-radius: var(--radius-xs);
+  transition: background var(--duration-fast) ease;
+}
+
+.stepper-btn:hover:not(:disabled) {
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+}
+
+.stepper-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.stepper-value {
+  font-size: var(--text-base);
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--text-main);
+  min-width: 32px;
+  text-align: center;
+}
+
+/* Materiallar tanlov kartochkalari / segmented */
+.option-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-2);
+}
+
+.option-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-3);
+  background: var(--bg-surface-muted);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-spring);
+  text-align: left;
+}
+
+.option-chip:hover {
+  background: var(--bg-surface);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.option-chip.active {
+  background: var(--bg-surface);
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px var(--color-primary-glow);
+}
+
+.chip-name {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.chip-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  align-self: flex-start;
+}
+
+/* Ranglar tanlovi (kamida 8 ta dumaloq swatch) */
+.color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.color-swatch-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.swatch {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border-light);
+  cursor: pointer;
+  position: relative;
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast) ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swatch:hover {
+  transform: scale(1.12);
+}
+
+.swatch.active {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px var(--bg-surface), 0 0 0 5px var(--color-primary);
+}
+
+.swatch-check {
+  display: none;
+  width: 18px;
+  height: 18px;
+}
+
+.swatch.active .swatch-check {
+  display: block;
+}
+
+.swatch-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Switch (O'rnatish kerak) */
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) 0;
+}
+
+.switch-label-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.switch-title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.switch-hint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: var(--border-light);
+  transition: 0.3s;
+  border-radius: var(--radius-full);
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--color-primary);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+/* ==========================================================================
+   5. O'NG USTUN: JONLI VIZUALIZATSIYA VA NARX KARTASI
+   ========================================================================== */
+.calc-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .calc-sidebar {
+    position: sticky;
+    top: 92px;
+  }
+}
+
+/* Vizualizatsiya oynasi */
+.visual-card {
+  background: var(--blueprint-bg);
+  border: 1px solid var(--blueprint-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.visual-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.visual-badge {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.visual-canvas-wrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#mebel-visual-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transition: opacity 0.25s ease;
+}
+
+.visual-caption {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: var(--space-2);
+}
+
+/* Narx kartasi */
+.price-card {
+  background: var(--bg-surface);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.price-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.price-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.quote-sync-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+.quote-sync-status.loading {
+  color: var(--color-warning);
+}
+
+.quote-sync-status.error {
+  color: var(--color-error);
+}
+
+.big-price {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: var(--space-2);
+  transition: color var(--duration-fast) ease;
+}
+
+.price-disclaimers {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px dashed var(--border-light);
+  padding-bottom: var(--space-3);
+}
+
+/* Hisob tafsiloti (Accordion) */
+.breakdown-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-main);
+  border-top: 1px solid var(--border-light);
+  margin-bottom: var(--space-2);
+}
+
+.breakdown-toggle-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--duration-fast) ease;
+}
+
+.breakdown-toggle-btn.active svg {
+  transform: rotate(180deg);
+}
+
+.breakdown-content {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: var(--space-4);
+}
+
+.breakdown-content.open {
+  display: flex;
+}
+
+.breakdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.breakdown-row span:last-child {
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+}
+
+.price-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.btn-order-cta {
+  width: 100%;
+  padding: var(--space-4);
+  font-size: var(--text-base);
+}
+
+.price-secondary-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.btn-action-icon {
+  font-size: var(--text-xs);
+  padding: var(--space-2);
+}
+
+/* Mobildagi yopishqoq pastki narx paneli */
+.mobile-sticky-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 950;
+  background: var(--bg-surface);
+  border-top: 2px solid var(--color-primary);
+  padding: var(--space-3) var(--space-4);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.12);
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 1023px) {
+  .mobile-sticky-bar.visible {
+    display: flex;
+  }
+}
+
+.mobile-bar-price {
+  font-size: var(--text-lg);
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+}
+
+.mobile-bar-label {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   6. QANDAY ISHLAYDI & AFZALLIKLAR
+   ========================================================================== */
+.how-it-works-section, .advantages-section {
+  padding: var(--space-16) 0;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-light);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .steps-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.step-card {
+  background: var(--bg-surface-muted);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  position: relative;
+  transition: transform var(--duration-fast) var(--ease-spring);
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+}
+
+.step-number {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  font-size: var(--text-3xl);
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: var(--border-light);
+}
+
+.step-icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+.step-icon-box svg {
+  width: 28px;
+  height: 28px;
+}
+
+.step-title {
+  font-size: var(--text-lg);
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: var(--space-2);
+}
+
+.step-desc {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-6);
+}
+
+.adv-card {
+  background: var(--bg-page);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+}
+
+.adv-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.adv-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--color-secondary-subtle);
+  color: var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+/* ==========================================================================
+   7. TEZ-TEZ SO'RALADIGAN SAVOLLAR (Accordion)
+   ========================================================================== */
+.faq-section {
+  padding: var(--space-16) 0;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faq-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color var(--duration-fast) ease;
+}
+
+.faq-item:hover {
+  border-color: var(--color-primary);
+}
+
+.faq-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: left;
+}
+
+.faq-header svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-primary);
+  transition: transform var(--duration-fast) ease;
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-header svg {
+  transform: rotate(180deg);
+}
+
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s var(--ease-spring);
+}
+
+.faq-item.active .faq-body {
+  max-height: 200px;
+}
+
+.faq-content {
+  padding: 0 var(--space-5) var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   8. BUYURTMA FORMASI JOYLASHUVI (4-bosqich joyi) & ALOQA / FOOTER
+   ========================================================================== */
+.order-placeholder-section {
+  padding: var(--space-16) 0;
+  background: var(--bg-surface-muted);
+  text-align: center;
+}
+
+.placeholder-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--bg-surface);
+  border: 2px dashed var(--color-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10) var(--space-6);
+}
+
+.placeholder-badge {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 800;
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-3);
+}
+
+.placeholder-title {
+  font-size: var(--text-2xl);
+  font-weight: 900;
+  color: var(--text-main);
+  margin-bottom: var(--space-2);
+}
+
+.placeholder-desc {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.site-footer {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-light);
+  padding: var(--space-12) 0 var(--space-6);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer-title {
+  font-size: var(--text-base);
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: var(--space-2);
+}
+
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border-light);
+  padding-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .footer-bottom {
+    flex-direction: row;
+  }
+}
+
+/* ==========================================================================
+   9. TOAST XABARLAR TIZIMI
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  background: var(--bg-surface-elevated);
+  color: var(--text-main);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.3s var(--ease-spring);
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast-success {
+  border-left: 4px solid var(--color-success);
+}
+
+.toast-error {
+  border-left: 4px solid var(--color-error);
+}
+
+/* ==========================================================================
+   10. BUYURTMA MODAL OYNASI VA HOLATNI TEKSHIRISH (MebelPro)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(18, 16, 14, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease-spring);
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 520px;
+  padding: var(--space-8);
+  box-shadow: var(--shadow-xl);
+  transform: scale(0.92) translateY(20px);
+  transition: transform 0.3s var(--ease-spring);
+  position: relative;
+}
+
+.modal-overlay.open .modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--text-muted);
+  background: var(--bg-surface-muted);
+  transition: all var(--duration-fast) ease;
+}
+
+.modal-close-btn:hover {
+  color: var(--color-error);
+  background: var(--color-error-bg);
+}
+
+.modal-title {
+  font-size: var(--text-2xl);
+  font-weight: 900;
+  color: var(--text-main);
+  margin-bottom: var(--space-2);
+}
+
+.modal-summary-box {
+  background: var(--bg-surface-muted);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin: var(--space-4) 0 var(--space-5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-summary-title {
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.modal-summary-dims {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.modal-summary-price {
+  font-size: var(--text-lg);
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+}
+
+/* Formalar va Inputlar (Buyurtma modali va Savat) */
+.form-group {
+  margin-bottom: var(--space-4);
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main) !important;
+  background-color: var(--bg-input) !important;
+  outline: none;
+  transition: all var(--duration-fast) ease;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  background-color: var(--bg-surface) !important;
+  box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.18);
+  color: var(--text-main) !important;
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+/* Tracking / Status Tekshirish */
+.tracking-section {
+  padding: var(--space-12) 0;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-light);
+}
+
+.track-input-wrapper {
+  display: flex;
+  gap: var(--space-2);
+  max-width: 480px;
+  margin: var(--space-4) auto var(--space-6);
+}
+
+.track-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-main);
+  background: var(--bg-input);
+}
+
+.track-input:focus {
+  border-color: var(--color-primary);
+}
+
+.track-card {
+  max-width: 580px;
+  margin: 0 auto;
+  background: var(--bg-surface-muted);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: left;
+}
+
+.track-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.track-id {
+  font-size: var(--text-lg);
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: var(--text-main);
+}
+
+.track-badge {
+  font-size: 11px;
+  font-weight: 800;
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.track-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--border-light);
+}
+
+.timeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: center;
+  gap: 6px;
+}
+
+.timeline-step span {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.timeline-step.done span {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+
+.timeline-step.active span {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--btn-primary-text, #ffffff);
+  box-shadow: 0 0 0 4px var(--color-primary-glow);
+}
+
+.btn-sample-track {
+  background: var(--bg-surface);
+  color: var(--color-primary);
+  border: 1px solid var(--border-light);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-sample-track:hover {
+  background: var(--color-primary);
+  color: var(--btn-primary-text, #ffffff);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   10. RANG PALITRASI TANLAGICHI (PALETTE SWITCHER)
+   ========================================================================== */
+.palette-switcher-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.palette-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-muted);
+  border: 1px solid var(--border-light);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.palette-btn:hover {
+  background: var(--bg-surface);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.palette-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.palette-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  padding: 8px;
+  min-width: 210px;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+}
+
+.palette-dropdown.open {
+  display: flex;
+}
+
+.palette-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--duration-fast) ease;
+  width: 100%;
+}
+
+.palette-option:hover, .palette-option.active {
+  background: var(--bg-surface-muted);
+  color: var(--color-primary);
+}
+
+.palette-option-color {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+/* ==========================================================================
+   11. 0% MUDDATLI TO'LOV / NASIYA KALKULYATORI (INSTALLMENT WIDGET)
+   ========================================================================== */
+.installment-widget {
+  background: linear-gradient(135deg, rgba(200, 149, 87, 0.08), rgba(150, 91, 52, 0.05));
+  border: 1.5px solid rgba(200, 149, 87, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-top: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.installment-badge-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.installment-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-primary);
+  color: white;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.installment-partners {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.partner-tag {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.installment-monthly-display {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.monthly-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.monthly-amount {
+  font-size: 22px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+}
+
+.installment-months-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.installment-month-btn {
+  padding: 8px 4px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-main);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.installment-month-btn:hover {
+  border-color: var(--color-primary);
+}
+
+.installment-month-btn.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 10px var(--color-primary-glow);
+}
+
+.installment-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   12. BEPUL LAZERLI O'LCHOVCHINI CHAQIRISH (MEASUREMENT BOOKING)
+   ========================================================================== */
+.measurement-section {
+  padding: var(--space-16) 0;
+  background: linear-gradient(180deg, var(--bg-surface-muted), var(--bg-page));
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+}
+
+.measurement-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .measurement-container {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 48px;
+  }
+}
+
+.measure-info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.measure-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.measure-benefit-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+  color: var(--color-primary);
+}
+
+.measure-benefit-text h4 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.measure-benefit-text p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.measure-form-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.measure-form-header {
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.measure-form-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.measure-form-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.room-type-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.room-chip-btn {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-muted);
+  border: 1.5px solid transparent;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.room-chip-btn:hover {
+  background: var(--bg-surface);
+  border-color: var(--border-light);
+}
+
+.room-chip-btn.active {
+  background: var(--color-primary-subtle);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+.time-slot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.time-slot-btn {
+  padding: 8px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-muted);
+  border: 1.5px solid transparent;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.time-slot-btn.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+/* ==========================================================================
+   13. FLOATING QUICK CONCIERGE & TELEGRAM BUTTON
+   ========================================================================== */
+.floating-concierge {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 990;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .floating-concierge {
+    bottom: 80px; /* Mobilda sticky bar ustida */
+    right: 16px;
+  }
+}
+
+.concierge-pulse-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #229ED9, #1782B8); /* Telegram moviy */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(34, 158, 217, 0.45);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-spring);
+  position: relative;
+}
+
+.concierge-pulse-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(34, 158, 217, 0.55);
+}
+
+.concierge-tooltip {
+  background: var(--bg-surface);
+  color: var(--text-main);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 800;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-light);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: floatTooltip 3s ease-in-out infinite;
+}
+
+@keyframes floatTooltip {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ==========================================================================
+   14. JONLI 5-BOSQICHLI BUYURTMA KUZATUVI (EXTENDED TRACKER)
+   ========================================================================== */
+.track-step-rich {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  gap: 6px;
+}
+
+.track-step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-muted);
+  transition: all var(--duration-normal) ease;
+}
+
+.track-step-rich.done .track-step-circle {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+
+.track-step-rich.active .track-step-circle {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+  box-shadow: 0 0 0 5px var(--color-primary-glow);
+  animation: pulseActive 2s infinite;
+}
+
+@keyframes pulseActive {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.track-step-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+.track-step-desc {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+

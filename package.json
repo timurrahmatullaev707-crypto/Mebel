@@ -1,0 +1,17 @@
+{
+  "name": "mebelhisob",
+  "version": "1.0.0",
+  "description": "Mebel hisob-kitob va onlayn buyurtma platformasi",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "mebel",
+    "calculator",
+    "svg"
+  ],
+  "author": "",
+  "license": "ISC"
+}

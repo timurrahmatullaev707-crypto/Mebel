@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MebelPro - Savat va Xaridni Rasmiylashtirish</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <style>
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      padding: var(--space-10) 0 var(--space-16);
+    }
+    @media (min-width: 1024px) {
+      .cart-layout {
+        grid-template-columns: 1fr 420px;
+      }
+    }
+    .cart-table-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+    .cart-item-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .cart-item-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 200px;
+    }
+    .cart-item-title {
+      font-size: var(--text-base);
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .cart-item-specs {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+    }
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-surface-muted);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      padding: 2px 6px;
+    }
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .qty-val {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      min-width: 24px;
+      text-align: center;
+    }
+    .cart-item-price {
+      font-size: var(--text-base);
+      font-weight: 900;
+      font-family: var(--font-mono);
+      color: var(--color-primary);
+    }
+    .btn-remove-item {
+      color: var(--color-error);
+      font-size: 18px;
+      padding: 4px 8px;
+    }
+    .checkout-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 92px;
+      height: fit-content;
+    }
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-bottom: var(--space-3);
+    }
+    .summary-line.total {
+      font-size: var(--text-xl);
+      font-weight: 900;
+      font-family: var(--font-mono);
+      color: var(--color-primary);
+      border-top: 1px dashed var(--border-light);
+      padding-top: var(--space-4);
+      margin-top: var(--space-4);
+    }
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme') || 'light';
+        var p = localStorage.getItem('mebelpro_palette') || 'mocha';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.setAttribute('data-palette', p);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </div>
+          <span>Mebel<span class="logo-accent">Pro</span></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Asosiy menyu">
+          <a href="index.html#kalkulyator" class="nav-link">3D Kalkulyator</a>
+          <a href="catalog.html" class="nav-link">Tayyor Mebellar</a>
+          <a href="index.html#olchov-chaqirish" class="nav-link">Bepul O'lchov</a>
+          <a href="index.html#buyurtma-holati" class="nav-link">Holatni Kuzatish</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Mavzu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          <a href="catalog.html" class="btn btn-secondary" style="padding:8px 14px; font-size:13px;">← Do'konga qaytish</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="cart-layout">
+      <!-- CHAP: SAVATDAGI MAHSULOTLAR -->
+      <div>
+        <div class="cart-table-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-4);">
+            <h2 style="font-size:var(--text-xl); font-weight:900;">Xarid Savati</h2>
+            <button type="button" id="btn-clear-cart" style="font-size:12px; color:var(--color-error); font-weight:700;">Savatni tozalash</button>
+          </div>
+
+          <div id="cart-items-container">
+            <!-- JS orqali to'ldiriladi -->
+          </div>
+        </div>
+
+        <!-- BUYURTMACHI MA'LUMOTLARI FORMALARI -->
+        <div class="cart-table-card" style="margin-top:var(--space-6);">
+          <h3 style="font-size:var(--text-lg); font-weight:800; margin-bottom:var(--space-4);">Mijoz ma'lumotlari va Yetkazish</h3>
+          <form id="checkout-form">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px;">
+              <div class="form-group">
+                <label for="cust-name">Ism va Familiyangiz:</label>
+                <input type="text" class="form-control" id="cust-name" placeholder="Masalan: Akmal Karimov" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="cust-phone">Telefon raqamingiz:</label>
+                <input type="tel" class="form-control" id="cust-phone" placeholder="+998 (90) 123-45-67" required autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top:12px;">
+              <label for="cust-address">Yetkazib berish manzili:</label>
+              <input type="text" class="form-control" id="cust-address" placeholder="Toshkent sh., Yunusobod tumani, 4-mavze..." required autocomplete="street-address">
+            </div>
+
+            <div class="form-group" style="margin-top:12px;">
+              <label style="font-size:12px; font-weight:700; color:var(--text-muted);">To'lov usuli:</label>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:4px;">
+                <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:13px; font-weight:600;">
+                  <input type="radio" name="pay-method" value="Naqd pul" checked> Naqd pul / Yetkazilganda
+                </label>
+                <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:13px; font-weight:600;">
+                  <input type="radio" name="pay-method" value="Click / Payme"> Click / Payme
+                </label>
+                <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:13px; font-weight:600;">
+                  <input type="radio" name="pay-method" value="Nasiya (Muddatli to'lov)"> Nasiya (Muddatli to'lov)
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- O'NG: CHEK VA HISOB-KITOB -->
+      <div>
+        <div class="checkout-card">
+          <h3 style="font-size:var(--text-lg); font-weight:800; margin-bottom:var(--space-4);">Buyurtma Xulosasi</h3>
+
+          <div class="summary-line">
+            <span>Mahsulotlar qiymati:</span>
+            <span id="sum-subtotal" style="font-weight:700; font-family:var(--font-mono);">0 so'm</span>
+          </div>
+
+          <div class="summary-line">
+            <span>Yetkazib berish:</span>
+            <span id="sum-delivery" style="font-weight:700; color:var(--color-success);">Bepul</span>
+          </div>
+
+          <div class="summary-line" id="discount-row" style="display:none; color:var(--color-success);">
+            <span>Promokod chegirmasi (10%):</span>
+            <span id="sum-discount" style="font-weight:700; font-family:var(--font-mono);">-0 so'm</span>
+          </div>
+
+          <!-- Promokod -->
+          <div style="margin: var(--space-4) 0; display:flex; gap:8px;">
+            <input type="text" class="form-control" id="promo-input" placeholder="Promokod (INVESTOR)" style="text-transform:uppercase;">
+            <button type="button" class="btn btn-secondary" id="btn-apply-promo" style="padding:8px 14px; font-size:12px;">Qo'llash</button>
+          </div>
+
+          <div class="summary-line total">
+            <span>Jami To'lov:</span>
+            <span id="sum-total">0 so'm</span>
+          </div>
+
+          <button type="button" class="btn btn-primary" id="btn-confirm-checkout" style="width:100%; padding:14px; margin-top:var(--space-5); font-size:15px;">
+            Buyurtmani Tasdiqlash
+          </button>
+
+          <p style="font-size:11px; color:var(--text-muted); text-align:center; margin-top:12px;">
+            🔒 Xavfsiz xarid. 2 yil rasmiy kafolat taqdim etiladi.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="js/app.js"></script>
+  <script>
+    function showToast(msg, type = 'success') {
+      let c = document.getElementById('toast-container');
+      if (!c) {
+        c = document.createElement('div');
+        c.id = 'toast-container';
+        c.className = 'toast-container';
+        document.body.appendChild(c);
+      }
+      const t = document.createElement('div');
+      t.className = `toast toast-${type} show`;
+      t.innerHTML = `<span>${type === 'success' ? '✓' : 'ℹ'}</span> <span>${msg}</span>`;
+      c.appendChild(t);
+      setTimeout(() => {
+        t.classList.remove('show');
+        setTimeout(() => t.remove(), 300);
+      }, 3000);
+    }
+
+    let discountRate = 0;
+
+    function getCart() {
+      try {
+        return JSON.parse(localStorage.getItem('mebelpro_cart') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('mebelpro_cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function renderCart() {
+      const cart = getCart();
+      const container = document.getElementById('cart-items-container');
+      if (!container) return;
+
+      if (!cart.length) {
+        container.innerHTML = `
+          <div style="text-align:center; padding: 40px 10px;">
+            <p style="font-size:18px; font-weight:800; color:var(--text-main); margin-bottom:8px;">Savatingiz hozircha bo'sh</p>
+            <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">Tayyor mebellar katalogimizdan o'zingizga yoqqan mahsulotlarni tanlang</p>
+            <a href="catalog.html" class="btn btn-primary" style="padding:10px 20px;">Katalogga o'tish</a>
+          </div>
+        `;
+        updateTotals(0);
+        return;
+      }
+
+      let subtotal = 0;
+      container.innerHTML = cart.map(item => {
+        const itemTotal = item.price * (item.qty || 1);
+        subtotal += itemTotal;
+        return `
+          <div class="cart-item-row">
+            <div class="cart-item-info">
+              <span class="cart-item-title">${item.title}</span>
+              <span class="cart-item-specs">${item.specs || ''}</span>
+            </div>
+
+            <div class="qty-control">
+              <button type="button" class="qty-btn" onclick="changeQty('${item.id}', -1)">−</button>
+              <span class="qty-val">${item.qty || 1}</span>
+              <button type="button" class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+            </div>
+
+            <div class="cart-item-price">
+              ${itemTotal.toLocaleString('uz-UZ')} so'm
+            </div>
+
+            <button type="button" class="btn-remove-item" onclick="removeItem('${item.id}')" title="O'chirish">&times;</button>
+          </div>
+        `;
+      }).join('');
+
+      updateTotals(subtotal);
+    }
+
+    function changeQty(id, delta) {
+      const cart = getCart();
+      const item = cart.find(x => x.id === id);
+      if (!item) return;
+
+      item.qty = (item.qty || 1) + delta;
+      if (item.qty <= 0) {
+        saveCart(cart.filter(x => x.id !== id));
+      } else {
+        saveCart(cart);
+      }
+    }
+
+    function removeItem(id) {
+      const cart = getCart();
+      saveCart(cart.filter(x => x.id !== id));
+      showToast('Mahsulot savatdan olib tashlandi', 'info');
+    }
+
+    function updateTotals(subtotal) {
+      const discount = subtotal * discountRate;
+      const total = subtotal - discount;
+
+      document.getElementById('sum-subtotal').textContent = subtotal.toLocaleString('uz-UZ') + " so'm";
+      document.getElementById('sum-total').textContent = total.toLocaleString('uz-UZ') + " so'm";
+
+      const discRow = document.getElementById('discount-row');
+      if (discountRate > 0) {
+        discRow.style.display = 'flex';
+        document.getElementById('sum-discount').textContent = "-" + discount.toLocaleString('uz-UZ') + " so'm";
+      } else {
+        discRow.style.display = 'none';
+      }
+    }
+
+    document.getElementById('btn-clear-cart').addEventListener('click', () => {
+      saveCart([]);
+      showToast('Savat tozalandi', 'info');
+    });
+
+    // Promokod
+    document.getElementById('btn-apply-promo').addEventListener('click', () => {
+      const val = document.getElementById('promo-input').value.trim().toUpperCase();
+      if (val === 'INVESTOR' || val === 'ITLIVE') {
+        discountRate = 0.10;
+        showToast('Maxsus 10% investorlik chegirmasi qo\'llandi!', 'success');
+        renderCart();
+      } else {
+        showToast('Noto\'g\'ri promokod. Sinab ko\'ring: INVESTOR', 'error');
+      }
+    });
+
+    // Buyurtmani tasdiqlash
+    document.getElementById('btn-confirm-checkout').addEventListener('click', () => {
+      const cart = getCart();
+      if (!cart.length) {
+        showToast('Savat bo\'sh, mahsulot qo\'shing', 'error');
+        return;
+      }
+
+      const name = document.getElementById('cust-name').value.trim();
+      const phone = document.getElementById('cust-phone').value.trim();
+      const address = document.getElementById('cust-address').value.trim();
+      const payMethod = document.querySelector('input[name="pay-method"]:checked')?.value || 'Naqd pul';
+
+      if (!name || !phone || !address) {
+        showToast('Ism, telefon va yetkazish manzilini to\'liq kiriting', 'error');
+        return;
+      }
+
+      const orderId = 'MP-' + Math.floor(2000 + Math.random() * 7000);
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      const total = subtotal - (subtotal * discountRate);
+
+      const newOrder = {
+        id: orderId,
+        date: new Date().toLocaleDateString('uz-UZ'),
+        clientName: name,
+        clientPhone: phone,
+        clientAddress: address,
+        type: `Do'kon xaridi (${cart.length} ta mebel)`,
+        dimensions: cart.map(c => `${c.title} x${c.qty}`).join(', '),
+        color: 'Tayyor model',
+        totalPrice: total,
+        formattedPrice: total.toLocaleString('uz-UZ') + " so'm",
+        payMethod: payMethod,
+        status: 'Qabul qilindi'
+      };
+
+      // Admin CRM'ga qo'shish
+      const existingOrders = JSON.parse(localStorage.getItem('mebelpro_orders') || '[]');
+      existingOrders.unshift(newOrder);
+      localStorage.setItem('mebelpro_orders', JSON.stringify(existingOrders));
+
+      // Savatni tozalash
+      saveCart([]);
+
+      // Natija
+      alert(`🎉 Tabriklaymiz! Buyurtmangiz qabul qilindi!\n\nBuyurtma raqami: #${orderId}\nJami summa: ${total.toLocaleString('uz-UZ')} so'm\nTo'lov: ${payMethod}\n\nOperatorimiz tez orada siz bilan bog'lanadi.`);
+      window.location.href = 'index.html#buyurtma-holati';
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>

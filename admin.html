@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MebelPro - Boshqaruv Paneli (Admin CRM)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme') || 'light';
+        var p = localStorage.getItem('mebelpro_palette') || 'mocha';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.setAttribute('data-palette', p);
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    /* ==========================================================================
+       SODDALASHTIRILGAN VA TOZA ADMIN CRM STILLARI
+       ========================================================================== */
+    .admin-page {
+      background-color: var(--bg-page);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .admin-header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-light);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+    .admin-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .admin-badge {
+      font-size: 11px;
+      font-weight: 800;
+      background: var(--color-primary-subtle);
+      color: var(--color-primary);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* KPI Kartalari */
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 24px 0 28px;
+    }
+    .admin-stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .admin-stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary);
+    }
+    .admin-stat-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .admin-stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    .admin-stat-val {
+      font-size: 26px;
+      font-weight: 900;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .admin-stat-sub {
+      font-size: 12px;
+      color: var(--color-primary);
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    .admin-stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-lg);
+      background: var(--color-primary-subtle);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    /* Asosiy Boshqaruv Quti */
+    .admin-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+    }
+    .admin-card-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .admin-card-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Filtrlar Paneli */
+    .admin-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .status-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .status-pill-btn {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border-light);
+      background: var(--bg-surface-muted);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .status-pill-btn:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+    .status-pill-btn.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px var(--color-primary-glow);
+    }
+    .admin-search-input {
+      min-width: 260px;
+      padding: 8px 14px 8px 36px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      background: var(--bg-surface-muted);
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+      transition: border 0.2s ease;
+    }
+    .admin-search-input:focus {
+      border-color: var(--color-primary);
+      background: var(--bg-surface);
+    }
+
+    /* Qulay Jadval */
+    .table-container {
+      overflow-x: auto;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+    .data-table th {
+      background: var(--bg-surface-muted);
+      padding: 12px 16px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-light);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text-main);
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .data-table tr:hover {
+      background: var(--bg-surface-muted);
+    }
+
+    /* Status Select */
+    .status-select {
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid var(--border-light);
+      background: var(--bg-surface);
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .status-select.val-qabul { background: #FEF3C7; color: #B45309; border-color: #FDE68A; }
+    .status-select.val-olchov { background: #E0E7FF; color: #4338CA; border-color: #C7D2FE; }
+    .status-select.val-ishlab { background: #E0F2FE; color: #0369A1; border-color: #BAE6FD; }
+    .status-select.val-yetkaz { background: #F3E8FF; color: #7E22CE; border-color: #E9D5FF; }
+    .status-select.val-ornat { background: #DCFCE7; color: #15803D; border-color: #BBF7D0; }
+
+    /* Modal */
+    .admin-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .admin-modal.active {
+      display: flex;
+    }
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      max-width: 540px;
+      width: 100%;
+      box-shadow: var(--shadow-xl);
+      animation: modalSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalSlide {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .modal-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+    .modal-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--border-light);
+      font-size: 13px;
+    }
+    .modal-row span { color: var(--text-muted); }
+    .modal-row strong { color: var(--text-main); }
+  </style>
+</head>
+<body class="admin-page">
+
+  <!-- ADMIN HEADER -->
+  <header class="admin-header">
+    <div class="container">
+      <div class="admin-nav">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <a href="index.html" class="logo">
+            <div class="logo-icon" style="background:linear-gradient(135deg, var(--color-primary), var(--color-secondary));">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </div>
+            <span>Mebel<span class="logo-accent" style="color:var(--color-primary);">Pro</span></span>
+          </a>
+          <span class="admin-badge">Oddiy & Qulay CRM</span>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:12px;">
+          <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Mavzu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          <a href="index.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px; font-weight:700;">
+            <span>← Mijoz Saytiga</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="flex: 1; padding-top: 12px; padding-bottom: 40px;">
+    <!-- 3 TA ASOSIY STATISTIKA KARTASI -->
+    <div class="admin-stats-grid">
+      <div class="admin-stat-card">
+        <div class="admin-stat-info">
+          <span class="admin-stat-label">Jami Buyurtmalar</span>
+          <span class="admin-stat-val" id="kpi-orders">0 ta</span>
+          <span class="admin-stat-sub" id="kpi-orders-sub">Faol buyurtmalar: 0 ta</span>
+        </div>
+        <div class="admin-stat-icon">📦</div>
+      </div>
+
+      <div class="admin-stat-card">
+        <div class="admin-stat-info">
+          <span class="admin-stat-label">Jami Tushum (Summa)</span>
+          <span class="admin-stat-val" id="kpi-revenue" style="color:var(--color-primary);">0 so'm</span>
+          <span class="admin-stat-sub">Barcha buyurtmalar summasi</span>
+        </div>
+        <div class="admin-stat-icon">💰</div>
+      </div>
+
+      <div class="admin-stat-card">
+        <div class="admin-stat-info">
+          <span class="admin-stat-label">Ishlab chiqarilmoqda</span>
+          <span class="admin-stat-val" id="kpi-active" style="color:#d97706;">0 ta</span>
+          <span class="admin-stat-sub">Sexda tayyorlanayotgan mebellar</span>
+        </div>
+        <div class="admin-stat-icon">⚙️</div>
+      </div>
+    </div>
+
+    <!-- YAGONA VA QULAY BUYURTMALAR CRM BLOKI -->
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <div class="admin-card-title">
+          <span>📋 Kelib Tushgan Buyurtmalar</span>
+          <span style="font-size:12px; color:var(--text-muted); font-weight:600;" id="table-total-count">(Jami: 0 ta)</span>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:10px;">
+          <button type="button" class="btn btn-secondary" id="btn-seed-orders" style="padding:8px 14px; font-size:12px; font-weight:700;">
+            + Namunaviy Buyurtmalar
+          </button>
+          <button type="button" class="btn btn-primary" id="btn-open-add-modal" style="padding:8px 16px; font-size:12px; font-weight:700;">
+            + Yangi Buyurtma
+          </button>
+        </div>
+      </div>
+
+      <!-- TEZKOR FILTRLAR VA QIDIRUV -->
+      <div class="admin-filter-bar">
+        <div class="status-pills">
+          <button type="button" class="status-pill-btn active" data-filter="all">Barchasi</button>
+          <button type="button" class="status-pill-btn" data-filter="Qabul qilindi">🟡 Yangi</button>
+          <button type="button" class="status-pill-btn" data-filter="Ishlab chiqarilmoqda">🔵 Jarayonda</button>
+          <button type="button" class="status-pill-btn" data-filter="O'rnatildi">🟢 Tayyor / O'rnatildi</button>
+        </div>
+
+        <div style="position:relative;">
+          <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:13px; color:var(--text-muted);">🔍</span>
+          <input type="text" id="admin-search-input" class="admin-search-input" placeholder="Mijoz ismi yoki telefoni...">
+        </div>
+      </div>
+
+      <!-- BUYURTMALAR JADVALI -->
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Sana</th>
+              <th>Mijoz</th>
+              <th>Telefon</th>
+              <th>Mebel Turi & O'lchami</th>
+              <th>Summa</th>
+              <th>Holat (Status)</th>
+              <th style="text-align:right;">Amallar</th>
+            </tr>
+          </thead>
+          <tbody id="orders-table-tbody">
+            <!-- JS orqali chiziladi -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- BUYURTMA TAFSILOTLARI MODALI -->
+  <div class="admin-modal" id="order-details-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="m-order-title">Buyurtma Tafsilotlari</h3>
+        <button type="button" class="modal-close-btn" onclick="closeDetailsModal()">✕</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:20px;" id="modal-details-body">
+        <!-- JS orqali to'ldiriladi -->
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:10px;">
+        <button type="button" class="btn btn-secondary" onclick="closeDetailsModal()">Yopish</button>
+        <button type="button" class="btn btn-primary" onclick="window.print()">🖨️ Naryadni Chop Etish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- YANGI BUYURTMA QO'SHISH MODALI -->
+  <div class="admin-modal" id="add-order-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">+ Yangi Buyurtma Qo'shish</h3>
+        <button type="button" class="modal-close-btn" onclick="closeAddModal()">✕</button>
+      </div>
+
+      <form id="add-order-form" style="display:flex; flex-direction:column; gap:12px;">
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Mijoz Ismi:</label>
+          <input type="text" id="new-name" required placeholder="Masalan: Aziz Rahimov" style="padding:9px 12px; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-surface-muted); color:var(--text-main); font-size:13px; outline:none;">
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Telefon Raqami:</label>
+          <input type="tel" id="new-phone" required placeholder="+998 90 123 45 67" style="padding:9px 12px; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-surface-muted); color:var(--text-main); font-size:13px; outline:none;">
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Mebel Turi & O'lchami:</label>
+          <input type="text" id="new-furniture" required placeholder="Masalan: Shkaf-kupe (200 x 240 x 60 sm)" style="padding:9px 12px; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-surface-muted); color:var(--text-main); font-size:13px; outline:none;">
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Summa (so'm):</label>
+          <input type="number" id="new-price" required placeholder="4500000" style="padding:9px 12px; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-surface-muted); color:var(--text-main); font-size:13px; outline:none;">
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:12px;">
+          <button type="button" class="btn btn-secondary" onclick="closeAddModal()">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary">Saqlash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- SCRIPT -->
+  <script>
+    function showToast(msg, type = 'success') {
+      let c = document.getElementById('toast-container');
+      if (!c) {
+        c = document.createElement('div');
+        c.id = 'toast-container';
+        c.className = 'toast-container';
+        document.body.appendChild(c);
+      }
+      const t = document.createElement('div');
+      t.className = `toast toast-${type} show`;
+      t.innerHTML = `<span>${type === 'success' ? '✓' : 'ℹ'}</span> <span>${msg}</span>`;
+      c.appendChild(t);
+      setTimeout(() => {
+        t.classList.remove('show');
+        setTimeout(() => t.remove(), 300);
+      }, 3000);
+    }
+
+    // Mavzu (Dark/Light)
+    const storedTheme = localStorage.getItem('mebelpro_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    document.getElementById('theme-toggle-btn').addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('mebelpro_theme', next);
+    });
+
+    // STANDART NAMUNAVIY BUYURTMALAR
+    const DEFAULT_ORDERS = [
+      { id: 'MP-1042', date: '11.10.2026', clientName: 'Akmal Karimov', clientPhone: '+998 90 911 22 33', clientAddress: 'Yunusobod 14-mavze', type: 'Shkaf-kupe', dimensions: '220 × 240 × 60 sm', totalPrice: 4850000, formattedPrice: '4 850 000 so\'m', status: 'Ishlab chiqarilmoqda' },
+      { id: 'MP-1041', date: '10.10.2026', clientName: 'Nodira Salimova', clientPhone: '+998 97 733 44 55', clientAddress: 'Chilonzor 9-kvartal', type: 'Oshxona garnituri', dimensions: '280 × 230 × 60 sm', totalPrice: 5800000, formattedPrice: '5 800 000 so\'m', status: 'Qabul qilindi' },
+      { id: 'MP-1040', date: '09.10.2026', clientName: 'Jasur Beknazarov', clientPhone: '+998 93 500 60 70', clientAddress: 'Mirzo Ulug\'bek tumani', type: 'Zamonaviy Stol', dimensions: '160 × 75 × 80 sm', totalPrice: 1150000, formattedPrice: '1 150 000 so\'m', status: 'O\'rnatildi' }
+    ];
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function getOrders() {
+      const raw = localStorage.getItem('mebelpro_orders');
+      if (!raw) {
+        localStorage.setItem('mebelpro_orders', JSON.stringify(DEFAULT_ORDERS));
+        return DEFAULT_ORDERS;
+      }
+      try {
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : DEFAULT_ORDERS;
+      } catch (e) {
+        return DEFAULT_ORDERS;
+      }
+    }
+
+    function saveOrders(orders) {
+      localStorage.setItem('mebelpro_orders', JSON.stringify(orders));
+      renderOrders();
+    }
+
+    function renderOrders() {
+      const orders = getOrders();
+      const tbody = document.getElementById('orders-table-tbody');
+      if (!tbody) return;
+
+      let filtered = orders.filter(o => {
+        if (currentFilter !== 'all' && o.status !== currentFilter) return false;
+        if (searchQuery.trim()) {
+          const q = searchQuery.toLowerCase().trim();
+          const matchName = (o.clientName || '').toLowerCase().includes(q);
+          const matchPhone = (o.clientPhone || '').toLowerCase().includes(q);
+          const matchId = (o.id || '').toLowerCase().includes(q);
+          if (!matchName && !matchPhone && !matchId) return false;
+        }
+        return true;
+      });
+
+      // KPI larni hisoblash
+      let totalRevenue = 0;
+      let activeCount = 0;
+      orders.forEach(o => {
+        totalRevenue += (o.totalPrice || 0);
+        if (o.status === 'Qabul qilindi' || o.status === 'Ishlab chiqarilmoqda' || o.status === 'O\'lchov belgilandi') {
+          activeCount++;
+        }
+      });
+
+      document.getElementById('kpi-orders').textContent = `${orders.length} ta`;
+      document.getElementById('kpi-orders-sub').textContent = `Faol buyurtmalar: ${activeCount} ta`;
+      document.getElementById('kpi-revenue').textContent = totalRevenue.toLocaleString('uz-UZ') + " so'm";
+      document.getElementById('kpi-active').textContent = `${activeCount} ta`;
+      document.getElementById('table-total-count').textContent = `(Jami: ${filtered.length} ta)`;
+
+      if (!filtered.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align:center; padding:40px; color:var(--text-muted);">
+              Hech qanday buyurtma topilmadi
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      const getStatusClass = (st) => {
+        if (st === 'Qabul qilindi') return 'val-qabul';
+        if (st === 'O\'lchov belgilandi') return 'val-olchov';
+        if (st === 'Ishlab chiqarilmoqda') return 'val-ishlab';
+        if (st === 'Yetkazilmoqda') return 'val-yetkaz';
+        if (st === 'O\'rnatildi') return 'val-ornat';
+        return '';
+      };
+
+      tbody.innerHTML = filtered.map(o => `
+        <tr>
+          <td><strong>#${o.id}</strong></td>
+          <td style="color:var(--text-muted); font-size:12px;">${o.date || '—'}</td>
+          <td><strong>${o.clientName || 'Noma\'lum'}</strong></td>
+          <td>
+            <a href="tel:${o.clientPhone}" style="color:var(--color-primary); font-weight:700; text-decoration:none;">
+              ${o.clientPhone || '—'}
+            </a>
+          </td>
+          <td>
+            <span>${o.type || 'Mebel'}</span>
+            <span style="font-size:11px; color:var(--text-muted); display:block;">${o.dimensions || ''}</span>
+          </td>
+          <td style="font-weight:900; font-family:var(--font-mono); color:var(--color-primary);">
+            ${(o.totalPrice || 0).toLocaleString('uz-UZ')} so'm
+          </td>
+          <td>
+            <select class="status-select ${getStatusClass(o.status)}" data-id="${o.id}">
+              <option value="Qabul qilindi" ${o.status === 'Qabul qilindi' ? 'selected' : ''}>🟡 Yangi</option>
+              <option value="O'lchov belgilandi" ${o.status === 'O\'lchov belgilandi' ? 'selected' : ''}>📐 O'lchov</option>
+              <option value="Ishlab chiqarilmoqda" ${o.status === 'Ishlab chiqarilmoqda' ? 'selected' : ''}>🔵 Jarayonda</option>
+              <option value="Yetkazilmoqda" ${o.status === 'Yetkazilmoqda' ? 'selected' : ''}>🚚 Yetkazilmoqda</option>
+              <option value="O'rnatildi" ${o.status === 'O\'rnatildi' ? 'selected' : ''}>🟢 O'rnatildi</option>
+            </select>
+          </td>
+          <td style="text-align:right;">
+            <div style="display:inline-flex; gap:6px;">
+              <button type="button" class="btn btn-secondary" onclick="viewOrderDetails('${o.id}')" style="padding:5px 9px; font-size:11px;" title="Batafsil">
+                👁️
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="deleteOrder('${o.id}')" style="padding:5px 9px; font-size:11px; color:#ef4444;" title="O'chirish">
+                🗑️
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      // Status o'zgarishi
+      document.querySelectorAll('.status-select').forEach(sel => {
+        sel.addEventListener('change', (e) => {
+          const id = e.target.dataset.id;
+          const newStatus = e.target.value;
+          const list = getOrders();
+          const target = list.find(x => x.id === id);
+          if (target) {
+            target.status = newStatus;
+            saveOrders(list);
+            showToast(`Buyurtma #${id} holati yangilandi: ${newStatus}`);
+          }
+        });
+      });
+    }
+
+    // TAFSILOTLARNI KO'RISH
+    window.viewOrderDetails = function(id) {
+      const orders = getOrders();
+      const o = orders.find(x => x.id === id);
+      if (!o) return;
+
+      document.getElementById('m-order-title').textContent = `Buyurtma #${o.id} Tafsilotlari`;
+      document.getElementById('modal-details-body').innerHTML = `
+        <div class="modal-row"><span>Sana:</span> <strong>${o.date || 'Bugun'}</strong></div>
+        <div class="modal-row"><span>Mijoz:</span> <strong>${o.clientName || '—'}</strong></div>
+        <div class="modal-row"><span>Telefon:</span> <strong>${o.clientPhone || '—'}</strong></div>
+        <div class="modal-row"><span>Manzil:</span> <strong>${o.clientAddress || 'Toshkent sh.'}</strong></div>
+        <div class="modal-row"><span>Mebel turi:</span> <strong>${o.type || 'Mebel'}</strong></div>
+        <div class="modal-row"><span>O'lchamlari:</span> <strong>${o.dimensions || 'Standart'}</strong></div>
+        <div class="modal-row"><span>Holat:</span> <strong>${o.status || 'Qabul qilindi'}</strong></div>
+        <div class="modal-row" style="border:none; padding-top:12px; font-size:15px;">
+          <span>Jami Summa:</span>
+          <strong style="color:var(--color-primary); font-size:18px; font-family:var(--font-mono);">
+            ${(o.totalPrice || 0).toLocaleString('uz-UZ')} so'm
+          </strong>
+        </div>
+      `;
+      document.getElementById('order-details-modal').classList.add('active');
+    };
+
+    window.closeDetailsModal = function() {
+      document.getElementById('order-details-modal').classList.remove('active');
+    };
+
+    // BUYURTMANI O'CHIRISH
+    window.deleteOrder = function(id) {
+      if (!confirm(`Haqiqatan ham #${id} raqamli buyurtmani o'chirmoqchimisiz?`)) return;
+      const orders = getOrders().filter(x => x.id !== id);
+      saveOrders(orders);
+      showToast(`Buyurtma #${id} o'chirildi`, 'info');
+    };
+
+    // YANGI BUYURTMA MODALI
+    document.getElementById('btn-open-add-modal').addEventListener('click', () => {
+      document.getElementById('add-order-modal').classList.add('active');
+    });
+    window.closeAddModal = function() {
+      document.getElementById('add-order-modal').classList.remove('active');
+    };
+
+    document.getElementById('add-order-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('new-name').value.trim();
+      const phone = document.getElementById('new-phone').value.trim();
+      const furn = document.getElementById('new-furniture').value.trim();
+      const price = Number(document.getElementById('new-price').value) || 0;
+
+      const newId = 'MP-' + Math.floor(1000 + Math.random() * 9000);
+      const today = new Date().toLocaleDateString('uz-UZ');
+
+      const orders = getOrders();
+      orders.unshift({
+        id: newId,
+        date: today,
+        clientName: name,
+        clientPhone: phone,
+        clientAddress: 'Toshkent sh.',
+        type: furn,
+        dimensions: 'Maxsus o\'lcham',
+        totalPrice: price,
+        formattedPrice: price.toLocaleString('uz-UZ') + " so'm",
+        status: 'Qabul qilindi'
+      });
+
+      saveOrders(orders);
+      closeAddModal();
+      document.getElementById('add-order-form').reset();
+      showToast(`Yangi buyurtma #${newId} qo'shildi!`);
+    });
+
+    // NAMUNALAR YUKLASH
+    document.getElementById('btn-seed-orders').addEventListener('click', () => {
+      saveOrders(DEFAULT_ORDERS);
+      showToast('Namunaviy buyurtmalar yuklandi');
+    });
+
+    // FILTRLAR
+    document.querySelectorAll('.status-pill-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.status-pill-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderOrders();
+      });
+    });
+
+    // QIDIRUV
+    document.getElementById('admin-search-input').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderOrders();
+    });
+
+    renderOrders();
+  </script>
+</body>
+</html>

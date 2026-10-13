@@ -92,6 +92,15 @@
   --shadow-lg: 0 12px 28px -4px rgba(36, 26, 21, 0.10), 0 4px 12px -3px rgba(36, 26, 21, 0.05);
   --shadow-xl: 0 22px 42px -6px rgba(36, 26, 21, 0.14), 0 8px 18px -6px rgba(36, 26, 21, 0.06);
 
+  /* Tugmalar dizayn tizimi tokenlari */
+  --btn-radius: 12px;
+  --btn-padding: 12px 22px;
+  --btn-shadow: 0 4px 10px rgba(36, 26, 21, 0.12), 0 1px 2px rgba(36, 26, 21, 0.08);
+  --btn-shadow-hover: 0 8px 18px rgba(36, 26, 21, 0.16), 0 2px 5px rgba(36, 26, 21, 0.08);
+  --btn-shadow-active: 0 2px 5px rgba(36, 26, 21, 0.12);
+  --btn-shadow-secondary: 0 2px 6px rgba(36, 26, 21, 0.06), 0 1px 2px rgba(36, 26, 21, 0.04);
+  --btn-shadow-secondary-hover: 0 6px 14px rgba(36, 26, 21, 0.10), 0 2px 4px rgba(36, 26, 21, 0.04);
+
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 400ms;
@@ -136,6 +145,12 @@
   --shadow-md: 0 4px 16px -1px rgba(0, 0, 0, 0.65);
   --shadow-lg: 0 14px 32px -3px rgba(0, 0, 0, 0.75);
   --shadow-xl: 0 26px 48px -5px rgba(0, 0, 0, 0.85);
+
+  --btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.35);
+  --btn-shadow-hover: 0 8px 22px rgba(0, 0, 0, 0.60), 0 2px 6px rgba(0, 0, 0, 0.40);
+  --btn-shadow-active: 0 2px 5px rgba(0, 0, 0, 0.45);
+  --btn-shadow-secondary: 0 2px 6px rgba(0, 0, 0, 0.35);
+  --btn-shadow-secondary-hover: 0 6px 14px rgba(0, 0, 0, 0.50);
 
   --blueprint-bg: #1A120E;
   --blueprint-grid: rgba(216, 163, 105, 0.12);

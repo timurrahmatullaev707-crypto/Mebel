@@ -357,7 +357,7 @@ export class FurnitureCalculator {
 
   copyQuoteToClipboard() {
     const typeName = FURNITURE_LIMITS[this.state.type].name;
-    const text = `📋 MebelHisob Hisobi:\n` +
+    const text = `MebelPro Hisob Xulosasi:\n` +
       `Mebel: ${typeName}\n` +
       `O'lchamlari: ${this.state.width} x ${this.state.height} x ${this.state.depth} sm\n` +
       `Jami taxminiy narx: ${formatSum(this.currentDisplayedPrice)}\n` +

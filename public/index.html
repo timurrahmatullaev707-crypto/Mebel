@@ -63,19 +63,19 @@
             <div class="palette-dropdown" id="palette-dropdown">
               <button type="button" class="palette-option active" data-set-palette="mocha">
                 <span class="palette-option-color" style="background:#4A3326;"></span>
-                <span>☕ Mocha & Kashmer</span>
+                <span>Mocha & Kashmer</span>
               </button>
               <button type="button" class="palette-option" data-set-palette="emerald">
                 <span class="palette-option-color" style="background:#124E3F;"></span>
-                <span>🌿 Zümrad & Oltin</span>
+                <span>Zümrad & Oltin</span>
               </button>
               <button type="button" class="palette-option" data-set-palette="japandi">
                 <span class="palette-option-color" style="background:#784522;"></span>
-                <span>🪵 Japandi & Qum</span>
+                <span>Japandi & Qum</span>
               </button>
               <button type="button" class="palette-option" data-set-palette="obsidian">
                 <span class="palette-option-color" style="background:#1E232A;"></span>
-                <span>🖤 Obsidian & Grafit</span>
+                <span>Obsidian & Grafit</span>
               </button>
             </div>
           </div>
@@ -87,12 +87,13 @@
           
           <!-- Savat tugmasi -->
           <a href="cart.html" class="btn btn-secondary" style="position:relative; padding:8px 14px;" aria-label="Savat" title="Savat">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
             <span id="cart-counter-badge" style="position:absolute; top:-6px; right:-6px; background:var(--color-primary); color:white; font-size:11px; font-weight:900; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center;">0</span>
           </a>
 
           <!-- Asosiy Tezkor Harakat (CTA) -->
           <a href="#olchov-chaqirish" class="btn btn-primary nav-cta-btn btn-open-measure">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
             <span>Usta Chaqirish</span>
           </a>
 
@@ -107,15 +108,42 @@
 
     <!-- Mobil menyu darchasi (Tartibli va soddalashtirilgan) -->
     <div class="mobile-menu" id="mobile-menu">
-      <a href="#kalkulyator" class="nav-link" onclick="document.getElementById('burger-btn').click();">📐 3D Kalkulyator & Narx</a>
-      <a href="catalog.html" class="nav-link">🛋️ Tayyor Mebellar Do'koni</a>
-      <a href="#olchov-chaqirish" class="nav-link btn-open-measure" style="color:var(--color-secondary); font-weight:800;">🏠 Bepul Usta & O'lchov Chaqirish</a>
-      <a href="#muddatli-tolov" class="nav-link" onclick="document.getElementById('burger-btn').click();">⚡ 0% Muddatli To'lov (Nasiya)</a>
-      <a href="#buyurtma-holati" class="nav-link" onclick="document.getElementById('burger-btn').click();">📦 Buyurtma Holatini Kuzatish</a>
-      <a href="portfolio.html" class="nav-link">✨ Bajarilgan Ishlarimiz</a>
-      <a href="cart.html" class="nav-link">🛒 Savat</a>
-      <a href="admin.html" class="nav-link" style="color:var(--text-muted); font-size:13px;">⚙️ Admin CRM</a>
-      <button type="button" class="btn btn-primary btn-open-measure" style="margin-top: 14px; width:100%;">Bepul O'lchovga Yozilish</button>
+      <a href="#kalkulyator" class="nav-link" onclick="document.getElementById('burger-btn').click();">
+        <svg class="icon" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+        <span>3D Kalkulyator & Narx</span>
+      </a>
+      <a href="catalog.html" class="nav-link">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H7v-2a2 2 0 0 0-4 0Z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg>
+        <span>Tayyor Mebellar Do'koni</span>
+      </a>
+      <a href="#olchov-chaqirish" class="nav-link btn-open-measure" style="color:var(--color-secondary); font-weight:800;">
+        <svg class="icon" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Bepul Usta & O'lchov Chaqirish</span>
+      </a>
+      <a href="#muddatli-tolov" class="nav-link" onclick="document.getElementById('burger-btn').click();">
+        <svg class="icon" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        <span>0% Muddatli To'lov (Nasiya)</span>
+      </a>
+      <a href="#buyurtma-holati" class="nav-link" onclick="document.getElementById('burger-btn').click();">
+        <svg class="icon" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+        <span>Buyurtma Holatini Kuzatish</span>
+      </a>
+      <a href="portfolio.html" class="nav-link">
+        <svg class="icon" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+        <span>Bajarilgan Ishlarimiz</span>
+      </a>
+      <a href="cart.html" class="nav-link">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <span>Savat</span>
+      </a>
+      <a href="admin.html" class="nav-link" style="color:var(--text-muted); font-size:13px;">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/></svg>
+        <span>Admin CRM</span>
+      </a>
+      <button type="button" class="btn btn-primary btn-open-measure" style="margin-top: 14px; width:100%;">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
+        <span>Bepul O'lchovga Yozilish</span>
+      </button>
     </div>
   </header>
 
@@ -160,10 +188,12 @@
               <span>Narxni hisoblash</span>
             </a>
             <a href="#olchov-chaqirish" class="btn btn-secondary btn-open-measure" style="border-color:var(--color-primary); color:var(--color-primary); font-weight:800; padding: 12px 22px; font-size: 15px;">
-              <span>📐 Bepul O'lchov Chaqirish</span>
+              <svg class="icon" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
+              <span>Bepul O'lchov Chaqirish</span>
             </a>
             <a href="#kalkulyator" class="btn btn-secondary" onclick="if(window.MebelProStudio) window.MebelProStudio.switchMode('3d');" style="padding: 12px 20px; font-size: 14px;">
-              <span>🧊 3D Xonada Ko'rish</span>
+              <svg class="icon" viewBox="0 0 24 24"><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="m3 8 9 5v9l-9-5V8Z"/><path d="m21 8-9 5v9l9-5V8Z"/></svg>
+              <span>3D Xonada Ko'rish</span>
             </a>
           </div>
         </div>
@@ -215,35 +245,43 @@
         <div class="presets-banner reveal-init">
           <div class="presets-banner-header">
             <div class="presets-banner-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
               <span>1-Klikda Tayyor Dizayn Uslublari (Shablonlar):</span>
             </div>
             <span class="presets-hint">Tanlang — materiallar, ranglar va furnitura avtomatik moslashadi</span>
           </div>
           <div class="presets-grid">
             <button type="button" class="preset-card active" data-preset="scandi" title="Skandinav Minimal">
-              <span class="preset-icon">🤍</span>
+              <span class="preset-icon">
+                <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              </span>
               <div class="preset-info">
                 <span class="preset-name">Skandinav Oq</span>
                 <span class="preset-desc">Oq fasad + Eman korpus</span>
               </div>
             </button>
             <button type="button" class="preset-card" data-preset="loft" title="Loft & Tabiiy Eman">
-              <span class="preset-icon">🪵</span>
+              <span class="preset-icon">
+                <svg class="icon" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.9a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+              </span>
               <div class="preset-info">
                 <span class="preset-name">Loft & Eman</span>
                 <span class="preset-desc">Tabiiy yog'och + Grafit</span>
               </div>
             </button>
             <button type="button" class="preset-card" data-preset="neoclassic" title="Dark Neo-Klassika">
-              <span class="preset-icon">🖤</span>
+              <span class="preset-icon">
+                <svg class="icon" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+              </span>
               <div class="preset-info">
                 <span class="preset-name">Neo-Klassik Grafit</span>
                 <span class="preset-desc">Antratsit + Blum Premium</span>
               </div>
             </button>
             <button type="button" class="preset-card" data-preset="royal" title="Royal Walnut & Lux">
-              <span class="preset-icon">👑</span>
+              <span class="preset-icon">
+                <svg class="icon" viewBox="0 0 24 24"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>
+              </span>
               <div class="preset-info">
                 <span class="preset-name">Royal Yong'oq</span>
                 <span class="preset-desc">Yong'oq + Fil suyagi + Akril</span>
@@ -261,13 +299,13 @@
                 <div class="control-title">
                   <span>1. Mebel toifasini tanlang</span>
                 </div>
-                <span class="type-active-pill" id="type-active-pill">🌟 Tanlangan: Shkaf-kupe</span>
+                <span class="type-active-pill" id="type-active-pill">Tanlangan: Shkaf-kupe</span>
               </div>
               <div class="type-grid">
                 <button type="button" class="type-btn active" data-type="shkaf">
                   <div class="type-btn-top">
                     <span class="type-badge-pill">Garderob</span>
-                    <span class="type-check-icon">✓</span>
+                    <span class="type-check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
                   </div>
                   <div class="type-icon">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -285,7 +323,7 @@
                 <button type="button" class="type-btn" data-type="oshxona">
                   <div class="type-btn-top">
                     <span class="type-badge-pill badge-kitchen">Garnitur</span>
-                    <span class="type-check-icon">✓</span>
+                    <span class="type-check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
                   </div>
                   <div class="type-icon">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -305,7 +343,7 @@
                 <button type="button" class="type-btn" data-type="tumba">
                   <div class="type-btn-top">
                     <span class="type-badge-pill badge-tv">TV & Komod</span>
-                    <span class="type-check-icon">✓</span>
+                    <span class="type-check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
                   </div>
                   <div class="type-icon">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -325,7 +363,7 @@
                 <button type="button" class="type-btn" data-type="stol">
                   <div class="type-btn-top">
                     <span class="type-badge-pill badge-table">Smart Stol</span>
-                    <span class="type-check-icon">✓</span>
+                    <span class="type-check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
                   </div>
                   <div class="type-icon">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -345,7 +383,7 @@
                 <button type="button" class="type-btn" data-type="krovat">
                   <div class="type-btn-top">
                     <span class="type-badge-pill badge-bed">Ortopedik</span>
-                    <span class="type-check-icon">✓</span>
+                    <span class="type-check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
                   </div>
                   <div class="type-icon">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -365,7 +403,7 @@
                 <button type="button" class="type-btn" data-type="ofis">
                   <div class="type-btn-top">
                     <span class="type-badge-pill badge-office">Rahbar / Ofis</span>
-                    <span class="type-check-icon">✓</span>
+                    <span class="type-check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
                   </div>
                   <div class="type-icon">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -663,14 +701,17 @@
               <div class="visual-header-flex">
                 <div class="studio-mode-tabs" role="tablist">
                   <button type="button" class="studio-tab-btn active" data-vmode="2d" role="tab">
-                    <span>📐 2D Chizma</span>
+                    <svg class="icon" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                    <span>2D Chizma</span>
                   </button>
                   <button type="button" class="studio-tab-btn" data-vmode="3d" role="tab">
-                    <span>🧊 3D Xona</span>
+                    <svg class="icon" viewBox="0 0 24 24"><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="m3 8 9 5v9l-9-5V8Z"/><path d="m21 8-9 5v9l9-5V8Z"/></svg>
+                    <span>3D Xona</span>
                     <span class="studio-badge-pulse">3D</span>
                   </button>
                   <button type="button" class="studio-tab-btn" data-vmode="raskroy" role="tab">
-                    <span>🪚 Raskroy (BOM)</span>
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14 2v6h6"/><path d="M4 4v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2z"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg>
+                    <span>Raskroy (BOM)</span>
                     <span class="studio-badge-pulse" style="background:#2563eb;">Usta</span>
                   </button>
                 </div>
@@ -687,7 +728,7 @@
                   <svg id="mebel-visual-svg" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mebelning jonli chizmasi">
                   </svg>
                 </div>
-                <p class="visual-caption">2D chizma namunaviy ko'rinish. Yuqoridagi <strong>"🧊 3D Xona"</strong> tugmasini bosib mebelni 3D da aylantirib ko'ring.</p>
+                <p class="visual-caption">2D chizma namunaviy ko'rinish. Yuqoridagi <strong>"3D Xona"</strong> tugmasini bosib mebelni 3D da aylantirib ko'ring.</p>
               </div>
 
               <!-- 2. 3D INTERAKTIV XONA KO'RINISHI -->
@@ -696,30 +737,35 @@
                   <div class="viewport-3d-toolbar">
                     <div class="tool-pill-group">
                       <button type="button" class="tool-icon-btn" id="btn-toggle-doors-3d" title="Eshik va tortmalarni ochish/yopish">
-                        <span>🚪 Ochish/Yopish</span>
+                        <svg class="icon icon-sm" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 12h.01"/></svg>
+                        <span>Ochish/Yopish</span>
                       </button>
                       <button type="button" class="tool-icon-btn active" id="btn-toggle-led-3d" title="LED chiroq">
-                        <span>💡 LED Nur</span>
+                        <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+                        <span>LED Nur</span>
                       </button>
-                      <button type="button" class="tool-icon-btn" id="btn-toggle-night" title="☀️ Kunduzgi / 🌙 Tungi atmosfera nuri">
-                        <span>☀️ Kunduz</span>
+                      <button type="button" class="tool-icon-btn" id="btn-toggle-night" title="Kunduzgi / Tungi atmosfera nuri">
+                        <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                        <span id="txt-daynight">Kunduz</span>
                       </button>
                       <button type="button" class="tool-icon-btn active" id="btn-toggle-human-3d" title="Inson bo'yi (1.75m)">
-                        <span>👤 Inson</span>
+                        <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+                        <span>Inson</span>
                       </button>
                     </div>
 
                     <div class="tool-pill-group">
                       <button type="button" class="tool-icon-btn" id="btn-export-snapshot" title="3D Dizaynni yuqori sifatli HD rasm qilib yuklab olish">
-                        <span>📸 HD Rasm</span>
+                        <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                        <span>HD Rasm</span>
                       </button>
                       <div class="cam-angles-mini" title="Kamera burchagini tanlash">
                         <button type="button" class="cam-mini-btn" id="btn-cam-front" title="Oldidan ko'rinish">Oldi</button>
                         <button type="button" class="cam-mini-btn active" id="btn-cam-iso" title="3D Izometriya">3D</button>
                         <button type="button" class="cam-mini-btn" id="btn-cam-top" title="Tepadan reja (Plan)">Plan</button>
                       </div>
-                      <button type="button" class="tool-icon-btn" id="btn-reset-cam-3d" title="Kamerani dastlabki holatga qaytarish">
-                        <span>🔄</span>
+                      <button type="button" class="tool-icon-btn" id="btn-reset-cam-3d" title="Kamerani dastlabki holatga qaytarish" aria-label="Kamerani qaytarish">
+                        <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
                       </button>
                     </div>
                   </div>
@@ -729,7 +775,7 @@
                   <div class="viewport-3d-info-bottom">
                     <span class="viewport-hint-pill">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
-                      360° aylantiring • g'ildirak bilan masshtablang • ☀️/🌙 va 📸 HD Rasm tugmalarini sinab ko'ring
+                      360° aylantiring • g'ildirak bilan masshtablang • Kunduz/Tun va HD Rasm tugmalarini sinab ko'ring
                     </span>
                   </div>
                 </div>
@@ -737,19 +783,31 @@
                 <!-- AQLLI ERGONOMIKA VA XONA STATISTIKASI -->
                 <div class="ergo-metrics-bar">
                   <div class="ergo-metric-item" title="Shift 270 sm standartiga nisbatan qolgan oraliq masofa">
-                    <span class="ergo-metric-lbl">📏 Shiftgacha qoldiq:</span>
+                    <span class="ergo-metric-lbl">
+                      <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/><line x1="5" x2="19" y1="2" y2="2"/></svg>
+                      Shiftgacha qoldiq:
+                    </span>
                     <span class="ergo-metric-val" id="ergo-ceiling-rem">30 sm</span>
                   </div>
                   <div class="ergo-metric-item" title="Pol maydonida egallaydigan o'rni">
-                    <span class="ergo-metric-lbl">📐 Maydoni:</span>
+                    <span class="ergo-metric-lbl">
+                      <svg class="icon icon-sm" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
+                      Maydoni:
+                    </span>
                     <span class="ergo-metric-val" id="ergo-floor-area">1.20 m²</span>
                   </div>
                   <div class="ergo-metric-item" title="Mebelning ichki foydali sig'imi">
-                    <span class="ergo-metric-lbl">📦 Foydali hajm:</span>
+                    <span class="ergo-metric-lbl">
+                      <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                      Foydali hajm:
+                    </span>
                     <span class="ergo-metric-val" id="ergo-volume">2.88 m³</span>
                   </div>
                   <div class="ergo-metric-item" title="Ergonomik qulaylik standarti">
-                    <span class="ergo-metric-lbl">👤 Ergonomika:</span>
+                    <span class="ergo-metric-lbl">
+                      <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                      Ergonomika:
+                    </span>
                     <span class="ergo-metric-val success">100% Ideal</span>
                   </div>
                 </div>
@@ -876,8 +934,12 @@
               <!-- 0% Muddatli to'lov / Nasiya bloki -->
               <div class="installment-widget" id="installment-widget">
                 <div class="installment-badge-strip">
+              <!-- 0% Muddatli to'lov / Nasiya bloki -->
+              <div class="installment-widget" id="installment-widget">
+                <div class="installment-badge-strip">
                   <div class="installment-pill">
-                    <span>⚡ 0% Boshlang'ich to'lov</span>
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>0% Boshlang'ich to'lov</span>
                   </div>
                   <div class="installment-partners">
                     <span class="partner-tag">Uzum Nasiya</span>
@@ -896,27 +958,29 @@
                   <button type="button" class="installment-month-btn" data-months="24">24 oy</button>
                 </div>
                 <div class="installment-note">
-                  <span>🛡️ Ortiqcha to'lovlarsiz. Faqat pasport orqali 5 daqiqada onlayn tasdiqlanadi.</span>
+                  <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                  <span>Ortiqcha to'lovlarsiz. Faqat pasport orqali 5 daqiqada onlayn tasdiqlanadi.</span>
                 </div>
               </div>
 
               <div class="price-actions" style="margin-top:16px;">
                 <button type="button" class="btn btn-primary btn-order-cta btn-open-order" style="flex:1;">
                   <span>Buyurtma berish</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </button>
 
                 <button type="button" class="btn btn-secondary btn-open-measure" style="border-color:var(--color-primary); color:var(--color-primary); font-weight:800; padding:10px 14px;">
-                  <span>📐 Bepul O'lchov</span>
+                  <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
+                  <span>Bepul O'lchov</span>
                 </button>
 
                 <div class="price-secondary-actions">
                   <button type="button" class="btn btn-secondary btn-action-icon" id="btn-copy-quote" title="Xulosani nusxalash">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     <span>Nusxalash</span>
                   </button>
                   <button type="button" class="btn btn-secondary btn-action-icon" id="btn-share-tg" title="Telegramda ulashish">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                     <span>Telegram</span>
                   </button>
                 </div>
@@ -934,8 +998,8 @@
       <div class="container">
         <div class="section-header reveal-init" style="text-align: center; margin-bottom: 40px;">
           <div class="studio-mega-badge">
-            <span class="badge-dot"></span>
-            <span>★ OMBOR VA FABRIKA SHOURUMI — 24 SOATDA YETKAZISH</span>
+            <svg class="icon icon-sm" style="color:#fbbf24; fill:#fbbf24;" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>OMBOR VA FABRIKA SHOURUMI — 24 SOATDA YETKAZISH</span>
           </div>
           <h2 class="section-title">Eksklyuziv Tayyor Mebellar</h2>
           <p class="section-desc">Kutish shart emas! Omborda tayyor bo'lgan eng xaridorgir mebellarni to'g'ridan-to'g'ri xarid qiling yoki 3D studiyamizda o'z xonangizga moslashtiring.</p>
@@ -946,7 +1010,10 @@
           <div class="product-card" style="background:var(--bg-surface); border:1px solid var(--border-light); border-radius:var(--radius-xl); overflow:hidden; display:flex; flex-direction:column; box-shadow:var(--shadow-sm); transition:all 0.3s ease;">
             <div class="product-img-box" style="height:210px; background:radial-gradient(circle at 50% 40%, rgba(255,255,255,0.05), transparent 70%), linear-gradient(180deg, #18202c, #0f141d); display:flex; align-items:center; justify-content:center; position:relative;">
               <span class="product-badge" style="position:absolute; top:12px; left:12px; background:#f59e0b; color:#111; font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px;">Top Model</span>
-              <span style="position:absolute; top:12px; right:12px; background:rgba(15,23,42,0.8); color:#fbbf24; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px;">★ 5.0</span>
+              <span style="position:absolute; top:12px; right:12px; background:rgba(15,23,42,0.8); color:#fbbf24; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; display:inline-flex; align-items:center; gap:4px;">
+                <svg class="icon icon-sm" style="color:#fbbf24; fill:#fbbf24; width:12px; height:12px;" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                5.0
+              </span>
               <svg viewBox="0 0 240 180" width="180" height="135" style="filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));">
                 <ellipse cx="120" cy="172" rx="95" ry="6" fill="rgba(0,0,0,0.4)" />
                 <rect x="30" y="15" width="180" height="48" rx="2" fill="#FFFFFF" stroke="#1f2937" stroke-width="1.8" />
@@ -974,10 +1041,12 @@
               </div>
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
                 <button type="button" class="btn btn-primary" onclick="if(window.addDirectToCart) window.addDirectToCart('Milano High-Gloss Oshxona', 'Oshxona garnituri', 5800000)" style="padding:9px; font-size:12px; font-weight:700;">
-                  🛒 Savatga
+                  <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                  <span>Savatga</span>
                 </button>
                 <button type="button" class="btn btn-secondary" onclick="document.querySelector('.type-btn[data-type=\'oshxona\']')?.click(); document.getElementById('kalkulyator')?.scrollIntoView({behavior:'smooth'});" style="padding:9px; font-size:12px; font-weight:700;">
-                  🧊 3D da Ko'rish
+                  <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="m3 8 9 5v9l-9-5V8Z"/><path d="m21 8-9 5v9l9-5V8Z"/></svg>
+                  <span>3D da Ko'rish</span>
                 </button>
               </div>
             </div>
@@ -987,7 +1056,10 @@
           <div class="product-card" style="background:var(--bg-surface); border:1px solid var(--border-light); border-radius:var(--radius-xl); overflow:hidden; display:flex; flex-direction:column; box-shadow:var(--shadow-sm); transition:all 0.3s ease;">
             <div class="product-img-box" style="height:210px; background:radial-gradient(circle at 50% 40%, rgba(255,255,255,0.05), transparent 70%), linear-gradient(180deg, #18202c, #0f141d); display:flex; align-items:center; justify-content:center; position:relative;">
               <span class="product-badge" style="position:absolute; top:12px; left:12px; background:#10b981; color:#fff; font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px;">Xit Savdo</span>
-              <span style="position:absolute; top:12px; right:12px; background:rgba(15,23,42,0.8); color:#fbbf24; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px;">★ 4.9</span>
+              <span style="position:absolute; top:12px; right:12px; background:rgba(15,23,42,0.8); color:#fbbf24; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; display:inline-flex; align-items:center; gap:4px;">
+                <svg class="icon icon-sm" style="color:#fbbf24; fill:#fbbf24; width:12px; height:12px;" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                4.9
+              </span>
               <svg viewBox="0 0 240 180" width="180" height="135" style="filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));">
                 <ellipse cx="120" cy="172" rx="90" ry="6" fill="rgba(0,0,0,0.4)" />
                 <rect x="35" y="15" width="170" height="150" rx="3" fill="#181c24" stroke="#374151" stroke-width="2" />
@@ -1013,10 +1085,12 @@
               </div>
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
                 <button type="button" class="btn btn-primary" onclick="if(window.addDirectToCart) window.addDirectToCart('Verona Shkaf-Kupe 3 Eshikli', 'Shkaf-kupe', 4650000)" style="padding:9px; font-size:12px; font-weight:700;">
-                  🛒 Savatga
+                  <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                  <span>Savatga</span>
                 </button>
                 <button type="button" class="btn btn-secondary" onclick="document.querySelector('.type-btn[data-type=\'shkaf\']')?.click(); document.getElementById('kalkulyator')?.scrollIntoView({behavior:'smooth'});" style="padding:9px; font-size:12px; font-weight:700;">
-                  🧊 3D da Ko'rish
+                  <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="m3 8 9 5v9l-9-5V8Z"/><path d="m21 8-9 5v9l9-5V8Z"/></svg>
+                  <span>3D da Ko'rish</span>
                 </button>
               </div>
             </div>
@@ -1026,7 +1100,10 @@
           <div class="product-card" style="background:var(--bg-surface); border:1px solid var(--border-light); border-radius:var(--radius-xl); overflow:hidden; display:flex; flex-direction:column; box-shadow:var(--shadow-sm); transition:all 0.3s ease;">
             <div class="product-img-box" style="height:210px; background:radial-gradient(circle at 50% 40%, rgba(255,255,255,0.05), transparent 70%), linear-gradient(180deg, #18202c, #0f141d); display:flex; align-items:center; justify-content:center; position:relative;">
               <span class="product-badge" style="position:absolute; top:12px; left:12px; background:linear-gradient(135deg, #fbbf24, #d97706); color:#000; font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px;">Premium</span>
-              <span style="position:absolute; top:12px; right:12px; background:rgba(15,23,42,0.8); color:#fbbf24; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px;">★ 4.9</span>
+              <span style="position:absolute; top:12px; right:12px; background:rgba(15,23,42,0.8); color:#fbbf24; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; display:inline-flex; align-items:center; gap:4px;">
+                <svg class="icon icon-sm" style="color:#fbbf24; fill:#fbbf24; width:12px; height:12px;" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                4.9
+              </span>
               <svg viewBox="0 0 240 180" width="180" height="135" style="filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));">
                 <ellipse cx="120" cy="168" rx="85" ry="6" fill="rgba(0,0,0,0.4)" />
                 <rect x="45" y="30" width="150" height="65" rx="6" fill="#373A3C" stroke="#1f2937" stroke-width="2" />
@@ -1053,10 +1130,12 @@
               </div>
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
                 <button type="button" class="btn btn-primary" onclick="if(window.addDirectToCart) window.addDirectToCart('Royal Soft Boshli Krovat', 'Krovat', 2950000)" style="padding:9px; font-size:12px; font-weight:700;">
-                  🛒 Savatga
+                  <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                  <span>Savatga</span>
                 </button>
                 <button type="button" class="btn btn-secondary" onclick="document.querySelector('.type-btn[data-type=\'krovat\']')?.click(); document.getElementById('kalkulyator')?.scrollIntoView({behavior:'smooth'});" style="padding:9px; font-size:12px; font-weight:700;">
-                  🧊 3D da Ko'rish
+                  <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="m3 8 9 5v9l-9-5V8Z"/><path d="m21 8-9 5v9l9-5V8Z"/></svg>
+                  <span>3D da Ko'rish</span>
                 </button>
               </div>
             </div>
@@ -1066,7 +1145,10 @@
           <div class="product-card" style="background:var(--bg-surface); border:1px solid var(--border-light); border-radius:var(--radius-xl); overflow:hidden; display:flex; flex-direction:column; box-shadow:var(--shadow-sm); transition:all 0.3s ease;">
             <div class="product-img-box" style="height:210px; background:radial-gradient(circle at 50% 40%, rgba(255,255,255,0.05), transparent 70%), linear-gradient(180deg, #18202c, #0f141d); display:flex; align-items:center; justify-content:center; position:relative;">
               <span class="product-badge" style="position:absolute; top:12px; left:12px; background:#ef4444; color:#fff; font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px;">Chegirma</span>
-              <span style="position:absolute; top:12px; right:12px; background:rgba(15,23,42,0.8); color:#fbbf24; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px;">★ 4.8</span>
+              <span style="position:absolute; top:12px; right:12px; background:rgba(15,23,42,0.8); color:#fbbf24; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; display:inline-flex; align-items:center; gap:4px;">
+                <svg class="icon icon-sm" style="color:#fbbf24; fill:#fbbf24; width:12px; height:12px;" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                4.8
+              </span>
               <svg viewBox="0 0 240 180" width="180" height="135" style="filter: drop-shadow(0 10px 14px rgba(0,0,0,0.5));">
                 <ellipse cx="120" cy="168" rx="80" ry="5" fill="rgba(0,0,0,0.4)" />
                 <polygon points="50,158 58,158 72,78 64,78" fill="#0f172a" />
@@ -1089,10 +1171,12 @@
               </div>
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
                 <button type="button" class="btn btn-primary" onclick="if(window.addDirectToCart) window.addDirectToCart('Loft Minimalist Ish Stoli', 'Stol', 890000)" style="padding:9px; font-size:12px; font-weight:700;">
-                  🛒 Savatga
+                  <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                  <span>Savatga</span>
                 </button>
                 <button type="button" class="btn btn-secondary" onclick="document.querySelector('.type-btn[data-type=\'stol\']')?.click(); document.getElementById('kalkulyator')?.scrollIntoView({behavior:'smooth'});" style="padding:9px; font-size:12px; font-weight:700;">
-                  🧊 3D da Ko'rish
+                  <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="m3 8 9 5v9l-9-5V8Z"/><path d="m21 8-9 5v9l9-5V8Z"/></svg>
+                  <span>3D da Ko'rish</span>
                 </button>
               </div>
             </div>
@@ -1117,7 +1201,7 @@
         <div class="section-header reveal-init" style="text-align: center; margin-bottom: 40px;">
           <div class="studio-mega-badge">
             <span class="badge-dot" style="background:#15803D;"></span>
-            <span>★ 100% BEPUL XIZMAT — HECH QANDAY MAJBURIYATSIZ</span>
+            <span>100% BEPUL XIZMAT — HECH QANDAY MAJBURIYATSIZ</span>
           </div>
           <h2 class="section-title">Lazerli O'lchovchini Uyga Chaqiring</h2>
           <p class="section-desc">Devoringiz qiya yoki rozetkalar xalal beryaptimi? 0.1 mm aniqlikdagi 3D lazer uskunasi bilan mutaxassisimiz xonadoningizga borib, bepul o'lchov va maslahat beradi.</p>
@@ -1127,7 +1211,9 @@
           <!-- Chap tomon: Afzalliklar va Kafolatlar -->
           <div class="measure-info-card">
             <div class="measure-benefit-item">
-              <div class="measure-benefit-icon">📐</div>
+              <div class="measure-benefit-icon">
+                <svg class="icon icon-md" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
+              </div>
               <div class="measure-benefit-text">
                 <h4>0.1 mm Germaniya Lazer Aniqligi</h4>
                 <p>Oddiy metr bilan xato qilish xavfi yo'q. Devor egriliklari, pol sathlari va burchaklar 3D lazer bilan tekshiriladi.</p>
@@ -1135,7 +1221,9 @@
             </div>
 
             <div class="measure-benefit-item">
-              <div class="measure-benefit-icon">🔌</div>
+              <div class="measure-benefit-icon">
+                <svg class="icon icon-md" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
               <div class="measure-benefit-text">
                 <h4>Rozetka va Quvurlar Xavfsizligi</h4>
                 <p>Oshxona santexnikasi, gaz trubalari, ventilyatsiya va rozetkalar mebel chizmasiga aniq tushiriladi.</p>
@@ -1143,7 +1231,9 @@
             </div>
 
             <div class="measure-benefit-item">
-              <div class="measure-benefit-icon">🎨</div>
+              <div class="measure-benefit-icon">
+                <svg class="icon icon-md" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.9a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+              </div>
               <div class="measure-benefit-text">
                 <h4>Jonli Material va Rang Namunalarini Ko'rish</h4>
                 <p>Usta uyingizga DSP, MDF, Emal va Shpon fasad namunalarini olib boradi — o'z yorug'ligingizda ushlab ko'rasiz.</p>
@@ -1151,7 +1241,9 @@
             </div>
 
             <div class="measure-benefit-item">
-              <div class="measure-benefit-icon">🛡️</div>
+              <div class="measure-benefit-icon">
+                <svg class="icon icon-md" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
               <div class="measure-benefit-text">
                 <h4>100% Bepul va Sotib Olish Majburiyatsiz</h4>
                 <p>Agar narx yoki loyiha yoqmasa — bir tiyin ham to'lamaysiz. Bepul maslahat va hisob-kitob sizda qoladi.</p>
@@ -1170,11 +1262,26 @@
               <div style="margin-bottom: 14px;">
                 <label style="display:block; font-size:12px; font-weight:800; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase;">1. Xona yoki mebel turi:</label>
                 <div class="room-type-chips">
-                  <button type="button" class="room-chip-btn active" data-room="oshxona">🍽️ Oshxona</button>
-                  <button type="button" class="room-chip-btn" data-room="shkaf">🚪 Shkaf-kupe</button>
-                  <button type="button" class="room-chip-btn" data-room="yotoqxona">🛏️ Yotoqxona</button>
-                  <button type="button" class="room-chip-btn" data-room="zal">🛋️ Mehmonxona</button>
-                  <button type="button" class="room-chip-btn" data-room="butun">🏠 Butun uy</button>
+                  <button type="button" class="room-chip-btn active" data-room="oshxona">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H7v-2a2 2 0 0 0-4 0Z"/><path d="M5 18v2"/><path d="M19 18v2"/></svg>
+                    <span>Oshxona</span>
+                  </button>
+                  <button type="button" class="room-chip-btn" data-room="shkaf">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 12h.01"/></svg>
+                    <span>Shkaf-kupe</span>
+                  </button>
+                  <button type="button" class="room-chip-btn" data-room="yotoqxona">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+                    <span>Yotoqxona</span>
+                  </button>
+                  <button type="button" class="room-chip-btn" data-room="zal">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H7v-2a2 2 0 0 0-4 0Z"/></svg>
+                    <span>Mehmonxona</span>
+                  </button>
+                  <button type="button" class="room-chip-btn" data-room="butun">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span>Butun uy</span>
+                  </button>
                 </div>
               </div>
 
@@ -1221,7 +1328,7 @@
         <div class="section-header reveal-init" style="text-align: center; margin-bottom: 40px;">
           <div class="studio-mega-badge">
             <span class="badge-dot" style="background:#D97706;"></span>
-            <span>★ 0% FOIZSIZ BO'LIB TO'LASH — BIRINCHI TO'LOV 0 SO'M</span>
+            <span>0% FOIZSIZ BO'LIB TO'LASH — BIRINCHI TO'LOV 0 SO'M</span>
           </div>
           <h2 class="section-title">Orzuingizdagi Mebelni Bugun Oling</h2>
           <p class="section-desc">Katta mablag' yig'ishni kutish shart emas! O'zbekistonning eng ishonchli banklari va nasiya xizmatlari orqali 3 oydan 24 oygacha foizsiz bo'lib to'lang.</p>
@@ -1231,16 +1338,19 @@
           <!-- Kartochka 1: Uzum Nasiya -->
           <div style="background:var(--bg-surface-muted); border:1px solid var(--border-light); border-radius:var(--radius-xl); padding:24px; display:flex; flex-direction:column; box-shadow:var(--shadow-sm);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-              <span style="font-size:18px; font-weight:900; color:var(--text-main);">🍇 Uzum Nasiya</span>
+              <span style="font-size:18px; font-weight:900; color:var(--text-main); display:inline-flex; align-items:center; gap:8px;">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Uzum Nasiya
+              </span>
               <span style="font-size:11px; font-weight:800; background:var(--color-primary-subtle); color:var(--color-primary); padding:3px 8px; border-radius:999px;">3 - 12 oy</span>
             </div>
             <p style="font-size:13px; color:var(--text-muted); line-height:1.5; margin-bottom:16px;">
               Uzum ilovasi orqali 3 daqiqada limit tekshiriladi. Hech qanday kafillarsiz, faqat pasport kifoya.
             </p>
-            <ul style="font-size:12px; color:var(--text-muted); margin-bottom:20px; line-height:1.8;">
-              <li>✓ Boshlang'ich to'lov: <strong>0 so'm</strong></li>
-              <li>✓ Tasdiqlash vaqti: <strong>2 daqiqa</strong></li>
-              <li>✓ Oylik to'lov Click / Payme orqali</li>
+            <ul style="font-size:12px; color:var(--text-muted); margin-bottom:20px; line-height:1.8; list-style:none; padding-left:0;">
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:6px; color:var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>Boshlang'ich to'lov: <strong>0 so'm</strong></li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:6px; color:var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>Tasdiqlash vaqti: <strong>2 daqiqa</strong></li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:6px; color:var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>Oylik to'lov Click / Payme orqali</li>
             </ul>
             <a href="#kalkulyator" class="btn btn-secondary" style="margin-top:auto; font-weight:800; font-size:13px;">Kalkulyatorda hisoblash</a>
           </div>
@@ -1249,16 +1359,19 @@
           <div style="background:var(--bg-surface-muted); border:1.5px solid var(--color-primary); border-radius:var(--radius-xl); padding:24px; display:flex; flex-direction:column; box-shadow:var(--shadow-md); position:relative;">
             <span style="position:absolute; top:-10px; right:20px; background:var(--color-primary); color:white; font-size:10px; font-weight:900; padding:2px 10px; border-radius:999px;">Eng Ommabop</span>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-              <span style="font-size:18px; font-weight:900; color:var(--text-main);">🏦 Anorbank Nasiya</span>
+              <span style="font-size:18px; font-weight:900; color:var(--text-main); display:inline-flex; align-items:center; gap:8px;">
+                <svg class="icon" viewBox="0 0 24 24"><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+                Anorbank Nasiya
+              </span>
               <span style="font-size:11px; font-weight:800; background:var(--color-primary-subtle); color:var(--color-primary); padding:3px 8px; border-radius:999px;">3 - 24 oy</span>
             </div>
             <p style="font-size:13px; color:var(--text-muted); line-height:1.5; margin-bottom:16px;">
               Eng uzoq 24 oygacha bo'lgan qulay muddat. Katta oshxona yoki butun kvartira mebellari uchun ideal yechim.
             </p>
-            <ul style="font-size:12px; color:var(--text-muted); margin-bottom:20px; line-height:1.8;">
-              <li>✓ 50,000,000 so'mgacha limit</li>
-              <li>✓ 0% ortiqcha yashirin to'lov</li>
-              <li>✓ Shartnoma to'g'ridan-to'g'ri uyda imzolanadi</li>
+            <ul style="font-size:12px; color:var(--text-muted); margin-bottom:20px; line-height:1.8; list-style:none; padding-left:0;">
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:6px; color:var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>50,000,000 so'mgacha limit</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:6px; color:var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>0% ortiqcha yashirin to'lov</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:6px; color:var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>Shartnoma to'g'ridan-to'g'ri uyda imzolanadi</li>
             </ul>
             <a href="#kalkulyator" class="btn btn-primary" style="margin-top:auto; font-weight:800; font-size:13px;">Muddatli xarid qilish</a>
           </div>
@@ -1266,16 +1379,19 @@
           <!-- Kartochka 3: Paymart & Zoodpay -->
           <div style="background:var(--bg-surface-muted); border:1px solid var(--border-light); border-radius:var(--radius-xl); padding:24px; display:flex; flex-direction:column; box-shadow:var(--shadow-sm);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-              <span style="font-size:18px; font-weight:900; color:var(--text-main);">💳 Paymart & Zoodpay</span>
+              <span style="font-size:18px; font-weight:900; color:var(--text-main); display:inline-flex; align-items:center; gap:8px;">
+                <svg class="icon" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                Paymart & Zoodpay
+              </span>
               <span style="font-size:11px; font-weight:800; background:var(--color-primary-subtle); color:var(--color-primary); padding:3px 8px; border-radius:999px;">3 - 6 oy</span>
             </div>
             <p style="font-size:13px; color:var(--text-muted); line-height:1.5; margin-bottom:16px;">
               Kichikroq xaridlar (stol, komod, tumba, krovat) uchun bir zumda rasmiylashtiriladigan qulay mikro-to'lov.
             </p>
-            <ul style="font-size:12px; color:var(--text-muted); margin-bottom:20px; line-height:1.8;">
-              <li>✓ Karta balansi bilan darhol integratsiya</li>
-              <li>✓ Jarima va yashirin komissiyalarsiz</li>
-              <li>✓ 100% shaffof to'lov grafigi</li>
+            <ul style="font-size:12px; color:var(--text-muted); margin-bottom:20px; line-height:1.8; list-style:none; padding-left:0;">
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:6px; color:var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>Karta balansi bilan darhol integratsiya</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:6px; color:var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>Jarima va yashirin komissiyalarsiz</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-2px; margin-right:6px; color:var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>100% shaffof to'lov grafigi</li>
             </ul>
             <a href="#kalkulyator" class="btn btn-secondary" style="margin-top:auto; font-weight:800; font-size:13px;">Hisobni ko'rish</a>
           </div>
@@ -1410,8 +1526,14 @@
 
         <div style="display:flex; justify-content:center; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
           <span style="font-size:12px; color:var(--text-muted); font-weight:600;">Namunaviy buyurtmalar:</span>
-          <button type="button" class="btn-sample-track" onclick="document.getElementById('track-order-input').value='MP-1042'; document.getElementById('track-order-btn').click();">🔍 MP-1042 (Shkaf-kupe)</button>
-          <button type="button" class="btn-sample-track" onclick="document.getElementById('track-order-input').value='MP-1041'; document.getElementById('track-order-btn').click();">🔍 MP-1041 (Oshxona)</button>
+          <button type="button" class="btn-sample-track" onclick="document.getElementById('track-order-input').value='MP-1042'; document.getElementById('track-order-btn').click();">
+            <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <span>MP-1042 (Shkaf-kupe)</span>
+          </button>
+          <button type="button" class="btn-sample-track" onclick="document.getElementById('track-order-input').value='MP-1041'; document.getElementById('track-order-btn').click();">
+            <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <span>MP-1041 (Oshxona)</span>
+          </button>
         </div>
 
         <div id="track-result-box" style="display: none;"></div>
@@ -1608,30 +1730,35 @@
           <div class="viewport-3d-toolbar" style="top:14px; left:14px; right:14px;">
             <div class="tool-pill-group">
               <button type="button" class="tool-icon-btn" id="modal-btn-doors" onclick="if(window.MebelProStudio) window.MebelProStudio.toggleDoors();" title="Eshiklarni ochish/yopish">
-                <span>🚪 Ochish/Yopish</span>
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 12h.01"/></svg>
+                <span>Ochish/Yopish</span>
               </button>
               <button type="button" class="tool-icon-btn active" id="modal-btn-led" onclick="if(window.MebelProStudio) window.MebelProStudio.toggleLed();" title="LED Nur">
-                <span>💡 LED Nur</span>
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+                <span>LED Nur</span>
               </button>
               <button type="button" class="tool-icon-btn" id="modal-btn-night" onclick="if(window.MebelProStudio) window.MebelProStudio.toggleNightMode();" title="Kunduzgi / Tungi atmosfera">
-                <span>☀️ Kunduz</span>
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                <span id="modal-txt-daynight">Kunduz</span>
               </button>
               <button type="button" class="tool-icon-btn active" id="modal-btn-human" onclick="if(window.MebelProStudio) window.MebelProStudio.toggleHuman();" title="Inson bo'yi (1.75m)">
-                <span>👤 Inson</span>
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+                <span>Inson</span>
               </button>
             </div>
 
             <div class="tool-pill-group">
               <button type="button" class="tool-icon-btn" id="modal-btn-snapshot" onclick="if(window.MebelProStudio) window.MebelProStudio.exportSnapshot();" title="HD rasm yuklash">
-                <span>📸 HD Rasm</span>
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                <span>HD Rasm</span>
               </button>
               <div class="cam-angles-mini">
                 <button type="button" class="cam-mini-btn" onclick="if(window.MebelProStudio) window.MebelProStudio.setCameraView('front');">Oldi</button>
                 <button type="button" class="cam-mini-btn active" onclick="if(window.MebelProStudio) window.MebelProStudio.setCameraView('iso');">3D</button>
                 <button type="button" class="cam-mini-btn" onclick="if(window.MebelProStudio) window.MebelProStudio.setCameraView('top');">Plan</button>
               </div>
-              <button type="button" class="tool-icon-btn" id="modal-btn-reset" onclick="if(window.MebelProStudio) window.MebelProStudio.resetCamera();" title="Markazlash">
-                <span>🔄</span>
+              <button type="button" class="tool-icon-btn" id="modal-btn-reset" onclick="if(window.MebelProStudio) window.MebelProStudio.resetCamera();" title="Markazlash" aria-label="Markazlash">
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
               </button>
             </div>
           </div>
@@ -1681,7 +1808,8 @@
               Ushbu Dizaynni Buyurtma Qilish
             </button>
             <button type="button" class="btn btn-secondary" onclick="if(window.MebelProStudio) window.MebelProStudio.printProductionSheet();" style="width:100%; font-weight:700; font-size:12px; padding:10px;">
-              🖨️ Ishlab Chiqarish Xaritasi (PDF)
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+              <span>Ishlab Chiqarish Xaritasi (PDF)</span>
             </button>
           </div>
         </div>
@@ -1694,7 +1822,7 @@
     <div class="modal-card">
       <button type="button" class="modal-close-btn" id="close-measure-modal" aria-label="Yopish">&times;</button>
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
-        <span style="font-size:24px;">📐</span>
+        <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></svg>
         <h3 class="modal-title" style="margin-bottom:0;">Bepul Lazerli O'lchovchi Chaqirish</h3>
       </div>
       <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
@@ -1705,12 +1833,12 @@
         <div class="form-group">
           <label for="modal-measure-room-type">Xona yoki mebel turi:</label>
           <select class="form-control" id="modal-measure-room-type">
-            <option value="oshxona">🍽️ Oshxona garnituri</option>
-            <option value="shkaf">🚪 Shkaf-kupe / Garderob</option>
-            <option value="yotoqxona">🛏️ Yotoqxona / Krovat</option>
-            <option value="zal">🛋️ Mehmonxona / TV stend</option>
-            <option value="ofis">💼 Ofis / Ish stoli</option>
-            <option value="butun">🏠 Butun xonadon mebeli</option>
+            <option value="oshxona">Oshxona garnituri</option>
+            <option value="shkaf">Shkaf-kupe / Garderob</option>
+            <option value="yotoqxona">Yotoqxona / Krovat</option>
+            <option value="zal">Mehmonxona / TV stend</option>
+            <option value="ofis">Ofis / Ish stoli</option>
+            <option value="butun">Butun xonadon mebeli</option>
           </select>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
@@ -1744,7 +1872,7 @@
 
   <!-- FLOATING QUICK CONCIERGE & TELEGRAM BUTTON -->
   <div class="floating-concierge">
-    <div class="concierge-tooltip">💬 Mebel bo'yicha bepul maslahat</div>
+    <div class="concierge-tooltip">Mebel bo'yicha bepul maslahat</div>
     <a href="https://t.me/mebelpro_admin" target="_blank" rel="noopener noreferrer" class="concierge-pulse-btn" aria-label="Telegram orqali tezkor bog'lanish" title="Telegram orqali 1-klikda maslahat">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
         <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -1757,7 +1885,13 @@
   <div class="toast-container" id="toast-container"></div>
 
   <!-- Studiya va Asosiy Skriptlar -->
+  <script src="https://unpkg.com/lucide@latest"></script>
   <script src="js/studio.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
 </body>
 </html>

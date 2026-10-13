@@ -258,8 +258,12 @@
 
     const toast = document.createElement('div');
     toast.className = `toast toast-${type} show`;
-    const icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
-    toast.innerHTML = `<span style="font-weight:900; font-size:16px;">${icon}</span> <span>${message}</span>`;
+    const iconSvg = type === 'success' 
+      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>'
+      : type === 'error' 
+        ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+        : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
+    toast.innerHTML = `<span style="display:inline-flex; align-items:center;">${iconSvg}</span> <span>${message}</span>`;
     container.appendChild(toast);
 
     setTimeout(() => {
@@ -864,7 +868,7 @@
           const count = cart.reduce((acc, item) => acc + (item.qty || 1), 0);
           badge.textContent = count;
         }
-        showToast(`🛒 "${title}" savatga qo'shildi!`, 'success');
+        showToast(`"${title}" savatga qo'shildi!`, 'success');
       } catch (err) {
         console.error(err);
       }
@@ -1043,14 +1047,14 @@
         const pill = document.getElementById('type-active-pill');
         if (pill) {
           const typeNames = {
-            shkaf: '🌟 Tanlangan: Shkaf-kupe (Garderob)',
-            oshxona: '🔥 Tanlangan: Oshxona Garnituri',
-            tumba: '✨ Tanlangan: Tumba va Komod',
-            stol: '💎 Tanlangan: Zamonaviy Stol',
-            krovat: '👑 Tanlangan: Ortopedik Krovat',
-            ofis: '💼 Tanlangan: Ofis Mebeli'
+            shkaf: 'Tanlangan: Shkaf-kupe (Garderob)',
+            oshxona: 'Tanlangan: Oshxona Garnituri',
+            tumba: 'Tanlangan: Tumba va Komod',
+            stol: 'Tanlangan: Zamonaviy Stol',
+            krovat: 'Tanlangan: Ortopedik Krovat',
+            ofis: 'Tanlangan: Ofis Mebeli'
           };
-          pill.textContent = typeNames[state.type] || `🌟 Tanlangan: ${state.type}`;
+          pill.textContent = typeNames[state.type] || `Tanlangan: ${state.type}`;
         }
 
         applyTypeLimits(state.type, true);
@@ -1251,7 +1255,7 @@
 
         updateQuote();
         if (typeof showToast === 'function') {
-          showToast(`✨ "${cfg.name}" dizayn uslubi qo'llandi!`, 'success');
+          showToast(`"${cfg.name}" dizayn uslubi qo'llandi!`, 'success');
         }
       });
     });
@@ -1260,7 +1264,7 @@
     const copyBtn = document.getElementById('btn-copy-quote');
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {
-        const text = `📋 MebelPro Hisob Xulosasi:\n` +
+        const text = `MebelPro Hisob Xulosasi:\n` +
           `Mebel: ${FURNITURE_LIMITS[state.type].name}\n` +
           `O'lcham: ${state.width} x ${state.height} x ${state.depth} sm\n` +
           `Jami narx: ${formatSum(currentPrice)}\n` +
@@ -1417,10 +1421,10 @@
       });
 
       const paletteNames = {
-        mocha: '☕ Mocha',
-        emerald: '🌿 Zümrad',
-        japandi: '🪵 Japandi',
-        obsidian: '🖤 Obsidian'
+        mocha: 'Mocha',
+        emerald: 'Zümrad',
+        japandi: 'Japandi',
+        obsidian: 'Obsidian'
       };
 
       document.querySelectorAll('[data-set-palette]').forEach(btn => {
@@ -1431,7 +1435,7 @@
           localStorage.setItem('mebelpro_palette', p);
           if (paletteLabel) paletteLabel.textContent = paletteNames[p] || p;
           document.querySelectorAll('[data-set-palette]').forEach(b => b.classList.toggle('active', b === btn));
-          showToast(`🎨 "${paletteNames[p]}" rang uslubi tanlandi!`, 'success');
+          showToast(`"${paletteNames[p]}" rang uslubi tanlandi!`, 'success');
           paletteDropdown.classList.remove('open');
         });
       });
@@ -1439,7 +1443,7 @@
       // Default yoki saqlangan palitra
       const savedPalette = localStorage.getItem('mebelpro_palette') || 'mocha';
       document.documentElement.setAttribute('data-palette', savedPalette);
-      if (paletteLabel) paletteLabel.textContent = paletteNames[savedPalette] || '☕ Mocha';
+      if (paletteLabel) paletteLabel.textContent = paletteNames[savedPalette] || 'Mocha';
       document.querySelectorAll(`[data-set-palette="${savedPalette}"]`).forEach(b => b.classList.add('active'));
     }
 
@@ -1503,7 +1507,7 @@
         bookings.push(booking);
         localStorage.setItem('mebelpro_measurements', JSON.stringify(bookings));
 
-        showToast(`✅ Rahmat, ${name}! Bepul lazerli o'lchovchi qabul qilindi. 15 daqiqada bog'lanamiz.`, 'success');
+        showToast(`Rahmat, ${name}! Bepul lazerli o'lchov so'rovi qabul qilindi. 15 daqiqada bog'lanamiz.`, 'success');
         f.reset();
         if (measureModal) {
           measureModal.classList.remove('open');
@@ -1582,22 +1586,22 @@
 
             <div class="track-timeline" style="grid-template-columns: repeat(5, 1fr); margin-top:16px;">
               <div class="track-step-rich ${s >= 1 ? 'done' : ''}">
-                <div class="track-step-circle">${s > 1 ? '✓' : '1'}</div>
+                <div class="track-step-circle">${s > 1 ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : '1'}</div>
                 <div class="track-step-title">1. O'lchov</div>
                 <div class="track-step-desc">Lazerli 3D</div>
               </div>
               <div class="track-step-rich ${s >= 2 ? 'done' : s === 2 ? 'active' : ''}">
-                <div class="track-step-circle">${s > 2 ? '✓' : '2'}</div>
+                <div class="track-step-circle">${s > 2 ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : '2'}</div>
                 <div class="track-step-title">2. 3D Model</div>
                 <div class="track-step-desc">Naryad & BOM</div>
               </div>
               <div class="track-step-rich ${s >= 3 ? (s === 3 ? 'active' : 'done') : ''}">
-                <div class="track-step-circle">${s > 3 ? '✓' : '3'}</div>
+                <div class="track-step-circle">${s > 3 ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : '3'}</div>
                 <div class="track-step-title">3. Sexda Kesish</div>
                 <div class="track-step-desc">Kromka & Raskroy</div>
               </div>
               <div class="track-step-rich ${s >= 4 ? (s === 4 ? 'active' : 'done') : ''}">
-                <div class="track-step-circle">${s > 4 ? '✓' : '4'}</div>
+                <div class="track-step-circle">${s > 4 ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : '4'}</div>
                 <div class="track-step-title">4. Sifat Nazorati</div>
                 <div class="track-step-desc">Yig'ish & QC</div>
               </div>

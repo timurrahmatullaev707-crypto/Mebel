@@ -465,7 +465,7 @@
 
       expCtx.fillStyle = '#f59e0b';
       expCtx.font = 'bold 16px Inter, sans-serif';
-      expCtx.fillText('★ 3-IN-1 PROFESSIONAL MEBEL PLATFORMASI', 370, 56);
+      expCtx.fillText('3-IN-1 PROFESSIONAL MEBEL PLATFORMASI', 370, 56);
 
       const d = this.currentData || { type: 'shkaf', width: 200, height: 240, depth: 60 };
       const typeNames = {

@@ -77,11 +77,13 @@ export function showToast(message, type = 'success', duration = 3000) {
   toast.className = `toast toast-${type}`;
   toast.setAttribute('role', 'status');
 
-  const icon = type === 'success' 
-    ? '✓' 
-    : type === 'error' ? '✕' : 'ℹ';
+  const iconSvg = type === 'success' 
+    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>'
+    : type === 'error' 
+      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+      : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
 
-  toast.innerHTML = `<span style="font-weight:900;">${icon}</span> <span>${message}</span>`;
+  toast.innerHTML = `<span style="display:inline-flex; align-items:center;">${iconSvg}</span> <span>${message}</span>`;
   toastContainer.appendChild(toast);
 
   // Animatsiyali paydo bo'lish

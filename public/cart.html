@@ -12,6 +12,16 @@
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/site.css">
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme') || localStorage.getItem('mebelpro_theme') || localStorage.getItem('mebel_theme') || 'light';
+        var p = localStorage.getItem('mebelpro_palette') || localStorage.getItem('palette') || 'mocha';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.setAttribute('data-palette', p);
+      } catch (e) {}
+    })();
+  </script>
   <style>
     .cart-layout {
       display: grid;
@@ -439,7 +449,13 @@
         status: 'Qabul qilindi'
       };
 
-      // Admin CRM'ga qo'shish
+      // Server API va Admin CRM'ga qo'shish
+      fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newOrder)
+      }).catch(e => console.warn('Serverga yuborishda xatolik:', e));
+
       const existingOrders = JSON.parse(localStorage.getItem('mebelpro_orders') || '[]');
       existingOrders.unshift(newOrder);
       localStorage.setItem('mebelpro_orders', JSON.stringify(existingOrders));
@@ -450,6 +466,41 @@
       // Natija
       alert(`Tabriklaymiz! Buyurtmangiz qabul qilindi!\n\nBuyurtma raqami: #${orderId}\nJami summa: ${total.toLocaleString('uz-UZ')} so'm\nTo'lov: ${payMethod}\n\nOperatorimiz tez orada siz bilan bog'lanadi.`);
       window.location.href = 'index.html#buyurtma-holati';
+    });
+
+    // Mavzu (Dark/Light)
+    const sunIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+    const moonIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+    function applyCartTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      localStorage.setItem('mebelpro_theme', theme);
+      localStorage.setItem('mebel_theme', theme);
+
+      document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+        btn.innerHTML = theme === 'dark' ? sunIconSvg : moonIconSvg;
+        btn.setAttribute('aria-label', theme === 'dark' ? "Yorug' mavzuga o'tish" : "Qorong'i mavzuga o'tish");
+        btn.setAttribute('title', theme === 'dark' ? "Yorug' mavzuga o'tish" : "Qorong'i mavzuga o'tish");
+      });
+    }
+
+    const currentCartTheme = localStorage.getItem('theme') || localStorage.getItem('mebelpro_theme') || localStorage.getItem('mebel_theme') || 'light';
+    applyCartTheme(currentCartTheme);
+
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = cur === 'dark' ? 'light' : 'dark';
+        applyCartTheme(next);
+      });
+    }
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'theme' || e.key === 'mebelpro_theme' || e.key === 'mebel_theme') {
+        if (e.newValue) applyCartTheme(e.newValue);
+      }
     });
 
     renderCart();

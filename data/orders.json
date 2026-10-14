@@ -1,0 +1,44 @@
+[
+  {
+    "id": "MP-1042",
+    "date": "11.10.2026",
+    "clientName": "Akmal Karimov",
+    "clientPhone": "+998 90 911 22 33",
+    "clientAddress": "Toshkent sh., Yunusobod 14-mavze, 21-uy",
+    "type": "Verona Shkaf-Kupe 3 Eshikli",
+    "dimensions": "220 × 240 × 60 sm",
+    "color": "Eman / Ko'zgu",
+    "totalPrice": 4650000,
+    "formattedPrice": "4 650 000 so'm",
+    "payMethod": "Naqd pul",
+    "status": "Ishlab chiqarilmoqda"
+  },
+  {
+    "id": "MP-1041",
+    "date": "10.10.2026",
+    "clientName": "Nodira Salimova",
+    "clientPhone": "+998 97 733 44 55",
+    "clientAddress": "Toshkent sh., Chilonzor 9-kvartal, 15-uy",
+    "type": "Milano High-Gloss Oshxona",
+    "dimensions": "280 × 230 × 60 sm",
+    "color": "Yaltiroq Oq",
+    "totalPrice": 5800000,
+    "formattedPrice": "5 800 000 so'm",
+    "payMethod": "Click / Payme",
+    "status": "O'lchov belgilandi"
+  },
+  {
+    "id": "MP-1040",
+    "date": "09.10.2026",
+    "clientName": "Jasur Beknazarov",
+    "clientPhone": "+998 93 500 60 70",
+    "clientAddress": "Toshkent sh., Mirzo Ulug'bek tumani, 4-mavze",
+    "type": "Loft Minimalist Ish Stoli",
+    "dimensions": "140 × 75 × 70 sm",
+    "color": "Tabiiy eman",
+    "totalPrice": 890000,
+    "formattedPrice": "890 000 so'm",
+    "payMethod": "Naqd pul",
+    "status": "O'rnatildi"
+  }
+]

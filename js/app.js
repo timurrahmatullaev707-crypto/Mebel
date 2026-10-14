@@ -874,16 +874,41 @@
       }
     };
 
+    // 1.1. MAVZU (DARK/LIGHT) VA QUYOSH/OY IKONKASI
+    const sunIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+    const moonIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+    function applyAppTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      localStorage.setItem('mebelpro_theme', theme);
+      localStorage.setItem('mebel_theme', theme);
+
+      document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+        btn.innerHTML = theme === 'dark' ? sunIconSvg : moonIconSvg;
+        btn.setAttribute('aria-label', theme === 'dark' ? "Yorug' mavzuga o'tish" : "Qorong'i mavzuga o'tish");
+        btn.setAttribute('title', theme === 'dark' ? "Yorug' mavzuga o'tish" : "Qorong'i mavzuga o'tish");
+      });
+    }
+
+    const currentSavedTheme = localStorage.getItem('theme') || localStorage.getItem('mebelpro_theme') || localStorage.getItem('mebel_theme') || 'light';
+    applyAppTheme(currentSavedTheme);
+
     const themeBtn = document.getElementById('theme-toggle-btn');
     if (themeBtn) {
       themeBtn.addEventListener('click', () => {
-        const cur = document.documentElement.getAttribute('data-theme');
+        const cur = document.documentElement.getAttribute('data-theme') || 'light';
         const next = cur === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('mebelpro_theme', next);
-        showToast(`Mavzu: ${next === 'dark' ? 'Qorong\'i' : 'Yorug\''} rejim yoqildi`, 'info');
+        applyAppTheme(next);
+        showToast(`Mavzu: ${next === 'dark' ? "Qorong'i" : "Yorug'"} rejim yoqildi`, 'info');
       });
     }
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'theme' || e.key === 'mebelpro_theme' || e.key === 'mebel_theme') {
+        if (e.newValue) applyAppTheme(e.newValue);
+      }
+    });
 
     // 2. Mobil burger menyu
     const burgerBtn = document.getElementById('burger-btn');

@@ -1,0 +1,37 @@
+# Netlify Konfiguratsiya Fayli
+[build]
+  publish = "."
+
+# Chiroyli URL yo'naltirishlari
+[[redirects]]
+  from = "/admin"
+  to = "/admin.html"
+  status = 200
+
+[[redirects]]
+  from = "/catalog"
+  to = "/catalog.html"
+  status = 200
+
+[[redirects]]
+  from = "/cart"
+  to = "/cart.html"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio"
+  to = "/portfolio.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+# Agar backend server (Node.js) alohida xizmatda (Render, Railway, VPS) joylashtirilsa,
+# quyidagi yo'naltirish orqali barcha /api/* so'rovlarini to'g'ridan-to'g'ri backendga yo'naltirish mumkin:
+# [[redirects]]
+#   from = "/api/*"
+#   to = "https://your-backend-server.com/api/:splat"
+#   status = 200
+#   force = true

@@ -2708,4 +2708,33 @@
   line-height: 1.2;
 }
 
+/* ==========================================================================
+   HAQIQIY MEBEL RASMLARI VA KARTALARI (UNIVERSAL)
+   ========================================================================== */
+.product-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg), 0 16px 36px rgba(0, 0, 0, 0.12);
+  border-color: #f59e0b;
+}
+.product-img-box {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-surface-muted);
+}
+.product-real-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.product-card:hover .product-real-image {
+  transform: scale(1.06);
+}
+
+
 

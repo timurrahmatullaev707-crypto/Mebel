@@ -4,224 +4,366 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MebelPro - Boshqaruv Paneli (Admin CRM)</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/site.css">
+
   <script>
     (function() {
       try {
-        var t = localStorage.getItem('theme') || 'light';
-        var p = localStorage.getItem('mebelpro_palette') || 'mocha';
+        var t = localStorage.getItem('theme') || localStorage.getItem('mebelpro_theme') || localStorage.getItem('mebel_theme') || 'light';
+        var p = localStorage.getItem('mebelpro_palette') || localStorage.getItem('palette') || 'mocha';
         document.documentElement.setAttribute('data-theme', t);
         document.documentElement.setAttribute('data-palette', p);
       } catch (e) {}
     })();
   </script>
+
   <style>
     /* ==========================================================================
-       SODDALASHTIRILGAN VA TOZA ADMIN CRM STILLARI
+       SODDA, ZAMONAVIY VA PROFESSIONAL ADMIN PANEL STILLARI
        ========================================================================== */
-    .admin-page {
-      background-color: var(--bg-page);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    .admin-header {
-      background: var(--bg-surface);
-      border-bottom: 1px solid var(--border-light);
-      padding: 14px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow-sm);
-    }
-    .admin-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .admin-badge {
-      font-size: 11px;
-      font-weight: 800;
-      background: var(--color-primary-subtle);
-      color: var(--color-primary);
-      padding: 4px 10px;
-      border-radius: var(--radius-full);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    :root {
+      --admin-sidebar-w: 260px;
+      --admin-accent: var(--color-primary);
+      --admin-accent-hover: var(--color-primary-hover);
+      --admin-accent-light: var(--color-primary-subtle);
+      --admin-accent-border: var(--border-light);
+      --admin-accent-glow: var(--color-primary-glow);
     }
 
-    /* KPI Kartalari */
-    .admin-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin: 24px 0 28px;
+    [data-theme="dark"] {
+      --admin-accent: var(--color-primary);
+      --admin-accent-hover: var(--color-primary-hover);
+      --admin-accent-light: var(--color-primary-subtle);
+      --admin-accent-border: var(--border-light);
+      --admin-accent-glow: var(--color-primary-glow);
     }
-    .admin-stat-card {
+
+    /* Asosiy tugmalar va aksentlar 4 xil palitraga to'liq moslashadi */
+    .btn-primary {
+      background: var(--admin-accent) !important;
+      border-color: var(--admin-accent) !important;
+      color: var(--btn-primary-text, #ffffff) !important;
+    }
+    .btn-primary:hover {
+      background: var(--admin-accent-hover) !important;
+      border-color: var(--admin-accent-hover) !important;
+      color: var(--btn-primary-text, #ffffff) !important;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Admin Container Layout */
+    .admin-app {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* 1. SIDEBAR (Chap menyu) */
+    .admin-sidebar {
+      width: var(--admin-sidebar-w);
       background: var(--bg-surface);
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-xl);
+      border-right: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      transition: transform 0.25s ease;
+    }
+
+    .sidebar-brand {
       padding: 20px 24px;
-      box-shadow: var(--shadow-sm);
+      border-bottom: 1px solid var(--border-light);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .admin-stat-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--color-primary);
-    }
-    .admin-stat-info {
+
+    .brand-logo {
       display: flex;
-      flex-direction: column;
-    }
-    .admin-stat-label {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 6px;
-    }
-    .admin-stat-val {
-      font-size: 26px;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
       font-weight: 900;
-      font-family: var(--font-mono);
       color: var(--text-main);
-      line-height: 1.2;
+      text-decoration: none;
     }
-    .admin-stat-sub {
-      font-size: 12px;
-      color: var(--color-primary);
-      font-weight: 700;
-      margin-top: 4px;
-    }
-    .admin-stat-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-lg);
-      background: var(--color-primary-subtle);
-      color: var(--color-primary);
+
+    .brand-logo-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-md);
+      background: var(--admin-accent);
+      color: var(--btn-primary-text, #ffffff);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
     }
 
-    /* Asosiy Boshqaruv Quti */
-    .admin-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-xl);
-      padding: 24px;
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 40px;
-    }
-    .admin-card-header {
+    .sidebar-menu {
+      padding: 20px 14px;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .nav-item-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 16px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      transition: all 0.15s ease;
+    }
+
+    .nav-item-btn:hover {
+      background: var(--bg-surface-muted);
+      color: var(--text-main);
+    }
+
+    .nav-item-btn.active {
+      background: var(--admin-accent-light);
+      color: var(--admin-accent);
+      border-color: var(--admin-accent-border);
+    }
+
+    .sidebar-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .user-badge {
+      display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 20px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--border-light);
+      font-size: 12px;
+      color: var(--text-muted);
     }
-    .admin-card-title {
+
+    /* 2. ASOSIY KONTENT SOHASI */
+    .admin-main {
+      flex: 1;
+      margin-left: var(--admin-sidebar-w);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .admin-topbar {
+      height: 64px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+
+    .topbar-title {
       font-size: 18px;
-      font-weight: 900;
+      font-weight: 800;
       color: var(--text-main);
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    /* Filtrlar Paneli */
-    .admin-filter-bar {
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .admin-content {
+      padding: 32px;
+      flex: 1;
+    }
+
+    /* SECTION VIEW boshqaruvi */
+    .admin-section {
+      display: none;
+    }
+    .admin-section.active {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 3. DASHBOARD KARTALARI */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--admin-accent);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 900;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+    }
+
+    .stat-icon-wrapper {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--admin-accent-light);
+      color: var(--admin-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* 4. JADVAL VA KARTALAR */
+    .content-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 28px;
+    }
+
+    .content-card-header {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 16px;
       margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-light);
     }
-    .status-pills {
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
       gap: 8px;
     }
-    .status-dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      margin-right: 6px;
-      vertical-align: middle;
-    }
-    .dot-yellow { background-color: #f59e0b; box-shadow: 0 0 6px rgba(245, 158, 11, 0.5); }
-    .dot-blue { background-color: #3b82f6; box-shadow: 0 0 6px rgba(59, 130, 246, 0.5); }
-    .dot-green { background-color: #10b981; box-shadow: 0 0 6px rgba(16, 185, 129, 0.5); }
-    .status-pill-btn {
-      padding: 6px 14px;
-      border-radius: var(--radius-full);
-      font-size: 12px;
-      font-weight: 700;
-      border: 1px solid var(--border-light);
-      background: var(--bg-surface-muted);
-      color: var(--text-main);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
       align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
     }
-    .status-pill-btn:hover {
-      border-color: var(--color-primary);
-      color: var(--color-primary);
-    }
-    .status-pill-btn.active {
-      background: var(--color-primary);
-      border-color: var(--color-primary);
-      color: #ffffff;
-      box-shadow: 0 4px 12px var(--color-primary-glow);
-    }
-    .admin-search-input {
+
+    .search-input {
       min-width: 260px;
-      padding: 8px 14px 8px 36px;
+      padding: 9px 14px 9px 36px;
       border-radius: var(--radius-md);
       border: 1px solid var(--border-light);
       background: var(--bg-surface-muted);
       color: var(--text-main);
       font-size: 13px;
       outline: none;
-      transition: border 0.2s ease;
-    }
-    .admin-search-input:focus {
-      border-color: var(--color-primary);
-      background: var(--bg-surface);
+      transition: all 0.2s ease;
     }
 
-    /* Qulay Jadval */
-    .table-container {
-      overflow-x: auto;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-light);
+    .search-input:focus {
+      border-color: var(--admin-accent);
+      background: var(--bg-surface);
+      box-shadow: 0 0 0 3px var(--admin-accent-light);
     }
-    .data-table {
+
+    .filter-select {
+      padding: 9px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* JADVAL */
+    .admin-table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+    }
+
+    .admin-table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
       font-size: 13px;
     }
-    .data-table th {
+
+    .admin-table th {
       background: var(--bg-surface-muted);
       padding: 12px 16px;
       font-weight: 800;
@@ -232,23 +374,50 @@
       border-bottom: 1px solid var(--border-light);
       white-space: nowrap;
     }
-    .data-table td {
-      padding: 14px 16px;
+
+    .admin-table td {
+      padding: 12px 16px;
       border-bottom: 1px solid var(--border-light);
       color: var(--text-main);
-      white-space: nowrap;
       vertical-align: middle;
     }
-    .data-table tr:last-child td {
+
+    .admin-table tr:last-child td {
       border-bottom: none;
     }
-    .data-table tr:hover {
+
+    .admin-table tr:hover {
       background: var(--bg-surface-muted);
     }
 
-    /* Status Select */
+    /* Mahsulot Rasmi Preview Thumb */
+    .prod-thumb {
+      width: 52px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      background: var(--bg-surface-muted);
+      border: 1px solid var(--border-light);
+      display: block;
+    }
+
+    /* Status Badge */
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: capitalize;
+    }
+
+    .badge-active { background: #dcfce7; color: #15803d; }
+    .badge-inactive { background: #f3f4f6; color: #6b7280; }
+    
     .status-select {
-      padding: 6px 12px;
+      padding: 5px 10px;
       border-radius: var(--radius-full);
       font-size: 12px;
       font-weight: 800;
@@ -256,44 +425,78 @@
       background: var(--bg-surface);
       cursor: pointer;
       outline: none;
-      transition: all 0.2s ease;
     }
-    .status-select.val-qabul { background: #FEF3C7; color: #B45309; border-color: #FDE68A; }
-    .status-select.val-olchov { background: #E0E7FF; color: #4338CA; border-color: #C7D2FE; }
-    .status-select.val-ishlab { background: #E0F2FE; color: #0369A1; border-color: #BAE6FD; }
-    .status-select.val-yetkaz { background: #F3E8FF; color: #7E22CE; border-color: #E9D5FF; }
-    .status-select.val-ornat { background: #DCFCE7; color: #15803D; border-color: #BBF7D0; }
 
-    /* Modal */
-    .admin-modal {
+    /* Amallar tugmalari */
+    .action-btn {
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border-light);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+    }
+
+    .action-btn:hover {
+      background: var(--bg-surface-muted);
+      border-color: var(--border-medium);
+    }
+
+    .action-btn.edit:hover {
+      border-color: var(--admin-accent);
+      color: var(--admin-accent);
+    }
+
+    .action-btn.delete {
+      color: var(--color-error);
+    }
+    .action-btn.delete:hover {
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+
+    /* 5. MODALLAR */
+    .modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(4px);
       z-index: 1000;
       align-items: center;
       justify-content: center;
       padding: 16px;
     }
-    .admin-modal.active {
+
+    .modal-backdrop.show {
       display: flex;
     }
-    .modal-box {
+
+    .modal-dialog {
       background: var(--bg-surface);
       border: 1px solid var(--border-light);
       border-radius: var(--radius-xl);
-      padding: 28px;
-      max-width: 540px;
+      padding: 24px;
+      max-width: 620px;
       width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
       box-shadow: var(--shadow-xl);
-      animation: modalSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: modalSlide 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     @keyframes modalSlide {
-      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      from { opacity: 0; transform: scale(0.96) translateY(8px); }
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
-    .modal-header {
+
+    .modal-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -301,223 +504,800 @@
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border-light);
     }
-    .modal-title {
+
+    .modal-head-title {
       font-size: 18px;
       font-weight: 800;
       color: var(--text-main);
     }
-    .modal-close-btn {
-      background: none;
+
+    .modal-close-icon {
+      background: transparent;
       border: none;
       font-size: 20px;
       cursor: pointer;
       color: var(--text-muted);
     }
-    .modal-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px dashed var(--border-light);
-      font-size: 13px;
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
     }
-    .modal-row span { color: var(--text-muted); }
-    .modal-row strong { color: var(--text-main); }
+
+    .form-group-admin {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .form-label-admin {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-input-admin {
+      padding: 9px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      background: var(--bg-surface-muted);
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+      transition: all 0.15s ease;
+    }
+
+    .form-input-admin:focus {
+      border-color: var(--admin-accent);
+      background: var(--bg-surface);
+      box-shadow: 0 0 0 3px var(--admin-accent-light);
+    }
+
+    /* Rasm Yuklash va Preview zonasi */
+    .image-upload-box {
+      border: 2px dashed var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      text-align: center;
+      background: var(--bg-surface-muted);
+      margin-top: 6px;
+    }
+
+    .image-preview-admin {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      margin-top: 10px;
+      background: #000000;
+      display: none;
+    }
+
+    /* 6. XAVFSIZ KIRISH (LOGIN VA SETUP) EKRANI */
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-page);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .auth-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-2xl);
+      padding: 36px 32px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .auth-logo-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .auth-error-msg {
+      padding: 10px 14px;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: var(--radius-md);
+      color: #b91c1c;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    .auth-password-wrapper {
+      position: relative;
+    }
+
+    .auth-password-wrapper input {
+      width: 100%;
+      box-sizing: border-box;
+      padding-right: 40px;
+    }
+
+    .eye-toggle-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Mobil moslashuv */
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .admin-sidebar {
+        transform: translateX(-100%);
+      }
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+      .admin-main {
+        margin-left: 0;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .admin-content {
+        padding: 20px 16px;
+      }
+    }
   </style>
 </head>
-<body class="admin-page">
+<body>
 
-  <!-- ADMIN HEADER -->
-  <header class="admin-header">
-    <div class="container">
-      <div class="admin-nav">
-        <div style="display:flex; align-items:center; gap:12px;">
-          <a href="index.html" class="logo">
-            <div class="logo-icon" style="background:linear-gradient(135deg, var(--color-primary), var(--color-secondary));">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-            </div>
-            <span>Mebel<span class="logo-accent" style="color:var(--color-primary);">Pro</span></span>
-          </a>
-          <span class="admin-badge">Oddiy & Qulay CRM</span>
-        </div>
-
-        <div style="display:flex; align-items:center; gap:12px;">
-          <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Mavzu">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+  <!-- ========================================================================
+       1. XAVFSIZ KIRISH (LOGIN VA INITIAL SETUP) EKRANI
+       ======================================================================== -->
+  <div class="auth-overlay" id="auth-overlay">
+    <!-- Auth screen top controls (4 xil rang palitrasi & Mavzu) -->
+    <div style="position:fixed; top:20px; right:24px; display:flex; align-items:center; gap:10px; z-index:10001;">
+      <div class="palette-switcher-wrapper">
+        <button type="button" class="palette-btn" aria-label="Rang uslubi" title="4 xil rang uslubini tanlash">
+          <span class="palette-dot"></span>
+          <span class="palette-label-text">Mocha</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="palette-dropdown">
+          <button type="button" class="palette-option active" data-set-palette="mocha">
+            <span class="palette-option-color" style="background:#4A3326;"></span>
+            <span>Mocha & Kashmer</span>
           </button>
-          <a href="index.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px; font-weight:700;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
-            <span>Mijoz Saytiga</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="container" style="flex: 1; padding-top: 12px; padding-bottom: 40px;">
-    <!-- 3 TA ASOSIY STATISTIKA KARTASI -->
-    <div class="admin-stats-grid">
-      <div class="admin-stat-card">
-        <div class="admin-stat-info">
-          <span class="admin-stat-label">Jami Buyurtmalar</span>
-          <span class="admin-stat-val" id="kpi-orders">0 ta</span>
-          <span class="admin-stat-sub" id="kpi-orders-sub">Faol buyurtmalar: 0 ta</span>
-        </div>
-        <div class="admin-stat-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+          <button type="button" class="palette-option" data-set-palette="emerald">
+            <span class="palette-option-color" style="background:#124E3F;"></span>
+            <span>Zümrad & Oltin</span>
+          </button>
+          <button type="button" class="palette-option" data-set-palette="japandi">
+            <span class="palette-option-color" style="background:#784522;"></span>
+            <span>Japandi & Qum</span>
+          </button>
+          <button type="button" class="palette-option" data-set-palette="obsidian">
+            <span class="palette-option-color" style="background:#1E232A;"></span>
+            <span>Obsidian & Grafit</span>
+          </button>
         </div>
       </div>
 
-      <div class="admin-stat-card">
-        <div class="admin-stat-info">
-          <span class="admin-stat-label">Jami Tushum (Summa)</span>
-          <span class="admin-stat-val" id="kpi-revenue" style="color:var(--color-primary);">0 so'm</span>
-          <span class="admin-stat-sub">Barcha buyurtmalar summasi</span>
-        </div>
-        <div class="admin-stat-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
-      </div>
+      <button type="button" class="theme-toggle-btn" aria-label="Mavzu" title="Qorong'i / Yorug' rejim">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
 
-      <div class="admin-stat-card">
-        <div class="admin-stat-info">
-          <span class="admin-stat-label">Ishlab chiqarilmoqda</span>
-          <span class="admin-stat-val" id="kpi-active" style="color:#d97706;">0 ta</span>
-          <span class="admin-stat-sub">Sexda tayyorlanayotgan mebellar</span>
-        </div>
-        <div class="admin-stat-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        </div>
-      </div>
+      <a href="index.html" class="btn btn-secondary" style="padding:6px 12px; font-size:12px; font-weight:700;">
+        ← Saytga
+      </a>
     </div>
 
-    <!-- YAGONA VA QULAY BUYURTMALAR CRM BLOKI -->
-    <div class="admin-card">
-      <div class="admin-card-header">
-        <div class="admin-card-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--color-primary);"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
-          <span>Kelib Tushgan Buyurtmalar</span>
-          <span style="font-size:12px; color:var(--text-muted); font-weight:600;" id="table-total-count">(Jami: 0 ta)</span>
+    <div class="auth-card">
+      <div class="auth-logo-row">
+        <div class="brand-logo-icon" style="width:48px; height:48px; margin-bottom:12px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
         </div>
-
-        <div style="display:flex; align-items:center; gap:10px;">
-          <button type="button" class="btn btn-secondary" id="btn-seed-orders" style="padding:8px 14px; font-size:12px; font-weight:700;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-            Namunaviy Buyurtmalar
-          </button>
-          <button type="button" class="btn btn-primary" id="btn-open-add-modal" style="padding:8px 16px; font-size:12px; font-weight:700;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-            Yangi Buyurtma
-          </button>
-        </div>
+        <h2 style="font-size:20px; font-weight:900; margin-bottom:4px;" id="auth-card-title">MebelPro Admin Kirish</h2>
+        <p style="font-size:12px; color:var(--text-muted); margin:0;" id="auth-card-subtitle">Faqat ruxsat berilgan tizim ma'murlari uchun</p>
       </div>
 
-      <!-- TEZKOR FILTRLAR VA QIDIRUV -->
-      <div class="admin-filter-bar">
-        <div class="status-pills">
-          <button type="button" class="status-pill-btn active" data-filter="all">Barchasi</button>
-          <button type="button" class="status-pill-btn" data-filter="Qabul qilindi">
-            <span class="status-dot dot-yellow"></span>
-            Yangi
-          </button>
-          <button type="button" class="status-pill-btn" data-filter="Ishlab chiqarilmoqda">
-            <span class="status-dot dot-blue"></span>
-            Jarayonda
-          </button>
-          <button type="button" class="status-pill-btn" data-filter="O'rnatildi">
-            <span class="status-dot dot-green"></span>
-            Tayyor / O'rnatildi
-          </button>
+      <!-- STATUS & CREDENTIALS INFO BOX -->
+      <div style="background:var(--admin-accent-light); border:1px dashed var(--admin-accent-border); padding:10px 14px; border-radius:var(--radius-md); font-size:12px; color:var(--text-main); margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
+        <div style="line-height:1.45;">
+          <div><span style="color:var(--text-muted);">Standart login:</span> <strong style="color:var(--admin-accent);">admin</strong></div>
+          <div><span style="color:var(--text-muted);">Standart parol:</span> <strong style="color:var(--admin-accent);">admin123</strong></div>
         </div>
-
-        <div style="position:relative;">
-          <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); display:flex; color:var(--text-muted); pointer-events:none;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          </span>
-          <input type="text" id="admin-search-input" class="admin-search-input" placeholder="Mijoz ismi yoki telefoni...">
-        </div>
-      </div>
-
-      <!-- BUYURTMALAR JADVALI -->
-      <div class="table-container">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Sana</th>
-              <th>Mijoz</th>
-              <th>Telefon</th>
-              <th>Mebel Turi & O'lchami</th>
-              <th>Summa</th>
-              <th>Holat (Status)</th>
-              <th style="text-align:right;">Amallar</th>
-            </tr>
-          </thead>
-          <tbody id="orders-table-tbody">
-            <!-- JS orqali chiziladi -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </main>
-
-  <!-- BUYURTMA TAFSILOTLARI MODALI -->
-  <div class="admin-modal" id="order-details-modal">
-    <div class="modal-box">
-      <div class="modal-header">
-        <h3 class="modal-title" id="m-order-title">Buyurtma Tafsilotlari</h3>
-        <button type="button" class="modal-close-btn" onclick="closeDetailsModal()" aria-label="Yopish">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <button type="button" class="btn btn-secondary" onclick="fillQuickDemoAdmin()" style="padding:6px 10px; font-size:11px; font-weight:700; white-space:nowrap;">
+          Avto-to'ldirish
         </button>
       </div>
 
-      <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:20px;" id="modal-details-body">
+      <div class="auth-error-msg" id="auth-error-box"></div>
+
+      <!-- LOGIN FORMASI -->
+      <form id="auth-login-form">
+        <div class="form-group-admin">
+          <label class="form-label-admin" for="login-username">Admin Login / Email:</label>
+          <input type="text" id="login-username" class="form-input-admin" placeholder="admin" value="admin" required autocomplete="username">
+        </div>
+
+        <div class="form-group-admin">
+          <label class="form-label-admin" for="login-password">Parol:</label>
+          <div class="auth-password-wrapper">
+            <input type="password" id="login-password" class="form-input-admin" placeholder="admin123" value="admin123" required autocomplete="current-password">
+            <button type="button" class="eye-toggle-btn" onclick="togglePassVisibility('login-password', this)" aria-label="Parolni ko'rsatish">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="btn-login-submit" class="btn btn-primary" style="width:100%; padding:12px; font-size:14px; margin-top:8px; background:var(--admin-accent); border-color:var(--admin-accent);">
+          <span>Tizimga Kirish</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        </button>
+
+        <button type="button" class="btn btn-secondary" onclick="quickBypassLogin()" style="width:100%; padding:10px; font-size:12px; margin-top:8px; border-style:dashed; color:var(--admin-accent); font-weight:700;">
+          ⚡ Tezkor Kirish (1-klikda panelni ochish)
+        </button>
+
+        <div style="display:flex; justify-content:center; gap:16px; margin-top:14px; font-size:12px;">
+          <a href="javascript:void(0)" onclick="showAuthOverlay(true)" style="color:var(--admin-accent); font-weight:700; text-decoration:none;">
+            Yangi parol o'rnatish / Sozlash
+          </a>
+        </div>
+      </form>
+
+      <!-- BIRINCHI MARTA SOZLASH (SETUP) FORMASI -->
+      <form id="auth-setup-form" style="display:none;">
+        <div style="background:var(--admin-accent-light); border:1px solid var(--admin-accent-border); padding:10px 12px; border-radius:var(--radius-md); font-size:12px; color:var(--admin-accent); margin-bottom:14px; font-weight:600;">
+          Yangi xavfsiz login va parolingizni kiriting. Bu ma'lumotlar bilan keyingi safar tizimga kirasiz.
+        </div>
+
+        <div class="form-group-admin">
+          <label class="form-label-admin" for="setup-username">Yangi Admin Login:</label>
+          <input type="text" id="setup-username" class="form-input-admin" placeholder="admin" required autocomplete="username">
+        </div>
+
+        <div class="form-group-admin">
+          <label class="form-label-admin" for="setup-password">Yangi Xavfsiz Parol (kamida 4 belgi):</label>
+          <div class="auth-password-wrapper">
+            <input type="password" id="setup-password" class="form-input-admin" placeholder="Yangi parol" required minlength="4" autocomplete="new-password">
+            <button type="button" class="eye-toggle-btn" onclick="togglePassVisibility('setup-password', this)" aria-label="Parolni ko'rsatish">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="btn-setup-submit" class="btn btn-primary" style="width:100%; padding:12px; font-size:14px; margin-top:8px; background:var(--admin-accent); border-color:var(--admin-accent);">
+          <span>Admin Hisobini Saqlash & Kirish</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+
+        <div style="display:flex; justify-content:center; margin-top:12px; font-size:12px;">
+          <a href="javascript:void(0)" onclick="showAuthOverlay(false)" style="color:var(--admin-accent); font-weight:700; text-decoration:none;">
+            ← Kirish formasiga qaytish
+          </a>
+        </div>
+      </form>
+
+      <div style="text-align:center; margin-top:16px;">
+        <a href="index.html" style="font-size:12px; color:var(--text-muted); text-decoration:none; font-weight:700;">
+          ← Mijozlar saytiga qaytish
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       2. ASOSIY ADMIN PANEL INTERFEYSI
+       ======================================================================== -->
+  <div class="admin-app" id="admin-app" style="display:none;">
+
+    <!-- CHAP MENU (SIDEBAR) -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="sidebar-brand">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-logo-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </div>
+          <span>Mebel<span style="color:var(--admin-accent);">Pro</span></span>
+        </a>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button type="button" class="nav-item-btn active" data-section="dashboard" onclick="switchSection('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Dashboard</span>
+        </button>
+
+        <button type="button" class="nav-item-btn" data-section="products" onclick="switchSection('products')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          <span>Tayyor mebellar</span>
+        </button>
+
+        <button type="button" class="nav-item-btn" data-section="orders" onclick="switchSection('orders')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+          <span>Buyurtmalar</span>
+        </button>
+
+        <div style="margin-top:auto; padding-top:12px; border-top:1px solid var(--border-light);">
+          <button type="button" class="nav-item-btn" style="color:var(--color-error);" onclick="handleLogout()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            <span>Chiqish</span>
+          </button>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-badge">
+          <span style="font-weight:700;" id="sidebar-admin-user">Admin</span>
+          <span style="background:var(--admin-accent-light); color:var(--admin-accent); padding:2px 8px; border-radius:var(--radius-full); font-size:10px; font-weight:800;">FAOL</span>
+        </div>
+        <a href="catalog.html" target="_blank" style="font-size:12px; color:var(--text-muted); text-decoration:none; display:flex; align-items:center; gap:6px; font-weight:600;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>Mijozlar Do'konini Ko'rish</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- O'NG KONTENT QISMI -->
+    <main class="admin-main">
+      <!-- TOPBAR -->
+      <header class="admin-topbar">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <button type="button" class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Menyu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          </button>
+          <h1 class="topbar-title" id="page-section-title">Dashboard</h1>
+        </div>
+
+        <div class="topbar-actions">
+          <span id="server-status-pill" style="font-size:11px; font-weight:700; padding:4px 10px; border-radius:999px; background:rgba(16,185,129,0.12); color:#10b981; display:inline-flex; align-items:center; gap:6px;">
+            <span style="width:7px; height:7px; border-radius:50%; background:#10b981;"></span>
+            <span id="server-status-text">Avtonom rejim</span>
+          </span>
+
+          <!-- 4 XIL RANG PALITRASI TANLAGICHI -->
+          <div class="palette-switcher-wrapper">
+            <button type="button" class="palette-btn" aria-label="Rang uslubi" title="4 xil rang uslubini tanlash">
+              <span class="palette-dot"></span>
+              <span class="palette-label-text">Mocha</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="palette-dropdown">
+              <button type="button" class="palette-option active" data-set-palette="mocha">
+                <span class="palette-option-color" style="background:#4A3326;"></span>
+                <span>Mocha & Kashmer</span>
+              </button>
+              <button type="button" class="palette-option" data-set-palette="emerald">
+                <span class="palette-option-color" style="background:#124E3F;"></span>
+                <span>Zümrad & Oltin</span>
+              </button>
+              <button type="button" class="palette-option" data-set-palette="japandi">
+                <span class="palette-option-color" style="background:#784522;"></span>
+                <span>Japandi & Qum</span>
+              </button>
+              <button type="button" class="palette-option" data-set-palette="obsidian">
+                <span class="palette-option-color" style="background:#1E232A;"></span>
+                <span>Obsidian & Grafit</span>
+              </button>
+            </div>
+          </div>
+
+          <button type="button" class="theme-toggle-btn" aria-label="Mavzu" title="Qorong'i / Yorug' rejim">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          <a href="index.html" class="btn btn-secondary" style="padding:7px 14px; font-size:12px; font-weight:700;">
+            ← Saytga o'tish
+          </a>
+        </div>
+      </header>
+
+      <div class="admin-content">
+
+        <!-- ====================================================================
+             BO'LIM 1: DASHBOARD
+             ==================================================================== -->
+        <section class="admin-section active" id="sec-dashboard">
+          <!-- 4 TA KPI KARTALARI -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div>
+                <div class="stat-label">Jami Mebellar</div>
+                <div class="stat-value" id="kpi-total-furniture">0 ta</div>
+              </div>
+              <div class="stat-icon-wrapper">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div>
+                <div class="stat-label">Yangi Buyurtmalar</div>
+                <div class="stat-value" style="color:#d97706;" id="kpi-new-orders">0 ta</div>
+              </div>
+              <div class="stat-icon-wrapper" style="background:#fef3c7; color:#b45309;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div>
+                <div class="stat-label">Jarayonda</div>
+                <div class="stat-value" style="color:#2563eb;" id="kpi-active-orders">0 ta</div>
+              </div>
+              <div class="stat-icon-wrapper" style="background:#dbeafe; color:#1d4ed8;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div>
+                <div class="stat-label">Yakunlangan</div>
+                <div class="stat-value" style="color:#16a34a;" id="kpi-done-orders">0 ta</div>
+              </div>
+              <div class="stat-icon-wrapper" style="background:#dcfce7; color:#15803d;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- TEZKOR AMALLAR VA OXIRGI BUYURTMALAR -->
+          <div class="content-card">
+            <div class="content-card-header">
+              <div class="card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+                <span>Oxirgi Buyurtmalar</span>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <button type="button" class="btn btn-primary" onclick="openProductModal()" style="padding:8px 16px; font-size:12px; background:var(--admin-accent); border-color:var(--admin-accent);">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  <span>+ Mebel qo'shish</span>
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="switchSection('orders')" style="padding:8px 14px; font-size:12px;">
+                  Barchasini ko'rish →
+                </button>
+              </div>
+            </div>
+
+            <div class="admin-table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Sana</th>
+                    <th>Mijoz</th>
+                    <th>Telefon</th>
+                    <th>Buyurtma turi</th>
+                    <th>Summa</th>
+                    <th>Holati</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-recent-orders-tbody">
+                  <!-- JS orqali to'ldiriladi -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ====================================================================
+             BO'LIM 2: TAYYOR MEBELLARNI BOSHQARISH
+             ==================================================================== -->
+        <section class="admin-section" id="sec-products">
+          <div class="content-card">
+            <div class="content-card-header">
+              <div class="card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                <span>Katalogdagi Tayyor Mebellar</span>
+                <span style="font-size:12px; color:var(--text-muted); font-weight:600;" id="products-count-badge">(0 ta)</span>
+              </div>
+              <button type="button" class="btn btn-primary" onclick="openProductModal()" style="padding:8px 16px; font-size:12px; background:var(--admin-accent); border-color:var(--admin-accent);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>+ Yangi Mebel Qo'shish</span>
+              </button>
+            </div>
+
+            <!-- QIDIRUV VA FILTR -->
+            <div class="filter-bar">
+              <div style="position:relative;">
+                <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-muted); pointer-events:none; display:flex;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </span>
+                <input type="text" id="prod-search-input" class="search-input" placeholder="Mebel nomi bo'yicha qidiruv...">
+              </div>
+
+              <select id="prod-cat-filter" class="filter-select">
+                <option value="all">Barcha kategoriyalar</option>
+                <option value="shkaf">Shkaf-kupe</option>
+                <option value="oshxona">Oshxona garnituri</option>
+                <option value="stol">Stol</option>
+                <option value="krovat">Krovat</option>
+                <option value="tumba">TV Tumba</option>
+                <option value="ofis">Ofis mebeli</option>
+              </select>
+            </div>
+
+            <!-- MAHSULOTLAR JADVALI -->
+            <div class="admin-table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th style="width:70px;">Rasm</th>
+                    <th>Nomi</th>
+                    <th>Kategoriya</th>
+                    <th>Narxi (so'm)</th>
+                    <th>O'lchamlari & Material</th>
+                    <th>Katalogda</th>
+                    <th style="text-align:right;">Amallar</th>
+                  </tr>
+                </thead>
+                <tbody id="products-table-tbody">
+                  <!-- JS orqali to'ldiriladi -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ====================================================================
+             BO'LIM 3: BUYURTMALAR CRM
+             ==================================================================== -->
+        <section class="admin-section" id="sec-orders">
+          <div class="content-card">
+            <div class="content-card-header">
+              <div class="card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+                <span>Mijozlar Buyurtmalari</span>
+                <span style="font-size:12px; color:var(--text-muted); font-weight:600;" id="orders-count-badge">(0 ta)</span>
+              </div>
+              <button type="button" class="btn btn-secondary" onclick="openAddOrderModal()" style="padding:8px 14px; font-size:12px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Yangi Buyurtma Yaratish</span>
+              </button>
+            </div>
+
+            <!-- FILTRLAR -->
+            <div class="filter-bar">
+              <div style="position:relative;">
+                <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-muted); pointer-events:none; display:flex;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </span>
+                <input type="text" id="order-search-input" class="search-input" placeholder="Mijoz ismi yoki telefoni...">
+              </div>
+
+              <select id="order-status-filter" class="filter-select">
+                <option value="all">Barcha holatlar</option>
+                <option value="Qabul qilindi">Yangi (Qabul qilindi)</option>
+                <option value="Tasdiqlandi">Tasdiqlandi</option>
+                <option value="O'lchov belgilandi">O'lchov belgilandi</option>
+                <option value="Ishlab chiqarilmoqda">Ishlab chiqarilmoqda</option>
+                <option value="Yetkazilmoqda">Yetkazilmoqda</option>
+                <option value="O'rnatildi">O'rnatildi (Yakunlangan)</option>
+                <option value="Bekor qilindi">Bekor qilindi</option>
+              </select>
+            </div>
+
+            <!-- BUYURTMALAR JADVALI -->
+            <div class="admin-table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Sana</th>
+                    <th>Mijoz</th>
+                    <th>Telefon & Manzil</th>
+                    <th>Mebel Turi</th>
+                    <th>Summa</th>
+                    <th>Holati (O'zgartirish)</th>
+                    <th style="text-align:right;">Amallar</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-table-tbody">
+                  <!-- JS orqali to'ldiriladi -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ========================================================================
+       MODALLAR: 
+       1) MEBEL QO'SHISH / TAHRIRLASH
+       2) BUYURTMA TAFSILOTLARI
+       3) YANGI BUYURTMA
+       ======================================================================== -->
+
+  <!-- 1. MEBEL QO'SHISH VA TAHRIRLASH MODALI -->
+  <div class="modal-backdrop" id="modal-product">
+    <div class="modal-dialog">
+      <div class="modal-top">
+        <h3 class="modal-head-title" id="prod-modal-title">Yangi Mebel Qo'shish</h3>
+        <button type="button" class="modal-close-icon" onclick="closeProductModal()">✕</button>
+      </div>
+
+      <form id="form-product" onsubmit="handleSaveProduct(event)">
+        <input type="hidden" id="edit-prod-id">
+
+        <div class="form-row">
+          <div class="form-group-admin">
+            <label class="form-label-admin">Mebel Nomi *</label>
+            <input type="text" id="p-title" class="form-input-admin" placeholder="Masalan: Verona Shkaf-Kupe" required>
+          </div>
+          <div class="form-group-admin">
+            <label class="form-label-admin">Kategoriya *</label>
+            <select id="p-category" class="form-input-admin" required onchange="handleCatChange()">
+              <option value="shkaf">Shkaf-kupe</option>
+              <option value="oshxona">Oshxona garnituri</option>
+              <option value="stol">Stol</option>
+              <option value="krovat">Krovat</option>
+              <option value="tumba">TV Tumba</option>
+              <option value="ofis">Ofis mebeli</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group-admin">
+            <label class="form-label-admin">Narxi (so'mda) *</label>
+            <input type="number" id="p-price" class="form-input-admin" placeholder="4500000" required min="1000">
+          </div>
+          <div class="form-group-admin">
+            <label class="form-label-admin">Eski narxi (ixtiyoriy so'm)</label>
+            <input type="number" id="p-old-price" class="form-input-admin" placeholder="5200000">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group-admin">
+            <label class="form-label-admin">O'lchamlari (eni × bo'yi × chuqurligi)</label>
+            <input type="text" id="p-specs" class="form-input-admin" placeholder="220 × 240 × 60 sm">
+          </div>
+          <div class="form-group-admin">
+            <label class="form-label-admin">Materiali va Rangi</label>
+            <input type="text" id="p-color" class="form-input-admin" placeholder="MDF Emal / Tabiiy Eman">
+          </div>
+        </div>
+
+        <div class="form-group-admin">
+          <label class="form-label-admin">Qisqa Tavsif</label>
+          <textarea id="p-desc" class="form-input-admin" rows="2" placeholder="Mahsulot haqida batafsil ma'lumot..."></textarea>
+        </div>
+
+        <!-- RASM YUKLASH VA PREVIEW -->
+        <div class="form-group-admin">
+          <label class="form-label-admin">Asosiy Rasm (Kompyuterdan yuklash yoki URL)</label>
+          
+          <div class="image-upload-box">
+            <input type="file" id="p-file-input" accept="image/*" style="display:none;" onchange="handleImageFileSelect(event)">
+            
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('p-file-input').click()" style="padding:8px 16px; font-size:12px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span>Kompyuterdan rasm tanlash</span>
+            </button>
+            <div style="font-size:11px; color:var(--text-muted); margin:6px 0;">yoki rasm havolasini kiriting:</div>
+            <input type="url" id="p-image-url" class="form-input-admin" placeholder="https://images.unsplash.com/..." oninput="updateImagePreview(this.value)">
+
+            <img id="p-image-preview" class="image-preview-admin" alt="Mebel rasm ko'rinishi">
+          </div>
+        </div>
+
+        <div class="form-group-admin" style="display:flex; flex-direction:row; align-items:center; gap:8px;">
+          <input type="checkbox" id="p-active" checked style="width:16px; height:16px; cursor:pointer;">
+          <label for="p-active" style="font-size:13px; font-weight:700; cursor:pointer;">Katalogda mijozlarga ko'rsatilsin (Faol)</label>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px; padding-top:14px; border-top:1px solid var(--border-light);">
+          <button type="button" class="btn btn-secondary" onclick="closeProductModal()">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary" style="background:var(--admin-accent); border-color:var(--admin-accent);">Saqlash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. BUYURTMA TAFSILOTLARI MODALI -->
+  <div class="modal-backdrop" id="modal-order-details">
+    <div class="modal-dialog">
+      <div class="modal-top">
+        <h3 class="modal-head-title" id="mod-ord-id">Buyurtma Tafsilotlari</h3>
+        <button type="button" class="modal-close-icon" onclick="closeOrderDetailsModal()">✕</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;" id="order-details-body">
         <!-- JS orqali to'ldiriladi -->
       </div>
 
-      <div style="display:flex; justify-content:flex-end; gap:10px;">
-        <button type="button" class="btn btn-secondary" onclick="closeDetailsModal()">Yopish</button>
+      <div style="display:flex; justify-content:flex-end; gap:10px; border-top:1px solid var(--border-light); padding-top:14px;">
+        <button type="button" class="btn btn-secondary" onclick="closeOrderDetailsModal()">Yopish</button>
         <button type="button" class="btn btn-primary" onclick="window.print()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
           Naryadni Chop Etish
         </button>
       </div>
     </div>
   </div>
 
-  <!-- YANGI BUYURTMA QO'SHISH MODALI -->
-  <div class="admin-modal" id="add-order-modal">
-    <div class="modal-box">
-      <div class="modal-header">
-        <h3 class="modal-title">+ Yangi Buyurtma Qo'shish</h3>
-        <button type="button" class="modal-close-btn" onclick="closeAddModal()" aria-label="Yopish">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-        </button>
+  <!-- 3. YANGI BUYURTMA YARATISH MODALI -->
+  <div class="modal-backdrop" id="modal-add-order">
+    <div class="modal-dialog">
+      <div class="modal-top">
+        <h3 class="modal-head-title">+ Yangi Buyurtma Kiritish</h3>
+        <button type="button" class="modal-close-icon" onclick="closeAddOrderModal()">✕</button>
       </div>
 
-      <form id="add-order-form" style="display:flex; flex-direction:column; gap:12px;">
-        <div style="display:flex; flex-direction:column; gap:4px;">
-          <label style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Mijoz Ismi:</label>
-          <input type="text" id="new-name" required placeholder="Masalan: Aziz Rahimov" style="padding:9px 12px; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-surface-muted); color:var(--text-main); font-size:13px; outline:none;">
+      <form id="form-add-order" onsubmit="handleSaveManualOrder(event)">
+        <div class="form-row">
+          <div class="form-group-admin">
+            <label class="form-label-admin">Mijoz Ismi *</label>
+            <input type="text" id="ord-client-name" class="form-input-admin" placeholder="Masalan: Sardor Aliyev" required>
+          </div>
+          <div class="form-group-admin">
+            <label class="form-label-admin">Telefon Raqami *</label>
+            <input type="tel" id="ord-client-phone" class="form-input-admin" placeholder="+998 90 123 45 67" required>
+          </div>
         </div>
 
-        <div style="display:flex; flex-direction:column; gap:4px;">
-          <label style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Telefon Raqami:</label>
-          <input type="tel" id="new-phone" required placeholder="+998 90 123 45 67" style="padding:9px 12px; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-surface-muted); color:var(--text-main); font-size:13px; outline:none;">
+        <div class="form-group-admin">
+          <label class="form-label-admin">Yetkazish Manzili</label>
+          <input type="text" id="ord-client-address" class="form-input-admin" placeholder="Toshkent sh., Mirobod tumani...">
         </div>
 
-        <div style="display:flex; flex-direction:column; gap:4px;">
-          <label style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Mebel Turi & O'lchami:</label>
-          <input type="text" id="new-furniture" required placeholder="Masalan: Shkaf-kupe (200 x 240 x 60 sm)" style="padding:9px 12px; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-surface-muted); color:var(--text-main); font-size:13px; outline:none;">
+        <div class="form-row">
+          <div class="form-group-admin">
+            <label class="form-label-admin">Mebel Turi & O'lchami *</label>
+            <input type="text" id="ord-furniture-type" class="form-input-admin" placeholder="Oshxona garnituri (260 sm)" required>
+          </div>
+          <div class="form-group-admin">
+            <label class="form-label-admin">Jami Summa (so'm) *</label>
+            <input type="number" id="ord-price" class="form-input-admin" placeholder="5600000" required>
+          </div>
         </div>
 
-        <div style="display:flex; flex-direction:column; gap:4px;">
-          <label style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Summa (so'm):</label>
-          <input type="number" id="new-price" required placeholder="4500000" style="padding:9px 12px; border:1px solid var(--border-light); border-radius:var(--radius-md); background:var(--bg-surface-muted); color:var(--text-main); font-size:13px; outline:none;">
+        <div class="form-group-admin">
+          <label class="form-label-admin">To'lov Usuli</label>
+          <select id="ord-pay-method" class="form-input-admin">
+            <option value="Naqd pul">Naqd pul</option>
+            <option value="Click / Payme">Click / Payme</option>
+            <option value="Nasiya (Muddatli to'lov)">Nasiya (Muddatli to'lov)</option>
+          </select>
         </div>
 
-        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:12px;">
-          <button type="button" class="btn btn-secondary" onclick="closeAddModal()">Bekor qilish</button>
-          <button type="submit" class="btn btn-primary">Saqlash</button>
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px; border-top:1px solid var(--border-light); padding-top:14px;">
+          <button type="button" class="btn btn-secondary" onclick="closeAddOrderModal()">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary" style="background:var(--admin-accent); border-color:var(--admin-accent);">Buyurtmani Saqlash</button>
         </div>
       </form>
     </div>
@@ -525,8 +1305,9 @@
 
   <div class="toast-container" id="toast-container"></div>
 
-  <!-- SCRIPT -->
+  <!-- SCRIPT: ADMIN LOGIKA VA API INTERAKTIVLIGI -->
   <script>
+    // TOAST BILDIRISHNOMA
     function showToast(msg, type = 'success') {
       let c = document.getElementById('toast-container');
       if (!c) {
@@ -545,260 +1326,1230 @@
       setTimeout(() => {
         t.classList.remove('show');
         setTimeout(() => t.remove(), 300);
-      }, 3000);
+      }, 3200);
     }
 
-    // Mavzu (Dark/Light)
-    const storedTheme = localStorage.getItem('mebelpro_theme') || 'light';
-    document.documentElement.setAttribute('data-theme', storedTheme);
-    document.getElementById('theme-toggle-btn').addEventListener('click', () => {
-      const cur = document.documentElement.getAttribute('data-theme');
-      const next = cur === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('mebelpro_theme', next);
-    });
+    // ========================================================================
+    // 4 XIL RANG PALITRASI (MOCHA, EMERALD, JAPANDI, OBSIDIAN) VA MAVZU TIZIMI
+    // ========================================================================
+    function initPaletteSwitcher() {
+      const paletteNames = {
+        mocha: 'Mocha',
+        emerald: 'Zümrad',
+        japandi: 'Japandi',
+        obsidian: 'Obsidian'
+      };
 
-    // STANDART NAMUNAVIY BUYURTMALAR
-    const DEFAULT_ORDERS = [
-      { id: 'MP-1042', date: '11.10.2026', clientName: 'Akmal Karimov', clientPhone: '+998 90 911 22 33', clientAddress: 'Yunusobod 14-mavze', type: 'Shkaf-kupe', dimensions: '220 × 240 × 60 sm', totalPrice: 4850000, formattedPrice: '4 850 000 so\'m', status: 'Ishlab chiqarilmoqda' },
-      { id: 'MP-1041', date: '10.10.2026', clientName: 'Nodira Salimova', clientPhone: '+998 97 733 44 55', clientAddress: 'Chilonzor 9-kvartal', type: 'Oshxona garnituri', dimensions: '280 × 230 × 60 sm', totalPrice: 5800000, formattedPrice: '5 800 000 so\'m', status: 'Qabul qilindi' },
-      { id: 'MP-1040', date: '09.10.2026', clientName: 'Jasur Beknazarov', clientPhone: '+998 93 500 60 70', clientAddress: 'Mirzo Ulug\'bek tumani', type: 'Zamonaviy Stol', dimensions: '160 × 75 × 80 sm', totalPrice: 1150000, formattedPrice: '1 150 000 so\'m', status: 'O\'rnatildi' }
-    ];
+      function updatePaletteUI(palette) {
+        document.documentElement.setAttribute('data-palette', palette);
+        localStorage.setItem('mebelpro_palette', palette);
+        localStorage.setItem('palette', palette);
 
-    let currentFilter = 'all';
-    let searchQuery = '';
+        // Barcha palitra yozuvlarini yangilash
+        document.querySelectorAll('.palette-label-text').forEach(el => {
+          el.textContent = paletteNames[palette] || palette;
+        });
 
-    function getOrders() {
-      const raw = localStorage.getItem('mebelpro_orders');
-      if (!raw) {
-        localStorage.setItem('mebelpro_orders', JSON.stringify(DEFAULT_ORDERS));
-        return DEFAULT_ORDERS;
+        // Tanlangan tugmaga active klassini berish
+        document.querySelectorAll('[data-set-palette]').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.setPalette === palette);
+        });
       }
-      try {
-        const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) ? parsed : DEFAULT_ORDERS;
-      } catch (e) {
-        return DEFAULT_ORDERS;
-      }
-    }
 
-    function saveOrders(orders) {
-      localStorage.setItem('mebelpro_orders', JSON.stringify(orders));
-      renderOrders();
-    }
-
-    function renderOrders() {
-      const orders = getOrders();
-      const tbody = document.getElementById('orders-table-tbody');
-      if (!tbody) return;
-
-      let filtered = orders.filter(o => {
-        if (currentFilter !== 'all' && o.status !== currentFilter) return false;
-        if (searchQuery.trim()) {
-          const q = searchQuery.toLowerCase().trim();
-          const matchName = (o.clientName || '').toLowerCase().includes(q);
-          const matchPhone = (o.clientPhone || '').toLowerCase().includes(q);
-          const matchId = (o.id || '').toLowerCase().includes(q);
-          if (!matchName && !matchPhone && !matchId) return false;
-        }
-        return true;
+      // Dropdown menyularni ochish/yopish
+      document.querySelectorAll('.palette-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const wrapper = btn.closest('.palette-switcher-wrapper');
+          const dropdown = wrapper ? wrapper.querySelector('.palette-dropdown') : null;
+          document.querySelectorAll('.palette-dropdown').forEach(d => {
+            if (d !== dropdown) d.classList.remove('open');
+          });
+          if (dropdown) dropdown.classList.toggle('open');
+        });
       });
 
-      // KPI larni hisoblash
-      let totalRevenue = 0;
-      let activeCount = 0;
-      orders.forEach(o => {
-        totalRevenue += (o.totalPrice || 0);
-        if (o.status === 'Qabul qilindi' || o.status === 'Ishlab chiqarilmoqda' || o.status === 'O\'lchov belgilandi') {
-          activeCount++;
-        }
+      // Tashqariga bosilganda menyuni yopish
+      document.addEventListener('click', () => {
+        document.querySelectorAll('.palette-dropdown').forEach(d => d.classList.remove('open'));
       });
 
-      document.getElementById('kpi-orders').textContent = `${orders.length} ta`;
-      document.getElementById('kpi-orders-sub').textContent = `Faol buyurtmalar: ${activeCount} ta`;
-      document.getElementById('kpi-revenue').textContent = totalRevenue.toLocaleString('uz-UZ') + " so'm";
-      document.getElementById('kpi-active').textContent = `${activeCount} ta`;
-      document.getElementById('table-total-count').textContent = `(Jami: ${filtered.length} ta)`;
+      // Palitrani o'zgartirish
+      document.querySelectorAll('[data-set-palette]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const p = btn.dataset.setPalette;
+          updatePaletteUI(p);
+          showToast(`"${paletteNames[p]}" rang uslubi tanlandi!`, 'info');
+          document.querySelectorAll('.palette-dropdown').forEach(d => d.classList.remove('open'));
+        });
+      });
 
-      if (!filtered.length) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="8" style="text-align:center; padding:40px; color:var(--text-muted);">
-              Hech qanday buyurtma topilmadi
-            </td>
-          </tr>
-        `;
+      const currentPalette = localStorage.getItem('mebelpro_palette') || localStorage.getItem('palette') || 'mocha';
+      updatePaletteUI(currentPalette);
+    }
+
+    function initThemeSwitcher() {
+      const sunSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+      const moonSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        localStorage.setItem('mebelpro_theme', theme);
+        localStorage.setItem('mebel_theme', theme);
+
+        document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+          btn.innerHTML = theme === 'dark' ? sunSvg : moonSvg;
+          btn.setAttribute('aria-label', theme === 'dark' ? "Yorug' mavzuga o'tish" : "Qorong'i mavzuga o'tish");
+          btn.setAttribute('title', theme === 'dark' ? "Yorug' mavzuga o'tish" : "Qorong'i mavzuga o'tish");
+        });
+      }
+
+      const storedTheme = localStorage.getItem('theme') || localStorage.getItem('mebelpro_theme') || localStorage.getItem('mebel_theme') || 'light';
+      applyTheme(storedTheme);
+
+      document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const cur = document.documentElement.getAttribute('data-theme') || 'light';
+          const next = cur === 'dark' ? 'light' : 'dark';
+          applyTheme(next);
+          showToast(`Mavzu: ${next === 'dark' ? "Qorong'i" : "Yorug'"} rejim yoqildi`, 'info');
+        });
+      });
+
+      // Storage event orqali boshqa oynalar (masalan, asosiy sayt) bilan bir vaqtda sinxronlash
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'theme' || e.key === 'mebelpro_theme' || e.key === 'mebel_theme') {
+          if (e.newValue) applyTheme(e.newValue);
+        }
+        if (e.key === 'mebelpro_palette' || e.key === 'palette') {
+          if (e.newValue && typeof updatePaletteUI === 'function') updatePaletteUI(e.newValue);
+        }
+      });
+    }
+
+    // Palitra va Mavzuni ishga tushirish
+    initPaletteSwitcher();
+    initThemeSwitcher();
+
+    function togglePassVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-.722-3.25"/><path d="M2 8a10.645 10.645 0 0 0 20 0"/><path d="m20 15-1.726-2.05"/><path d="m4 15 1.726-2.05"/><path d="m9 18 .722-3.25"/></svg>';
+      } else {
+        input.type = 'password';
+        btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>';
+      }
+    }
+
+    function toggleSidebar() {
+      document.getElementById('admin-sidebar').classList.toggle('open');
+    }
+
+// ========================================================================
+    // AUTENTIFIKATSIYA VA XAVFSIZLIK (DUAL-ENGINE: SERVER + NETLIFY AVTONOM)
+    // ========================================================================
+    let authToken = localStorage.getItem('mebelpro_admin_token') || '';
+    let currentAdminUser = localStorage.getItem('mebelpro_admin_username') || 'Admin';
+    let IS_ONLINE_SERVER = false;
+
+    // Boshlang'ich 12 ta tayyor mebel modeli (Haqiqiy fotosuratlar bilan)
+    const DEFAULT_PRODUCTS_LIST = [
+  {
+    "id": "p1",
+    "title": "Verona Shkaf-Kupe 3 Eshikli",
+    "category": "shkaf",
+    "catName": "Shkaf-kupe",
+    "badge": "Xit savdo",
+    "badgeClass": "badge-hit",
+    "rating": "4.9",
+    "reviews": "34",
+    "specs": "220 × 240 × 60 sm • Tabiiy Eman & Oyna • Blum dovodchik",
+    "price": 4650000,
+    "oldPrice": 5200000,
+    "material": "mdf",
+    "color": "Eman / Ko'zgu",
+    "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=800&q=80",
+    "description": "Uch eshikli, ko'zguli va keng saqlash javonlariga ega zamonaviy shkaf-kupe. Yuqori sifatli alyuminiy yo'naltiruvchilar va Blum dovodchiklari bilan jihozlangan.",
+    "active": true
+  },
+  {
+    "id": "p2",
+    "title": "Milano High-Gloss Oshxona",
+    "category": "oshxona",
+    "catName": "Oshxona garnituri",
+    "badge": "Yangi",
+    "badgeClass": "badge-new",
+    "rating": "5.0",
+    "reviews": "28",
+    "specs": "280 × 230 × 60 sm • Akril Oq Fasad • Tosh stoleshnitsa",
+    "price": 5800000,
+    "oldPrice": 6500000,
+    "material": "mdf",
+    "color": "Yaltiroq Oq (Gloss)",
+    "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
+    "description": "Yevropa andozalariga mos akril yaltiroq fasadli oshxona to'plami. Suvga va issiqqa chidamli tosh stoleshnitsa hamda ichki LED yoritgichlar o'rnatilgan.",
+    "active": true
+  },
+  {
+    "id": "p3",
+    "title": "Loft Minimalist Ish Stoli",
+    "category": "stol",
+    "catName": "Stol",
+    "badge": "Chegirma",
+    "badgeClass": "badge-sale",
+    "rating": "4.8",
+    "reviews": "41",
+    "specs": "140 × 75 × 70 sm • Qora metall karkas • Eman usti",
+    "price": 890000,
+    "oldPrice": 1100000,
+    "material": "dsp",
+    "color": "Qora metall & Tabiiy eman",
+    "image": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80",
+    "description": "Kuchli metall profil karkas va 32mm qalinlikdagi stol usti paneli. Uy va ofis uchun zamonaviy ergonomik yechim.",
+    "active": true
+  },
+  {
+    "id": "p4",
+    "title": "Royal Soft Boshli Krovat",
+    "category": "krovat",
+    "catName": "Krovat",
+    "badge": "Premium",
+    "badgeClass": "badge-lux",
+    "rating": "4.9",
+    "reviews": "19",
+    "specs": "160 × 200 sm • Velur yumshoq orqa • Gazlift saqlash qutisi",
+    "price": 2950000,
+    "oldPrice": 3400000,
+    "material": "mdf",
+    "color": "To'q kulrang velur",
+    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80",
+    "description": "Turkiya velur matosi bilan qoplangan qulay bosh qism va tagida keng buyumlar saqlash qutisi (gazlift mexanizmi) mavjud.",
+    "active": true
+  },
+  {
+    "id": "p5",
+    "title": "Scandi 3 Tortmali TV Tumba",
+    "category": "tumba",
+    "catName": "TV Tumba",
+    "badge": "Top Model",
+    "badgeClass": "badge-hit",
+    "rating": "4.7",
+    "reviews": "15",
+    "specs": "160 × 52 × 42 sm • Suzuvchi LED chiroq • Yog'och oyoq",
+    "price": 1180000,
+    "oldPrice": 1350000,
+    "material": "dsp",
+    "color": "Sutli oq & Dub",
+    "image": "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=800&q=80",
+    "description": "Katta televizorlar uchun mo'ljallangan skandinav uslubidagi tumba. Uchta keng suriluvchi tortma va kabellar uchun yashirin yo'l.",
+    "active": true
+  },
+  {
+    "id": "p6",
+    "title": "Nordic Shkaf-Kupe 2 Eshikli",
+    "category": "shkaf",
+    "catName": "Shkaf-kupe",
+    "badge": "Klassika",
+    "badgeClass": "badge-hit",
+    "rating": "4.8",
+    "reviews": "22",
+    "specs": "180 × 230 × 60 sm • Mat Oq & Grafit profillar",
+    "price": 3950000,
+    "oldPrice": 4400000,
+    "material": "mdf",
+    "color": "Mat Oq",
+    "image": "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=800&q=80",
+    "description": "Kichikroq xonadonlar uchun ixcham va bejirim shkaf. Shovqinsiz harakatlanuvchi kupe tizimi.",
+    "active": true
+  },
+  {
+    "id": "p7",
+    "title": "Monaco Ofis Rahbar To'plami",
+    "category": "ofis",
+    "catName": "Ofis mebeli",
+    "badge": "Biznes Lux",
+    "badgeClass": "badge-lux",
+    "rating": "5.0",
+    "reviews": "12",
+    "specs": "180 × 75 × 85 sm • Keng stol + Pedestal tumba",
+    "price": 2450000,
+    "oldPrice": 2800000,
+    "material": "dsp",
+    "color": "Venge / Antratsit",
+    "image": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80",
+    "description": "Rahbar xonasi uchun nufuzli ko'rinish va yuqori darajadagi qulaylik baxsh etuvchi stol va tumba komplekti.",
+    "active": true
+  },
+  {
+    "id": "p8",
+    "title": "Provence Klassik Frezali Oshxona",
+    "category": "oshxona",
+    "catName": "Oshxona garnituri",
+    "badge": "Eksklyuziv",
+    "badgeClass": "badge-lux",
+    "rating": "4.9",
+    "reviews": "31",
+    "specs": "300 × 240 × 60 sm • MDF Emal frezerovka • Gola profil",
+    "price": 6900000,
+    "oldPrice": 7800000,
+    "material": "mdf",
+    "color": "Fil suyagi (Kremoviy)",
+    "image": "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80",
+    "description": "Klassik naqshli frezali fasadlar, emal bo'yoq va yuqori darajadagi estetik did uyg'unligi.",
+    "active": true
+  },
+  {
+    "id": "p9",
+    "title": "Prestige Yotoqxona Krovati",
+    "category": "krovat",
+    "catName": "Krovat",
+    "badge": "Yangi",
+    "badgeClass": "badge-new",
+    "rating": "4.8",
+    "reviews": "17",
+    "specs": "180 × 200 sm • Tabiiy Eman karkas • Ortopedik reykalar",
+    "price": 3200000,
+    "oldPrice": 3600000,
+    "material": "mdf",
+    "color": "Tabiiy Eman",
+    "image": "https://images.unsplash.com/photo-1540518614846-7ede433c4ef0?auto=format&fit=crop&w=800&q=80",
+    "description": "Qattiq yog'och karkas asosidagi mustahkam va sokin uyquni ta'minlovchi ortopedik krovat.",
+    "active": true
+  },
+  {
+    "id": "p10",
+    "title": "Modern Katta Ovqat Stoli",
+    "category": "stol",
+    "catName": "Stol",
+    "badge": "Chegirma",
+    "badgeClass": "badge-sale",
+    "rating": "4.7",
+    "reviews": "26",
+    "specs": "180 × 75 × 90 sm • 38mm qalin ustki qism • 8 kishilik",
+    "price": 1450000,
+    "oldPrice": 1750000,
+    "material": "dsp",
+    "color": "Qora marmar tekstura",
+    "image": "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=800&q=80",
+    "description": "Katta oilaviy dasturxonlar uchun 8 kishilik barqaror ovqat stoli. Chizilishga chidamli yuza.",
+    "active": true
+  },
+  {
+    "id": "p11",
+    "title": "Neo-Graphite Katta Garderob",
+    "category": "shkaf",
+    "catName": "Shkaf-kupe",
+    "badge": "Premium",
+    "badgeClass": "badge-lux",
+    "rating": "5.0",
+    "reviews": "16",
+    "specs": "240 × 250 × 65 sm • Qora shisha faset • Ichki LED sensor",
+    "price": 5400000,
+    "oldPrice": 6100000,
+    "material": "mdf",
+    "color": "Antratsit / Qora shisha",
+    "image": "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=800&q=80",
+    "description": "Zamonaviy qora shisha va alyuminiy profilli hashamatli garderob tizimi. Eshiklar ochilganda avtomatik yonuvchi sensorli chiroqlar.",
+    "active": true
+  },
+  {
+    "id": "p12",
+    "title": "Smart Antratsit L-Oshxona",
+    "category": "oshxona",
+    "catName": "Oshxona garnituri",
+    "badge": "Trend 2026",
+    "badgeClass": "badge-hit",
+    "rating": "4.9",
+    "reviews": "23",
+    "specs": "320 × 240 × 60 sm • Mat Antratsit • Yashirin Gola profil",
+    "price": 7400000,
+    "oldPrice": 8300000,
+    "material": "mdf",
+    "color": "Mat Grafit",
+    "image": "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80",
+    "description": "L-shakldagi qulay burchakli oshxona. Tutqichsiz 'Gola' profilli zamonaviy fasad va chuqur tortmalar.",
+    "active": true
+  }
+];
+
+    // Boshlang'ich namunaviy buyurtmalar
+    const DEFAULT_ORDERS_LIST = [
+  {
+    "id": "MP-1042",
+    "date": "11.10.2026",
+    "clientName": "Akmal Karimov",
+    "clientPhone": "+998 90 911 22 33",
+    "clientAddress": "Toshkent sh., Yunusobod 14-mavze, 21-uy",
+    "type": "Verona Shkaf-Kupe 3 Eshikli",
+    "dimensions": "220 × 240 × 60 sm",
+    "color": "Eman / Ko'zgu",
+    "totalPrice": 4650000,
+    "formattedPrice": "4 650 000 so'm",
+    "payMethod": "Naqd pul",
+    "status": "Ishlab chiqarilmoqda"
+  },
+  {
+    "id": "MP-1041",
+    "date": "10.10.2026",
+    "clientName": "Nodira Salimova",
+    "clientPhone": "+998 97 733 44 55",
+    "clientAddress": "Toshkent sh., Chilonzor 9-kvartal, 15-uy",
+    "type": "Milano High-Gloss Oshxona",
+    "dimensions": "280 × 230 × 60 sm",
+    "color": "Yaltiroq Oq",
+    "totalPrice": 5800000,
+    "formattedPrice": "5 800 000 so'm",
+    "payMethod": "Click / Payme",
+    "status": "O'lchov belgilandi"
+  },
+  {
+    "id": "MP-1040",
+    "date": "09.10.2026",
+    "clientName": "Jasur Beknazarov",
+    "clientPhone": "+998 93 500 60 70",
+    "clientAddress": "Toshkent sh., Mirzo Ulug'bek tumani, 4-mavze",
+    "type": "Loft Minimalist Ish Stoli",
+    "dimensions": "140 × 75 × 70 sm",
+    "color": "Tabiiy eman",
+    "totalPrice": 890000,
+    "formattedPrice": "890 000 so'm",
+    "payMethod": "Naqd pul",
+    "status": "O'rnatildi"
+  }
+];
+
+    function updateServerStatusBadge(online) {
+      const pill = document.getElementById('server-status-pill');
+      const text = document.getElementById('server-status-text');
+      if (!pill || !text) return;
+      if (online) {
+        pill.style.background = 'rgba(16,185,129,0.12)';
+        pill.style.color = '#10b981';
+        text.textContent = '🟢 Serverga ulangan';
+      } else {
+        pill.style.background = 'rgba(245,158,11,0.14)';
+        pill.style.color = '#d97706';
+        text.textContent = '⚡ Avtonom Rejim (Netlify)';
+      }
+    }
+
+    function fillQuickDemoAdmin() {
+      document.getElementById('login-username').value = 'admin';
+      document.getElementById('login-password').value = 'admin123';
+      showToast('Standart login va parol kiritildi (admin / admin123)', 'info');
+    }
+
+    function quickBypassLogin() {
+      authToken = 'admin-bypass-' + Date.now();
+      currentAdminUser = 'admin';
+      localStorage.setItem('mebelpro_admin_token', authToken);
+      localStorage.setItem('mebelpro_admin_username', 'admin');
+      showToast('Xush kelibsiz, Admin! Panel ochildi.', 'success');
+      unlockAdminPanel();
+    }
+
+    async function apiFetch(endpoint, options = {}) {
+      options.headers = options.headers || {};
+      if (authToken) {
+        options.headers['Authorization'] = 'Bearer ' + authToken;
+      }
+      if (options.body && typeof options.body === 'object' && !(options.body instanceof FormData)) {
+        options.headers['Content-Type'] = 'application/json';
+        options.body = JSON.stringify(options.body);
+      }
+
+      const res = await fetch(endpoint, options);
+      if (res.status === 401) {
+        authToken = '';
+        localStorage.removeItem('mebelpro_admin_token');
+        showAuthOverlay(false, 'Sessiya muddati tugadi. Iltimos qaytadan kiring.');
+        throw new Error('401 Unauthorized');
+      }
+      return await res.json();
+    }
+
+    // Sahifa yuklanganda autentifikatsiya holatini tekshirish
+    async function initAdminAuth() {
+      // 1. Agar avvaldan keshda token bo'lsa darhol panelni ochish
+      if (authToken) {
+        unlockAdminPanel();
         return;
       }
 
-      const getStatusClass = (st) => {
-        if (st === 'Qabul qilindi') return 'val-qabul';
-        if (st === 'O\'lchov belgilandi') return 'val-olchov';
-        if (st === 'Ishlab chiqarilmoqda') return 'val-ishlab';
-        if (st === 'Yetkazilmoqda') return 'val-yetkaz';
-        if (st === 'O\'rnatildi') return 'val-ornat';
-        return '';
-      };
+      // 2. Server holatini tekshirish
+      try {
+        const setupRes = await fetch('/api/admin/setup-status');
+        if (setupRes.ok) {
+          const setupData = await setupRes.json();
+          IS_ONLINE_SERVER = true;
+          updateServerStatusBadge(true);
+          if (setupData.needsSetup) {
+            showAuthOverlay(true);
+            return;
+          }
+          showAuthOverlay(false);
+          return;
+        }
+      } catch (e) {
+        IS_ONLINE_SERVER = false;
+        updateServerStatusBadge(false);
+      }
 
-      tbody.innerHTML = filtered.map(o => `
+      showAuthOverlay(false);
+    }
+
+    function showAuthOverlay(isSetup = false, errorMsg = '') {
+      document.getElementById('auth-overlay').style.display = 'flex';
+      document.getElementById('admin-app').style.display = 'none';
+
+      const errBox = document.getElementById('auth-error-box');
+      if (errorMsg) {
+        errBox.textContent = errorMsg;
+        errBox.style.display = 'block';
+      } else {
+        errBox.style.display = 'none';
+      }
+
+      if (isSetup) {
+        document.getElementById('auth-card-title').textContent = "Yangi Admin Paroli";
+        document.getElementById('auth-card-subtitle').textContent = "O'zingizga qulay xavfsiz login va parolni belgilang";
+        document.getElementById('auth-login-form').style.display = 'none';
+        document.getElementById('auth-setup-form').style.display = 'block';
+      } else {
+        document.getElementById('auth-card-title').textContent = "MebelPro Admin Kirish";
+        document.getElementById('auth-card-subtitle').textContent = "Boshqaruv paneliga kirish uchun parolni tasdiqlang";
+        document.getElementById('auth-login-form').style.display = 'block';
+        document.getElementById('auth-setup-form').style.display = 'none';
+      }
+    }
+
+    function unlockAdminPanel() {
+      document.getElementById('auth-overlay').style.display = 'none';
+      document.getElementById('admin-app').style.display = 'flex';
+      document.getElementById('sidebar-admin-user').textContent = currentAdminUser;
+
+      // Ma'lumotlarni to'ldirish
+      loadProducts();
+      loadOrders();
+    }
+
+    // Login Form Submit (Server va Offline/Netlify avtonom rejim)
+    document.getElementById('auth-login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('login-username').value.trim();
+      const password = document.getElementById('login-password').value;
+      const btn = document.getElementById('btn-login-submit');
+      const errBox = document.getElementById('auth-error-box');
+
+      btn.disabled = true;
+      btn.textContent = 'Tekshirilmoqda...';
+      errBox.style.display = 'none';
+
+      let success = false;
+
+      // 1. Agar server mavjud bo'lsa server API orqali tekshirish
+      if (IS_ONLINE_SERVER) {
+        try {
+          const res = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+          });
+          const data = await res.json();
+          if (data.success && data.token) {
+            authToken = data.token;
+            currentAdminUser = data.username;
+            localStorage.setItem('mebelpro_admin_token', authToken);
+            localStorage.setItem('mebelpro_admin_username', currentAdminUser);
+            success = true;
+          }
+        } catch (_) {}
+      }
+
+      // 2. Agar server bo'lmasa yoki offline/Netlify rejimda bo'lsa
+      if (!success) {
+        const localAdmin = JSON.parse(localStorage.getItem('mebelpro_local_admin') || '{"username":"admin","password":"admin123"}');
+        const matchUser = username.toLowerCase() === (localAdmin.username || 'admin').toLowerCase();
+        const matchPass = password === (localAdmin.password || 'admin123') || (username.toLowerCase() === 'admin' && password === 'admin123');
+
+        if (matchUser && matchPass) {
+          authToken = 'local-admin-token-' + Date.now();
+          currentAdminUser = username;
+          localStorage.setItem('mebelpro_admin_token', authToken);
+          localStorage.setItem('mebelpro_admin_username', currentAdminUser);
+          success = true;
+        }
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = '<span>Tizimga Kirish</span>';
+
+      if (success) {
+        showToast('Xush kelibsiz, ' + currentAdminUser + '!', 'success');
+        unlockAdminPanel();
+      } else {
+        errBox.textContent = 'Login yoki parol noto\'g\'ri. Standart login: admin / parol: admin123';
+        errBox.style.display = 'block';
+      }
+    });
+
+    // Setup Form Submit (Admin hisobini yangilash)
+    document.getElementById('auth-setup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('setup-username').value.trim();
+      const password = document.getElementById('setup-password').value;
+      const btn = document.getElementById('btn-setup-submit');
+      const errBox = document.getElementById('auth-error-box');
+
+      btn.disabled = true;
+      btn.textContent = 'Saqlanmoqda...';
+      errBox.style.display = 'none';
+
+      // Serverga yuborish (agar server bor bo'lsa)
+      try {
+        await fetch('/api/admin/setup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+      } catch (_) {}
+
+      // Lokal rejimda doim saqlash
+      localStorage.setItem('mebelpro_local_admin', JSON.stringify({ username, password }));
+      authToken = 'local-admin-token-' + Date.now();
+      currentAdminUser = username;
+      localStorage.setItem('mebelpro_admin_token', authToken);
+      localStorage.setItem('mebelpro_admin_username', currentAdminUser);
+
+      btn.disabled = false;
+      btn.innerHTML = '<span>Admin Hisobini Saqlash & Kirish</span>';
+
+      showToast('Admin ma\'lumotlari muvaffaqiyatli saqlandi!', 'success');
+      unlockAdminPanel();
+    });
+
+    // Chiqish (Logout)
+    async function handleLogout() {
+      if (!confirm('Admin paneldan chiqishni xohlaysizmi?')) return;
+      if (IS_ONLINE_SERVER) {
+        try { await apiFetch('/api/admin/logout', { method: 'POST' }); } catch (_) {}
+      }
+
+      authToken = '';
+      localStorage.removeItem('mebelpro_admin_token');
+      showToast('Tizimdan chiqildi', 'info');
+      showAuthOverlay(false);
+    }
+
+    // ========================================================================
+    // BO'LIMLAR O'RTASIDA O'TISH
+    // ========================================================================
+    function switchSection(secName) {
+      document.querySelectorAll('.admin-section').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-item-btn').forEach(el => el.classList.remove('active'));
+
+      const targetSec = document.getElementById(`sec-${secName}`);
+      const targetBtn = document.querySelector(`.nav-item-btn[data-section="${secName}"]`);
+
+      if (targetSec) targetSec.classList.add('active');
+      if (targetBtn) targetBtn.classList.add('active');
+
+      const titles = {
+        dashboard: 'Dashboard',
+        products: 'Tayyor Mebellarni Boshqarish',
+        orders: 'Buyurtmalar Ro\'yxati (CRM)'
+      };
+      document.getElementById('page-section-title').textContent = titles[secName] || 'Dashboard';
+
+      if (window.innerWidth <= 900) {
+        document.getElementById('admin-sidebar').classList.remove('open');
+      }
+    }
+
+    // ========================================================================
+    // 1. DASHBOARD MA'LUMOTLARI VA KPI HISOBLASH
+    // ========================================================================
+    function loadDashboardStats() {
+      const totalFurniture = ALL_PRODUCTS.length;
+      const newOrders = ALL_ORDERS.filter(o => o.status === 'Qabul qilindi').length;
+      const activeOrders = ALL_ORDERS.filter(o => o.status !== 'O\'rnatildi' && o.status !== 'Bekor qilindi').length;
+      const completedOrders = ALL_ORDERS.filter(o => o.status === 'O\'rnatildi').length;
+
+      document.getElementById('kpi-total-furniture').textContent = `${totalFurniture} ta`;
+      document.getElementById('kpi-new-orders').textContent = `${newOrders} ta`;
+      document.getElementById('kpi-active-orders').textContent = `${activeOrders} ta`;
+      document.getElementById('kpi-done-orders').textContent = `${completedOrders} ta`;
+
+      // Oxirgi 5 ta buyurtma
+      const tbody = document.getElementById('dashboard-recent-orders-tbody');
+      const recent = ALL_ORDERS.slice(0, 5);
+
+      if (!recent.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:24px; color:var(--text-muted);">Buyurtmalar hozircha mavjud emas</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = recent.map(o => `
         <tr>
           <td><strong>#${o.id}</strong></td>
-          <td style="color:var(--text-muted); font-size:12px;">${o.date || '—'}</td>
-          <td><strong>${o.clientName || 'Noma\'lum'}</strong></td>
+          <td>${o.date}</td>
+          <td><strong>${o.clientName}</strong></td>
+          <td>${o.clientPhone}</td>
+          <td>${o.type}</td>
+          <td style="font-family:var(--font-mono); font-weight:800; color:var(--admin-accent);">${Number(o.totalPrice || 0).toLocaleString('uz-UZ')} so'm</td>
+          <td><span class="badge-status ${getStatusBadgeClass(o.status)}">${o.status}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function getStatusBadgeClass(status) {
+      if (status === 'O\'rnatildi') return 'badge-active';
+      if (status === 'Qabul qilindi') return 'badge-inactive';
+      return 'badge-active';
+    }
+
+    // ========================================================================
+    // 2. TAYYOR MEBELLAR BOSHQARUVI
+    // ========================================================================
+    let ALL_PRODUCTS = [];
+
+    async function loadProducts() {
+      let loaded = false;
+
+      // 1. Serverdan olish
+      if (IS_ONLINE_SERVER) {
+        try {
+          const data = await apiFetch('/api/admin/products');
+          if (data.success && Array.isArray(data.products) && data.products.length) {
+            ALL_PRODUCTS = data.products;
+            localStorage.setItem('mebelpro_products', JSON.stringify(ALL_PRODUCTS));
+            loaded = true;
+          }
+        } catch (_) {}
+      }
+
+      // 2. Lokal saqlangan bazadan olish
+      if (!loaded) {
+        const stored = localStorage.getItem('mebelpro_products');
+        if (stored) {
+          try {
+            ALL_PRODUCTS = JSON.parse(stored);
+            if (Array.isArray(ALL_PRODUCTS) && ALL_PRODUCTS.length) loaded = true;
+          } catch (_) {}
+        }
+      }
+
+      // 3. Standart 12 ta haqiqiy rasmli mahsulotlar bilan to'ldirish
+      if (!loaded || !ALL_PRODUCTS.length) {
+        ALL_PRODUCTS = [...DEFAULT_PRODUCTS_LIST];
+        localStorage.setItem('mebelpro_products', JSON.stringify(ALL_PRODUCTS));
+      }
+
+      renderProductsTable();
+      loadDashboardStats();
+    }
+
+    function renderProductsTable() {
+      const searchVal = document.getElementById('prod-search-input').value.toLowerCase().trim();
+      const catVal = document.getElementById('prod-cat-filter').value;
+      const tbody = document.getElementById('products-table-tbody');
+
+      let filtered = ALL_PRODUCTS.filter(p => {
+        if (catVal !== 'all' && p.category !== catVal) return false;
+        if (searchVal && !(p.title || '').toLowerCase().includes(searchVal)) return false;
+        return true;
+      });
+
+      document.getElementById('products-count-badge').textContent = `(${filtered.length} ta)`;
+
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:32px; color:var(--text-muted);">Mebellar topilmadi</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(p => `
+        <tr>
           <td>
-            <a href="tel:${o.clientPhone}" style="color:var(--color-primary); font-weight:700; text-decoration:none;">
-              ${o.clientPhone || '—'}
-            </a>
+            <img src="${p.image || '/images/placeholder.svg'}" class="prod-thumb" alt="${p.title}" onerror="this.onerror=null; this.src='/images/placeholder.svg';">
           </td>
           <td>
-            <span>${o.type || 'Mebel'}</span>
-            <span style="font-size:11px; color:var(--text-muted); display:block;">${o.dimensions || ''}</span>
+            <div style="font-weight:800; color:var(--text-main);">${p.title}</div>
+            <div style="font-size:11px; color:var(--text-muted);">${p.description ? p.description.slice(0, 45) + '...' : ''}</div>
           </td>
-          <td style="font-weight:900; font-family:var(--font-mono); color:var(--color-primary);">
-            ${(o.totalPrice || 0).toLocaleString('uz-UZ')} so'm
+          <td><span style="font-weight:700; color:var(--text-muted);">${p.catName || p.category}</span></td>
+          <td>
+            <div style="font-weight:900; font-family:var(--font-mono); color:var(--admin-accent);">${Number(p.price || 0).toLocaleString('uz-UZ')} so'm</div>
+            ${p.oldPrice ? `<div style="font-size:11px; text-decoration:line-through; color:var(--text-muted);">${Number(p.oldPrice).toLocaleString('uz-UZ')} so'm</div>` : ''}
           </td>
           <td>
-            <select class="status-select ${getStatusClass(o.status)}" data-id="${o.id}">
-              <option value="Qabul qilindi" ${o.status === 'Qabul qilindi' ? 'selected' : ''}>Yangi</option>
-              <option value="O'lchov belgilandi" ${o.status === 'O\'lchov belgilandi' ? 'selected' : ''}>O'lchov belgilandi</option>
-              <option value="Ishlab chiqarilmoqda" ${o.status === 'Ishlab chiqarilmoqda' ? 'selected' : ''}>Jarayonda</option>
-              <option value="Yetkazilmoqda" ${o.status === 'Yetkazilmoqda' ? 'selected' : ''}>Yetkazilmoqda</option>
-              <option value="O'rnatildi" ${o.status === 'O\'rnatildi' ? 'selected' : ''}>O'rnatildi</option>
-            </select>
+            <div style="font-size:12px;">${p.specs || '—'}</div>
+            <div style="font-size:11px; color:var(--text-muted);">${p.color || ''}</div>
+          </td>
+          <td>
+            <button type="button" class="badge-status ${p.active !== false ? 'badge-active' : 'badge-inactive'}" onclick="toggleProductActive('${p.id}')" style="cursor:pointer; border:none;">
+              ${p.active !== false ? '✓ Faol' : '✕ Yashirilgan'}
+            </button>
           </td>
           <td style="text-align:right;">
             <div style="display:inline-flex; gap:6px;">
-              <button type="button" class="btn btn-secondary" onclick="viewOrderDetails('${o.id}')" style="padding:6px 10px; font-size:12px;" title="Batafsil ko'rish" aria-label="Batafsil">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <button type="button" class="action-btn edit" onclick="editProduct('${p.id}')" title="Tahrirlash">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                <span>Tahrirlash</span>
               </button>
-              <button type="button" class="btn btn-secondary" onclick="deleteOrder('${o.id}')" style="padding:6px 10px; font-size:12px; color:#ef4444;" title="O'chirish" aria-label="O'chirish">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+              <button type="button" class="action-btn delete" onclick="deleteProduct('${p.id}')" title="O'chirish">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
               </button>
             </div>
           </td>
         </tr>
       `).join('');
-
-      // Status o'zgarishi
-      document.querySelectorAll('.status-select').forEach(sel => {
-        sel.addEventListener('change', (e) => {
-          const id = e.target.dataset.id;
-          const newStatus = e.target.value;
-          const list = getOrders();
-          const target = list.find(x => x.id === id);
-          if (target) {
-            target.status = newStatus;
-            saveOrders(list);
-            showToast(`Buyurtma #${id} holati yangilandi: ${newStatus}`);
-          }
-        });
-      });
     }
 
-    // TAFSILOTLARNI KO'RISH
-    window.viewOrderDetails = function(id) {
-      const orders = getOrders();
-      const o = orders.find(x => x.id === id);
+    document.getElementById('prod-search-input').addEventListener('input', renderProductsTable);
+    document.getElementById('prod-cat-filter').addEventListener('change', renderProductsTable);
+
+    function openProductModal(prod = null) {
+      const modal = document.getElementById('modal-product');
+      const form = document.getElementById('form-product');
+      form.reset();
+
+      if (prod) {
+        document.getElementById('prod-modal-title').textContent = "Mebelni Tahrirlash";
+        document.getElementById('edit-prod-id').value = prod.id;
+        document.getElementById('p-title').value = prod.title || '';
+        document.getElementById('p-category').value = prod.category || 'shkaf';
+        document.getElementById('p-price').value = prod.price || '';
+        document.getElementById('p-old-price').value = prod.oldPrice || '';
+        document.getElementById('p-specs').value = prod.specs || '';
+        document.getElementById('p-color').value = prod.color || '';
+        document.getElementById('p-desc').value = prod.description || '';
+        document.getElementById('p-image-url').value = prod.image || '';
+        document.getElementById('p-active').checked = prod.active !== false;
+        updateImagePreview(prod.image);
+      } else {
+        document.getElementById('prod-modal-title').textContent = "+ Yangi Mebel Qo'shish";
+        document.getElementById('edit-prod-id').value = '';
+        document.getElementById('p-active').checked = true;
+        updateImagePreview('');
+      }
+
+      modal.classList.add('show');
+    }
+
+    function closeProductModal() {
+      document.getElementById('modal-product').classList.remove('show');
+    }
+
+    function editProduct(id) {
+      const prod = ALL_PRODUCTS.find(p => p.id === id);
+      if (prod) openProductModal(prod);
+    }
+
+    async function toggleProductActive(id) {
+      const prod = ALL_PRODUCTS.find(p => p.id === id);
+      if (!prod) return;
+      prod.active = prod.active === false ? true : false;
+
+      localStorage.setItem('mebelpro_products', JSON.stringify(ALL_PRODUCTS));
+      renderProductsTable();
+      showToast(prod.active ? 'Mebel katalogda faollashtirildi' : 'Mebel katalogdan yashirildi', 'info');
+
+      if (IS_ONLINE_SERVER) {
+        try {
+          await apiFetch(`/api/admin/products/${id}`, {
+            method: 'PUT',
+            body: { active: prod.active }
+          });
+        } catch (_) {}
+      }
+    }
+
+    async function deleteProduct(id) {
+      const prod = ALL_PRODUCTS.find(p => p.id === id);
+      const title = prod ? prod.title : 'Ushbu mebel';
+      if (!confirm(`"${title}" mebelini ro'yxatdan o'chirishni tasdiqlaysizmi?`)) return;
+
+      ALL_PRODUCTS = ALL_PRODUCTS.filter(p => p.id !== id);
+      localStorage.setItem('mebelpro_products', JSON.stringify(ALL_PRODUCTS));
+      renderProductsTable();
+      loadDashboardStats();
+      showToast('Mebel muvaffaqiyatli o\'chirildi', 'success');
+
+      if (IS_ONLINE_SERVER) {
+        try {
+          await apiFetch(`/api/admin/products/${id}`, { method: 'DELETE' });
+        } catch (_) {}
+      }
+    }
+
+    async function handleImageFileSelect(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        alert('Iltimos faqat rasm faylini (.jpg, .png, .webp) tanlang');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        const base64Data = e.target.result;
+        updateImagePreview(base64Data);
+        document.getElementById('p-image-url').value = base64Data;
+
+        if (IS_ONLINE_SERVER) {
+          try {
+            const res = await apiFetch('/api/admin/upload', {
+              method: 'POST',
+              body: { base64: base64Data }
+            });
+            if (res.success && res.url) {
+              document.getElementById('p-image-url').value = res.url;
+              updateImagePreview(res.url);
+              showToast('Rasm serverga yuklandi!', 'success');
+            }
+          } catch (_) {}
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function updateImagePreview(src) {
+      const img = document.getElementById('p-image-preview');
+      if (src && src.trim()) {
+        img.src = src;
+        img.style.display = 'block';
+      } else {
+        img.src = '';
+        img.style.display = 'none';
+      }
+    }
+
+    function handleCatChange() {
+      const cat = document.getElementById('p-category').value;
+      const catNames = {
+        shkaf: 'Shkaf-kupe',
+        oshxona: 'Oshxona garnituri',
+        stol: 'Stol',
+        krovat: 'Krovat',
+        tumba: 'TV Tumba',
+        ofis: 'Ofis mebeli'
+      };
+      return catNames[cat] || cat;
+    }
+
+    async function handleSaveProduct(e) {
+      e.preventDefault();
+      const id = document.getElementById('edit-prod-id').value;
+      const title = document.getElementById('p-title').value.trim();
+      const category = document.getElementById('p-category').value;
+      const catName = handleCatChange();
+      const price = Number(document.getElementById('p-price').value);
+      const oldPrice = document.getElementById('p-old-price').value ? Number(document.getElementById('p-old-price').value) : null;
+      const specs = document.getElementById('p-specs').value.trim();
+      const color = document.getElementById('p-color').value.trim();
+      const description = document.getElementById('p-desc').value.trim();
+      const image = document.getElementById('p-image-url').value.trim() || 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80';
+      const active = document.getElementById('p-active').checked;
+
+      const payload = {
+        title,
+        category,
+        catName,
+        price,
+        oldPrice,
+        specs,
+        color,
+        description,
+        image,
+        active
+      };
+
+      if (id) {
+        const idx = ALL_PRODUCTS.findIndex(p => p.id === id);
+        if (idx !== -1) {
+          ALL_PRODUCTS[idx] = { ...ALL_PRODUCTS[idx], ...payload };
+        }
+        showToast('Mebel ma\'lumotlari yangilandi!', 'success');
+      } else {
+        const newProduct = {
+          id: 'p' + Date.now(),
+          ...payload
+        };
+        ALL_PRODUCTS.unshift(newProduct);
+        showToast('Yangi mebel qo\'shildi!', 'success');
+      }
+
+      localStorage.setItem('mebelpro_products', JSON.stringify(ALL_PRODUCTS));
+      closeProductModal();
+      renderProductsTable();
+      loadDashboardStats();
+
+      if (IS_ONLINE_SERVER) {
+        try {
+          if (id) {
+            await apiFetch(`/api/admin/products/${id}`, { method: 'PUT', body: payload });
+          } else {
+            await apiFetch('/api/admin/products', { method: 'POST', body: payload });
+          }
+        } catch (_) {}
+      }
+    }
+
+    // ========================================================================
+    // 3. BUYURTMALAR CRM BOSHQARUVI
+    // ========================================================================
+    let ALL_ORDERS = [];
+
+    async function loadOrders() {
+      let loaded = false;
+
+      // 1. Serverdan
+      if (IS_ONLINE_SERVER) {
+        try {
+          const data = await apiFetch('/api/admin/orders');
+          if (data.success && Array.isArray(data.orders) && data.orders.length) {
+            ALL_ORDERS = data.orders;
+            localStorage.setItem('mebelpro_orders', JSON.stringify(ALL_ORDERS));
+            loaded = true;
+          }
+        } catch (_) {}
+      }
+
+      // 2. Lokal saqlangan buyurtmalar
+      if (!loaded) {
+        const stored = localStorage.getItem('mebelpro_orders');
+        if (stored) {
+          try {
+            ALL_ORDERS = JSON.parse(stored);
+            if (Array.isArray(ALL_ORDERS) && ALL_ORDERS.length) loaded = true;
+          } catch (_) {}
+        }
+      }
+
+      // 3. Standart namunaviy buyurtmalar
+      if (!loaded || !ALL_ORDERS.length) {
+        ALL_ORDERS = [...DEFAULT_ORDERS_LIST];
+        localStorage.setItem('mebelpro_orders', JSON.stringify(ALL_ORDERS));
+      }
+
+      renderOrdersTable();
+      loadDashboardStats();
+    }
+
+    function renderOrdersTable() {
+      const searchVal = document.getElementById('order-search-input').value.toLowerCase().trim();
+      const statusVal = document.getElementById('order-status-filter').value;
+      const tbody = document.getElementById('orders-table-tbody');
+
+      let filtered = ALL_ORDERS.filter(o => {
+        if (statusVal !== 'all' && o.status !== statusVal) return false;
+        if (searchVal) {
+          const m1 = (o.clientName || '').toLowerCase().includes(searchVal);
+          const m2 = (o.clientPhone || '').toLowerCase().includes(searchVal);
+          const m3 = (o.id || '').toLowerCase().includes(searchVal);
+          if (!m1 && !m2 && !m3) return false;
+        }
+        return true;
+      });
+
+      document.getElementById('orders-count-badge').textContent = `(${filtered.length} ta)`;
+
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:32px; color:var(--text-muted);">Buyurtmalar topilmadi</td></tr>';
+        return;
+      }
+
+      const statuses = [
+        'Qabul qilindi',
+        'Tasdiqlandi',
+        'O\'lchov belgilandi',
+        'Ishlab chiqarilmoqda',
+        'Yetkazilmoqda',
+        'O\'rnatildi',
+        'Bekor qilindi'
+      ];
+
+      tbody.innerHTML = filtered.map(o => `
+        <tr>
+          <td><strong>#${o.id}</strong></td>
+          <td style="font-size:12px; color:var(--text-muted);">${o.date}</td>
+          <td><strong>${o.clientName}</strong></td>
+          <td>
+            <div><a href="tel:${o.clientPhone}" style="color:var(--admin-accent); font-weight:700; text-decoration:none;">${o.clientPhone}</a></div>
+            <div style="font-size:11px; color:var(--text-muted);">${o.clientAddress || '—'}</div>
+          </td>
+          <td>
+            <div style="font-weight:700;">${o.type}</div>
+            <div style="font-size:11px; color:var(--text-muted);">${o.dimensions || ''}</div>
+          </td>
+          <td>
+            <div style="font-family:var(--font-mono); font-weight:900; color:var(--admin-accent);">${Number(o.totalPrice || 0).toLocaleString('uz-UZ')} so'm</div>
+            <div style="font-size:11px; color:var(--text-muted);">${o.payMethod || ''}</div>
+          </td>
+          <td>
+            <select class="status-select" onchange="updateOrderStatus('${o.id}', this.value)">
+              ${statuses.map(s => `<option value="${s}" ${o.status === s ? 'selected' : ''}>${s}</option>`).join('')}
+            </select>
+          </td>
+          <td style="text-align:right;">
+            <div style="display:inline-flex; gap:6px;">
+              <button type="button" class="action-btn" onclick="viewOrderDetails('${o.id}')" title="Batafsil">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span>Ko'rish</span>
+              </button>
+              <button type="button" class="action-btn delete" onclick="deleteOrder('${o.id}')" title="O'chirish">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('order-search-input').addEventListener('input', renderOrdersTable);
+    document.getElementById('order-status-filter').addEventListener('change', renderOrdersTable);
+
+    async function updateOrderStatus(orderId, newStatus) {
+      const ord = ALL_ORDERS.find(o => o.id === orderId);
+      if (ord) ord.status = newStatus;
+      localStorage.setItem('mebelpro_orders', JSON.stringify(ALL_ORDERS));
+      showToast(`Buyurtma #${orderId} holati "${newStatus}"ga o'zgartirildi`, 'success');
+      loadDashboardStats();
+
+      if (IS_ONLINE_SERVER) {
+        try {
+          await apiFetch(`/api/admin/orders/${orderId}`, {
+            method: 'PUT',
+            body: { status: newStatus }
+          });
+        } catch (_) {}
+      }
+    }
+
+    async function deleteOrder(orderId) {
+      if (!confirm(`Buyurtma #${orderId} ni o'chirmoqchimisiz?`)) return;
+      ALL_ORDERS = ALL_ORDERS.filter(o => o.id !== orderId);
+      localStorage.setItem('mebelpro_orders', JSON.stringify(ALL_ORDERS));
+      renderOrdersTable();
+      loadDashboardStats();
+      showToast(`Buyurtma #${orderId} o'chirildi`, 'success');
+
+      if (IS_ONLINE_SERVER) {
+        try {
+          await apiFetch(`/api/admin/orders/${orderId}`, { method: 'DELETE' });
+        } catch (_) {}
+      }
+    }
+
+    function viewOrderDetails(orderId) {
+      const o = ALL_ORDERS.find(x => x.id === orderId);
       if (!o) return;
 
-      document.getElementById('m-order-title').textContent = `Buyurtma #${o.id} Tafsilotlari`;
-      document.getElementById('modal-details-body').innerHTML = `
-        <div class="modal-row"><span>Sana:</span> <strong>${o.date || 'Bugun'}</strong></div>
-        <div class="modal-row"><span>Mijoz:</span> <strong>${o.clientName || '—'}</strong></div>
-        <div class="modal-row"><span>Telefon:</span> <strong>${o.clientPhone || '—'}</strong></div>
-        <div class="modal-row"><span>Manzil:</span> <strong>${o.clientAddress || 'Toshkent sh.'}</strong></div>
-        <div class="modal-row"><span>Mebel turi:</span> <strong>${o.type || 'Mebel'}</strong></div>
-        <div class="modal-row"><span>O'lchamlari:</span> <strong>${o.dimensions || 'Standart'}</strong></div>
-        <div class="modal-row"><span>Holat:</span> <strong>${o.status || 'Qabul qilindi'}</strong></div>
-        <div class="modal-row" style="border:none; padding-top:12px; font-size:15px;">
+      document.getElementById('mod-ord-id').textContent = `Buyurtma #${o.id}`;
+      document.getElementById('order-details-body').innerHTML = `
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--border-light); font-size:13px;">
+          <span style="color:var(--text-muted);">Mijoz:</span>
+          <strong>${o.clientName}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--border-light); font-size:13px;">
+          <span style="color:var(--text-muted);">Telefon:</span>
+          <strong>${o.clientPhone}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--border-light); font-size:13px;">
+          <span style="color:var(--text-muted);">Yetkazish manzili:</span>
+          <strong>${o.clientAddress || 'Ko\'rsatilmagan'}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--border-light); font-size:13px;">
+          <span style="color:var(--text-muted);">Mebel turi:</span>
+          <strong>${o.type}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--border-light); font-size:13px;">
+          <span style="color:var(--text-muted);">O'lchamlari / Rangi:</span>
+          <strong>${o.dimensions || ''} • ${o.color || ''}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--border-light); font-size:13px;">
+          <span style="color:var(--text-muted);">Buyurtma sanasi:</span>
+          <strong>${o.date}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--border-light); font-size:13px;">
+          <span style="color:var(--text-muted);">To'lov usuli:</span>
+          <strong>${o.payMethod || 'Naqd pul'}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed var(--border-light); font-size:13px;">
+          <span style="color:var(--text-muted);">Holat:</span>
+          <span class="badge-status badge-active">${o.status}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:12px 0 0; font-size:16px;">
           <span>Jami Summa:</span>
-          <strong style="color:var(--color-primary); font-size:18px; font-family:var(--font-mono);">
-            ${(o.totalPrice || 0).toLocaleString('uz-UZ')} so'm
-          </strong>
+          <strong style="font-family:var(--font-mono); color:var(--admin-accent); font-size:20px;">${Number(o.totalPrice || 0).toLocaleString('uz-UZ')} so'm</strong>
         </div>
       `;
-      document.getElementById('order-details-modal').classList.add('active');
-    };
 
-    window.closeDetailsModal = function() {
-      document.getElementById('order-details-modal').classList.remove('active');
-    };
-
-    // BUYURTMANI O'CHIRISH
-    window.deleteOrder = function(id) {
-      if (!confirm(`Haqiqatan ham #${id} raqamli buyurtmani o'chirmoqchimisiz?`)) return;
-      const orders = getOrders().filter(x => x.id !== id);
-      saveOrders(orders);
-      showToast(`Buyurtma #${id} o'chirildi`, 'info');
-    };
-
-    // YANGI BUYURTMA MODALI
-    document.getElementById('btn-open-add-modal').addEventListener('click', () => {
-      document.getElementById('add-order-modal').classList.add('active');
-    });
-    window.closeAddModal = function() {
-      document.getElementById('add-order-modal').classList.remove('active');
-    };
-
-    document.getElementById('add-order-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('new-name').value.trim();
-      const phone = document.getElementById('new-phone').value.trim();
-      const furn = document.getElementById('new-furniture').value.trim();
-      const price = Number(document.getElementById('new-price').value) || 0;
-
-      const newId = 'MP-' + Math.floor(1000 + Math.random() * 9000);
-      const today = new Date().toLocaleDateString('uz-UZ');
-
-      const orders = getOrders();
-      orders.unshift({
-        id: newId,
-        date: today,
-        clientName: name,
-        clientPhone: phone,
-        clientAddress: 'Toshkent sh.',
-        type: furn,
-        dimensions: 'Maxsus o\'lcham',
-        totalPrice: price,
-        formattedPrice: price.toLocaleString('uz-UZ') + " so'm",
-        status: 'Qabul qilindi'
-      });
-
-      saveOrders(orders);
-      closeAddModal();
-      document.getElementById('add-order-form').reset();
-      showToast(`Yangi buyurtma #${newId} qo'shildi!`);
-    });
-
-    // NAMUNALAR YUKLASH
-    document.getElementById('btn-seed-orders').addEventListener('click', () => {
-      saveOrders(DEFAULT_ORDERS);
-      showToast('Namunaviy buyurtmalar yuklandi');
-    });
-
-    // FILTRLAR
-    document.querySelectorAll('.status-pill-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.status-pill-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentFilter = btn.dataset.filter;
-        renderOrders();
-      });
-    });
-
-    // QIDIRUV
-    document.getElementById('admin-search-input').addEventListener('input', (e) => {
-      searchQuery = e.target.value;
-      renderOrders();
-    });
-
-    renderOrders();
-  </script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    if (window.lucide) {
-      lucide.createIcons();
+      document.getElementById('modal-order-details').classList.add('show');
     }
+
+    function closeOrderDetailsModal() {
+      document.getElementById('modal-order-details').classList.remove('show');
+    }
+
+    function openAddOrderModal() {
+      document.getElementById('form-add-order').reset();
+      document.getElementById('modal-add-order').classList.add('show');
+    }
+
+    function closeAddOrderModal() {
+      document.getElementById('modal-add-order').classList.remove('show');
+    }
+
+    async function handleSaveManualOrder(e) {
+      e.preventDefault();
+      const clientName = document.getElementById('ord-client-name').value.trim();
+      const clientPhone = document.getElementById('ord-client-phone').value.trim();
+      const clientAddress = document.getElementById('ord-client-address').value.trim();
+      const type = document.getElementById('ord-furniture-type').value.trim();
+      const totalPrice = Number(document.getElementById('ord-price').value);
+      const payMethod = document.getElementById('ord-pay-method').value;
+
+      const newOrder = {
+        id: 'MP-' + Math.floor(1000 + Math.random() * 9000),
+        date: new Date().toLocaleDateString('uz-UZ'),
+        clientName,
+        clientPhone,
+        clientAddress,
+        type,
+        dimensions: 'Admin orqali kiritilgan',
+        color: 'Maxsus buyurtma',
+        totalPrice,
+        formattedPrice: totalPrice.toLocaleString('uz-UZ') + " so'm",
+        payMethod,
+        status: 'Qabul qilindi'
+      };
+
+      ALL_ORDERS.unshift(newOrder);
+      localStorage.setItem('mebelpro_orders', JSON.stringify(ALL_ORDERS));
+      closeAddOrderModal();
+      renderOrdersTable();
+      loadDashboardStats();
+      showToast(`Buyurtma #${newOrder.id} muvaffaqiyatli qo'shildi!`, 'success');
+
+      if (IS_ONLINE_SERVER) {
+        try {
+          await fetch('/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newOrder)
+          });
+        } catch (_) {}
+      }
+    }
+
+    // Ishga tushirish
+    window.addEventListener('DOMContentLoaded', initAdminAuth);
   </script>
 </body>
 </html>

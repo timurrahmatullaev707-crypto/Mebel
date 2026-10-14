@@ -13,6 +13,16 @@
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/site.css">
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme') || localStorage.getItem('mebelpro_theme') || localStorage.getItem('mebel_theme') || 'light';
+        var p = localStorage.getItem('mebelpro_palette') || localStorage.getItem('palette') || 'mocha';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.setAttribute('data-palette', p);
+      } catch (e) {}
+    })();
+  </script>
   <style>
     .about-hero {
       background: linear-gradient(135deg, var(--color-primary-subtle), var(--bg-surface));
